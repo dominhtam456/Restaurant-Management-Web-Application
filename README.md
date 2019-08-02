@@ -9,6 +9,8 @@
 
 #Technology: Bootstrap4, AngularJS, and Spring Boot 
 
+#Database: MySQL 
+
 #IDE: Atom, Visual Studio Code, and Spring Tool Suit4
 
 #Member: 
