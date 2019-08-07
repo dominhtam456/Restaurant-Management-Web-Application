@@ -14,7 +14,7 @@ app.config(function($routeProvider) {
 });
 
 app.controller('ResourcesCtrl', function($scope, $http) {
-  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
   $scope.resources = [
                 //{ Id: "SP000016", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
                 //{ Id: "SP000017", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
@@ -50,10 +50,11 @@ app.controller('ResourcesCtrl', function($scope, $http) {
   //Add resources
   $scope.updateResources= function(){
         var data= $.param({
-                    NGUYENLIEU_NAME: $scope.Name,
-                    NGUYENLIEU_PRICE: $scope.Price,
+                    NGUYENLIEU_NO: $scope.resourcesDetails.nguyenlieu_NO,
+                    NGUYENLIEU_NAME: $scope.resourcesDetails.nguyenlieu_NAME,
+                    NGUYENLIEU_PRICE: $scope.resourcesDetails.nguyenlieu_PRICE,
                     NGUYENLIEU_ID: $scope.resourcesDetails.nguyenlieu_ID,
-                    lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.loaiID,
+                    lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID
 
                 });
 
@@ -65,6 +66,7 @@ app.controller('ResourcesCtrl', function($scope, $http) {
 
       $scope.addResources= function(){
             var data= $.param({
+                        NGUYENLIEU_NO: $scope.resourcesNo,
                         NGUYENLIEU_NAME: $scope.inputName,
                         NGUYENLIEU_PRICE: $scope.inputPrice,
                         lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.TypeId,
@@ -73,6 +75,7 @@ app.controller('ResourcesCtrl', function($scope, $http) {
 
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
               .then(function mySuccess(data) {
+
               });
 
           }

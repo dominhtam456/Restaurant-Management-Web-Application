@@ -42,7 +42,7 @@
                               <div class="form-group row">
                                 <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã hàng hóa:</label>
                                 <div class="col-sm-7">
-                                  <input type="text" class="form-control form-control-sm" id="input1" placeholder="Mã hàng tự động">
+                                  <input ng-model="resourcesNo" type="text" class="form-control form-control-sm" id="input1" placeholder="Mã hàng tự động">
                                 </div>
                                 <div class="col-sm-1">
                                   <i class="fas fa-exclamation-circle"></i>
@@ -177,13 +177,13 @@
             </tr>
           </thead>
           <tbody ng-repeat="x in resources">
-              
+
             <tr  data-toggle="collapse" data-target="#a{{x.nguyenlieu_ID}}" class="clickable table-striped"  ng-click="getResourcesIndex(x)">
               <td>
                   {{x.nguyenlieu_ID}}
               </td>
               <td>
-                  _
+                  {{x.nguyenlieu_NO}}
               </td>
               <td>
                 {{x.nguyenlieu_NAME}}
@@ -202,7 +202,7 @@
 
                 </div>
               </td> -->
-              
+
               <td class="text-right">
                 <div class="dropdown">
                   <a class="btn btn-sm btn-icon-only text-light" href="#!tables" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -272,7 +272,7 @@
                                       Mã hàng hóa:
                                     </td>
                                     <td>
-                                      {{resourcesDetails.nguyenlieu_ID}}
+                                      {{resourcesDetails.nguyenlieu_NO}}
                                     </td>
                                   </tr>
                                   <tr>
@@ -370,7 +370,8 @@
                                               <div class="form-group row">
                                                 <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã hàng hóa:</label>
                                                 <div class="col-sm-7">
-                                                  <input ng-model="Id" type="text" class="form-control form-control-sm" id="input1" ng-value="{{resourcesDetails.nguyenlieu_ID}}" >
+                                                  <input ng-model="resourcesDetails.nguyenlieu_NO" type="text" class="form-control form-control-sm" id="input1" placeholder="{{resourcesDetails.nguyenlieu_NO}}" >
+
                                                 </div>
                                                 <div class="col-sm-1">
                                                   <i class="fas fa-exclamation-circle"></i>
@@ -379,7 +380,8 @@
                                               <div class="form-group row">
                                                 <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên hàng:</label>
                                                 <div class="col-sm-7">
-                                                  <input ng-model="Name" type="text" class="form-control form-control-sm" id="inputName" placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
+                                                  <input ng-model="resourcesDetails.nguyenlieu_NAME" type="text" class="form-control form-control-sm" id="inputName" placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
+
                                                 </div>
                                                 <div class="col-sm-1">
                                                   <i class="fas fa-exclamation-circle"></i>
@@ -397,7 +399,7 @@
                                               <div class="form-group row">
                                                 <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Nhóm hàng:</label>
                                                 <div class="col-sm-7">
-                                                  <select class="form-control-sm" id="inputType" ng-model="loaiID">
+                                                  <select class="form-control-sm" id="inputType" ng-model="resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID">
                                                     <option  ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}</option>
                                                   </select>
 
@@ -409,7 +411,7 @@
                                               <div class="form-group row">
                                                 <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                                 <div class="col-sm-7">
-                                                  <input ng-model="Price" type="text" class="form-control form-control-sm " id="inputNum" placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
+                                                  <input ng-model="resourcesDetails.nguyenlieu_PRICE" type="text" class="form-control form-control-sm " id="inputNum" placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
                                                 </div>
                                                 <div class="col-sm-1">
                                                   <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
