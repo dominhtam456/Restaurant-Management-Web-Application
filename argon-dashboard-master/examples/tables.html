@@ -1,0 +1,522 @@
+<div class="row">
+  <div class="col">
+    <div class="card shadow">
+      <div class="card-header border-0">
+        <h3 class="mb-0">Nguyên Liệu</h3>
+        <div class="float-md-right mb-3">
+          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAddMaterials"><i class="fas fa-plus-circle"></i> Thêm Mới</button>
+          <button type="button" class="btn btn-secondary btn-sm" disabled>Button</button>
+          <button type="button" class="btn btn-secondary btn-sm" disabled>Button</button>
+          <div class="modal fade" id="modalAddMaterials" tabindex="-1" role="dialog" aria-labelledby="modalAddMaterials" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content ">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalAddMaterials">
+                    <h3>Thêm hàng hóa</h3>
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" target="_self" role="tab" aria-controls="info" aria-selected="true">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="detail-tab" data-toggle="tab"  href="#detail" role="tab" target="_self" aria-controls="tab" aria-selected="false">Mô tả chi tiết</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="detailDescription-tab" data-toggle="tab"  href="#detailDescription" target="_self" role="tab" aria-controls="detailDescription" aria-selected="false">Thành phần</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="moreDishs-tab" data-toggle="tab"  href="#moreDishs" target="_self" role="tab" aria-controls="contact" aria-selected="false">Món thêm</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
+                      <form ng-submit="addResources()" class="mt-2">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="form-group row">
+                                <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã hàng hóa:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control form-control-sm" id="input1" placeholder="Mã hàng tự động">
+                                </div>
+                                <div class="col-sm-1">
+                                  <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên hàng:</label>
+                                <div class="col-sm-7">
+                                  <input ng-model="inputName" type="text" class="form-control form-control-sm" id="inputName" placeholder=" ">
+                                </div>
+                                <div class="col-sm-1">
+                                  <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại thực đơn:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control form-control-sm" id="inputType" placeholder="Đồ ăn">
+                                </div>
+                                <div class="col-sm-1">
+                                  <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Nhóm hàng:</label>
+                                <div class="col-sm-7">
+                                  <select class="form-control-sm" id="inputType" ng-model="TypeId">
+                                    <option ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}</option>
+
+                                  </select>
+                                  {{TypeId}}
+
+                                </div>
+
+                                <div class="col-sm-1">
+                                  <!-- Button trigger modal -->
+                                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalLongTitle" disabled><i class="fas fa-plus-square"></i></button>
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          ...
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
+                                <div class="col-sm-7">
+                                  <input ng-model="inputPrice" type="text" class="form-control form-control-sm " id="inputNum" placeholder="0">
+                                </div>
+                                <div class="col-sm-1">
+                                  <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputNumber1" class="col-sm-4 col-form-label form-control-sm">Tồn kho:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control form-control-sm" id="inputNumber1" placeholder="0">
+                                </div>
+                                <div class="col-sm-1">
+                                  <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <img src="https://via.placeholder.com/150x150" alt="">
+                                  </div>
+                                  <div class="col-6"></div>
+                                </div>
+                                <div class="row mt-1">
+                                  <div class="file-field">
+                                    <div class="btn form-control-file btn-sm btn-success ml-2">
+                                      <span>Choose file</span>
+                                      <input type="file">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="text-right">
+                            <button type="submit" class="btn btn-success btn-sm">Lưu</button>
+                            <button type="button" class="btn btn-success btn-sm">Lưu & Thêm mới</button>
+                            <button  type="button" class="btn btn-secondary btn-sm">Bỏ qua</button>
+                          </div>
+                      </form>
+                    </div>
+                    <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="profile-tab">
+
+                    </div>
+                    <div class="tab-pane fade" id="detailDescription" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    <div class="tab-pane fade" id="moreDishs" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table  align-items-center table-flush accordion table-hover" id="accordionRow">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Stt</th>
+              <th scope="col">Mã hàng hoá</th>
+              <th scope="col">Nguyên Liệu</th>
+              <th scope="col">Loại nguyên liệu</th>
+              <th scope="col">Giá nhập</th>
+              <!-- <th scope="col">Tồn kho</th> -->
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="x in resources">
+              
+            <tr  data-toggle="collapse" data-target="#a{{x.nguyenlieu_ID}}" class="clickable table-striped"  ng-click="getResourcesIndex(x)">
+              <td>
+                  {{x.nguyenlieu_ID}}
+              </td>
+              <td>
+                  _
+              </td>
+              <td>
+                {{x.nguyenlieu_NAME}}
+              </td>
+              <td ng-model="resourcesTypeId">
+                  <span  class="badge badge-dot" >
+                    {{x.tenloai_NGUYENLIEU}}
+                  </span>
+              </td>
+              <td>
+                <span class="mr-2">{{x.nguyenlieu_PRICE}}</span>
+              </td>
+              <!-- <td>
+                <div class="d-flex align-items-center">
+                  <span class="mr-2">qqq</span>
+
+                </div>
+              </td> -->
+              
+              <td class="text-right">
+                <div class="dropdown">
+                  <a class="btn btn-sm btn-icon-only text-light" href="#!tables" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td  ng-model="resourcesDetails" colspan="8" id="a{{x.nguyenlieu_ID}}" class="collapse">
+                <div class="container">
+                  <div class="row">
+                    <div class="card-body border">
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Thông Tin</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Thẻ Kho</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Tồn Kho</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Món Thêm</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="container border">
+                            <h2 mt-1>{{resourcesDetails.nguyenlieu_NAME}}</h2>
+                            <div class="row">
+                              <div class="col-9">
+                                <div class="container">
+                                  <div class="row mt-3">
+                                    <div class="col-3 ">
+                                      <i class="fas fa-check "></i>
+                                      <a href="#">Được bán trực tiếp</a>
+                                    </div>
+                                    <div class="col-3 ">
+                                      <i class="fas fa-times"></i>
+                                      <a href="#">Được tích điểm</a>
+                                    </div>
+                                    <div class="col-3 ">
+                                      <i class="fas fa-times"></i>
+                                      <a href="#">Không là món thêm (Extra topping)</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row p-2 mt-3 ">
+                              <div class="col-4">
+                                <div class="card">
+                                  <img src="https://via.placeholder.com/250x300" />
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <table>
+                                  <tr class="p-2">
+                                    <td>
+                                      Mã hàng hóa:
+                                    </td>
+                                    <td>
+                                      {{resourcesDetails.nguyenlieu_ID}}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Loại thực đơn:
+                                    </td>
+                                    <td>
+                                      qqq
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Nhóm hàng:
+                                    </td>
+                                    <td>
+                                      {{resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID}}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Loại Hàng:
+                                    </td>
+                                    <td>
+                                      qqq
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Định mức Tồn:
+                                    </td>
+                                    <td>
+                                      qqq
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Giá Bán:
+                                    </td>
+                                    <td>
+                                      {{resourcesDetails.nguyenlieu_PRICE}}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Giá Vốn:
+                                    </td>
+                                    <td>
+                                      qqq
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                              <div class="col-4">
+                                <table>
+                                  <tr>
+                                    <td>
+                                      Mô tả:
+                                    </td>
+                                    <td>
+                                      <div class="card">
+                                        <!-- content -->
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Ghi Chú:
+                                    </td>
+                                    <td>
+                                      <!-- content -->
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <div class="float-md-right mt-3">
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#b{{x.nguyenlieu_ID}}"><i class="fas fa-plus-circle"></i> Cập Nhật</button>
+                              <!-- Modal -->
+                              <div class="modal fade" id="b{{x.nguyenlieu_ID}}" tabindex="-1" role="dialog" aria-labelledby="modifyMaterialTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modifyMaterialTitle"></h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form ng-submit="updateResources()">
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="col-6">
+                                              <div class="form-group row">
+                                                <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã hàng hóa:</label>
+                                                <div class="col-sm-7">
+                                                  <input ng-model="Id" type="text" class="form-control form-control-sm" id="input1" ng-value="{{resourcesDetails.nguyenlieu_ID}}" >
+                                                </div>
+                                                <div class="col-sm-1">
+                                                  <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên hàng:</label>
+                                                <div class="col-sm-7">
+                                                  <input ng-model="Name" type="text" class="form-control form-control-sm" id="inputName" placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                  <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại thực đơn:</label>
+                                                <div class="col-sm-7">
+                                                  <input ng-model="type" type="text" class="form-control form-control-sm" id="inputType" placeholder="Đồ ăn">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                  <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Nhóm hàng:</label>
+                                                <div class="col-sm-7">
+                                                  <select class="form-control-sm" id="inputType" ng-model="loaiID">
+                                                    <option  ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}</option>
+                                                  </select>
+
+                                                </div>
+                                                <div class="col-sm-1">
+                                                  <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
+                                                <div class="col-sm-7">
+                                                  <input ng-model="Price" type="text" class="form-control form-control-sm " id="inputNum" placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                  <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="inputNumber1" class="col-sm-4 col-form-label form-control-sm">Tồn kho:</label>
+                                                <div class="col-sm-7">
+                                                  <input type="text" class="form-control form-control-sm" id="inputNumber1" placeholder="0">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                  <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="container">
+                                                  <div class="row">
+                                                    <div class="col-6">
+                                                      <img src="https://via.placeholder.com/150x150" alt="">
+                                                    </div>
+                                                    <div class="col-6"></div>
+                                                  </div>
+                                                  <div class="row mt-1">
+                                                    <div class=" form-control-sm custom-file  mb-3">
+                                                      <input type="file" class="custom-file-input" id="customFile" name="filename">
+                                                      <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-success ">Lưu</button>
+                                            <button type="button" class="btn btn-secondary ">Bỏ qua</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <!-- content -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lock"></i> Ngừng Kinh Doanh</button>
+                              <button type="button"  class="btn btn-danger btn-sm" data-toggle="modal" data-target="#c{{x.nguyenlieu_ID}}"><i class="far fa-trash-alt"></i> Xóa</button>
+                              <div class="modal fade" id="c{{x.nguyenlieu_ID}}" tabindex="-1" role="dialog" aria-labelledby="modalDeleteMaterials" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                  <div class="modal-content ">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modalDeleteMaterials">Xác Nhận Xóa</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Bạn sẽ xóa tất cả thông tin của sản phẩm có mã là <b>{{resourcesDetails.nguyenlieu_ID}}</b> có tên là <b>{{resourcesDetails.nguyenlieu_NAME}}</b></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" ng-click="deleteResources(x)" class="btn btn-secondary" data-dismiss="modal">Đồng ý</button>
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer py-4">
+        <nav aria-label="...">
+          <ul class="pagination justify-content-end mb-0">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">
+                <i class="fas fa-angle-left"></i>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                <i class="fas fa-angle-right"></i>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Dark table -->
+</div>
