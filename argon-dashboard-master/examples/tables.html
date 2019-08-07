@@ -81,7 +81,7 @@
                                   <!-- Button trigger modal -->
                                   <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalLongTitle" disabled><i class="fas fa-plus-square"></i></button>
                                   <!-- Modal -->
-                                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -98,7 +98,7 @@
                                           <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                       </div>
-                                    </div>
+                                    </div> -->
                                   </div>
                                 </div>
                               </div>
@@ -168,7 +168,7 @@
           <thead class="thead-light">
             <tr>
               <th scope="col">Stt</th>
-              <th scope="col">Mã hàng hoá</th>
+              <th scope="col">Mã Nguyên Liệu</th>
               <th scope="col">Nguyên Liệu</th>
               <th scope="col">Loại nguyên liệu</th>
               <th scope="col">Giá nhập</th>
@@ -194,7 +194,7 @@
                   </span>
               </td>
               <td>
-                <span class="mr-2">{{x.nguyenlieu_PRICE}}</span>
+                <span class="mr-2">{{x.nguyenlieu_PRICE}}đ</span>
               </td>
               <!-- <td>
                 <div class="d-flex align-items-center">
@@ -217,7 +217,7 @@
               </td>
             </tr>
             <tr>
-              <td  ng-model="resourcesDetails" colspan="8" id="a{{x.nguyenlieu_ID}}" class="collapse">
+              <td  ng-model="resourcesDetails" colspan="8" id="a{{x.nguyenlieu_ID}}" class="collapse" >
                 <div class="container">
                   <div class="row">
                     <div class="card-body border">
@@ -269,7 +269,7 @@
                                 <table>
                                   <tr class="p-2">
                                     <td>
-                                      Mã hàng hóa:
+                                      Mã Nguyên Liệu:
                                     </td>
                                     <td>
                                       {{resourcesDetails.nguyenlieu_NO}}
@@ -277,15 +277,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      Loại thực đơn:
-                                    </td>
-                                    <td>
-                                      qqq
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      Nhóm hàng:
+                                      Loại Nguyên Liệu:
                                     </td>
                                     <td>
                                       {{resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID}}
@@ -293,34 +285,10 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      Loại Hàng:
+                                      Giá Nhập:
                                     </td>
                                     <td>
-                                      qqq
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      Định mức Tồn:
-                                    </td>
-                                    <td>
-                                      qqq
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      Giá Bán:
-                                    </td>
-                                    <td>
-                                      {{resourcesDetails.nguyenlieu_PRICE}}
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      Giá Vốn:
-                                    </td>
-                                    <td>
-                                      qqq
+                                      {{resourcesDetails.nguyenlieu_PRICE}}đ
                                     </td>
                                   </tr>
                                 </table>
@@ -357,7 +325,7 @@
                                 <div class="modal-dialog modal-lg" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="modifyMaterialTitle"></h5>
+                                      <h2 class="modal-title" id="modifyMaterialTitle">Cập Nhật Thông Tin Nguyên Liệu</h2>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -378,7 +346,7 @@
                                                 </div>
                                               </div>
                                               <div class="form-group row">
-                                                <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên hàng:</label>
+                                                <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên nguyên liệu:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_NAME" type="text" class="form-control form-control-sm" id="inputName" placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
 
@@ -387,17 +355,9 @@
                                                   <i class="fas fa-exclamation-circle"></i>
                                                 </div>
                                               </div>
+                                              
                                               <div class="form-group row">
-                                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại thực đơn:</label>
-                                                <div class="col-sm-7">
-                                                  <input ng-model="type" type="text" class="form-control form-control-sm" id="inputType" placeholder="Đồ ăn">
-                                                </div>
-                                                <div class="col-sm-1">
-                                                  <i class="fas fa-exclamation-circle"></i>
-                                                </div>
-                                              </div>
-                                              <div class="form-group row">
-                                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Nhóm hàng:</label>
+                                                <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại nguyên liệu:</label>
                                                 <div class="col-sm-7">
                                                   <select class="form-control-sm" id="inputType" ng-model="resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID">
                                                     <option  ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}</option>
@@ -409,7 +369,7 @@
                                                 </div>
                                               </div>
                                               <div class="form-group row">
-                                                <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
+                                                <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá nhập:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_PRICE" type="text" class="form-control form-control-sm " id="inputNum" placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
                                                 </div>
@@ -417,15 +377,7 @@
                                                   <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
                                                 </div>
                                               </div>
-                                              <div class="form-group row">
-                                                <label for="inputNumber1" class="col-sm-4 col-form-label form-control-sm">Tồn kho:</label>
-                                                <div class="col-sm-7">
-                                                  <input type="text" class="form-control form-control-sm" id="inputNumber1" placeholder="0">
-                                                </div>
-                                                <div class="col-sm-1">
-                                                  <i class="fas fa-exclamation-circle"></i>
-                                                </div>
-                                              </div>
+                                              
                                             </div>
                                             <div class="col-6">
                                                 <div class="container">
@@ -457,8 +409,8 @@
                                   </div>
                                 </div>
                               </div>
-                              <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lock"></i> Ngừng Kinh Doanh</button>
-                              <button type="button"  class="btn btn-danger btn-sm" data-toggle="modal" data-target="#c{{x.nguyenlieu_ID}}"><i class="far fa-trash-alt"></i> Xóa</button>
+                              <button type="button" class="btn btn-danger "><i class="fas fa-lock"></i> Ngừng Kinh Doanh</button>
+                              <button type="button"  class="btn btn-danger " data-toggle="modal" data-target="#c{{x.nguyenlieu_ID}}"><i class="far fa-trash-alt"></i> Xóa</button>
                               <div class="modal fade" id="c{{x.nguyenlieu_ID}}" tabindex="-1" role="dialog" aria-labelledby="modalDeleteMaterials" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                   <div class="modal-content ">
@@ -469,7 +421,7 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      <p>Bạn sẽ xóa tất cả thông tin của sản phẩm có mã là <b>{{resourcesDetails.nguyenlieu_ID}}</b> có tên là <b>{{resourcesDetails.nguyenlieu_NAME}}</b></p>
+                                      <p>Bạn sẽ xóa sản phẩm có mã là <b>{{resourcesDetails.nguyenlieu_ID}}</b> có tên là <b>{{resourcesDetails.nguyenlieu_NAME}}</b></p>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" ng-click="deleteResources(x)" class="btn btn-secondary" data-dismiss="modal">Đồng ý</button>
