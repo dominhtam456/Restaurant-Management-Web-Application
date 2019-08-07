@@ -164,7 +164,7 @@ public class WebController {
 	
      //XOA NGUYEN LIEU
 	//cach 1
-	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.POST)
 	public ResponseEntity<NguyenLieu> deleteNguyenLieu1(@PathVariable(value = "id") Long id) {
 		NguyenLieu nl = repositoryNguyenLieu.getOne(id);
 	    if(nl == null) {
