@@ -13,7 +13,7 @@ app.config(function($routeProvider) {
   })
 });
 
-app.controller('ResourcesCtrl', function($scope, $http) {
+app.controller('ResourcesCtrl', function($scope, $http, $window) {
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
   $scope.resources = [
                 //{ Id: "SP000016", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
@@ -60,6 +60,7 @@ app.controller('ResourcesCtrl', function($scope, $http) {
 
         $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
           .then(function mySuccess(data) {
+            $window.location.reload()
           });
 
       }
@@ -75,7 +76,7 @@ app.controller('ResourcesCtrl', function($scope, $http) {
 
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
               .then(function mySuccess(data) {
-
+                $window.location.reload()
               });
 
           }
@@ -98,7 +99,8 @@ app.controller('ResourcesCtrl', function($scope, $http) {
             });
     $http.post("http://localhost:8080/api/NguyenLieu/" + resources.nguyenlieu_ID,data)
       .then(function mySuccess(response){
-        alert("Xoa thanh cong");
+        alert("Bạn đã xóa nguyên liệu thành công");
+        $window.location.reload()
       });
   }
 });

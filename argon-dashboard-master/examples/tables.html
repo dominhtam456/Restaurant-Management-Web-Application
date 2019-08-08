@@ -12,7 +12,7 @@
               <div class="modal-content ">
                 <div class="modal-header">
                   <h5 class="modal-title" id="modalAddMaterials">
-                    <h3>Thêm hàng hóa</h3>
+                    <h3>Thêm nguyên liệu</h3>
                   </h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -42,85 +42,42 @@
                               <div class="form-group row">
                                 <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã hàng hóa:</label>
                                 <div class="col-sm-7">
-                                  <input ng-model="resourcesNo" type="text" class="form-control form-control-sm" id="input1" placeholder="Mã hàng tự động">
-                                </div>
-                                <div class="col-sm-1">
-                                  <i class="fas fa-exclamation-circle"></i>
+                                  <input ng-model="resourcesNo" type="text" class="form-control form-control-sm" id="input1">
                                 </div>
                               </div>
+
                               <div class="form-group row">
                                 <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên hàng:</label>
                                 <div class="col-sm-7">
                                   <input ng-model="inputName" type="text" class="form-control form-control-sm" id="inputName" placeholder=" ">
                                 </div>
-                                <div class="col-sm-1">
-                                  <i class="fas fa-exclamation-circle"></i>
-                                </div>
                               </div>
+
                               <div class="form-group row">
                                 <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại thực đơn:</label>
                                 <div class="col-sm-7">
                                   <input type="text" class="form-control form-control-sm" id="inputType" placeholder="Đồ ăn">
                                 </div>
-                                <div class="col-sm-1">
-                                  <i class="fas fa-exclamation-circle"></i>
-                                </div>
                               </div>
+
                               <div class="form-group row">
                                 <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Nhóm hàng:</label>
                                 <div class="col-sm-7">
                                   <select class="form-control-sm" id="inputType" ng-model="TypeId">
                                     <option ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}</option>
-
                                   </select>
-                                  {{TypeId}}
-
-                                </div>
-
-                                <div class="col-sm-1">
-                                  <!-- Button trigger modal -->
-                                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalLongTitle" disabled><i class="fas fa-plus-square"></i></button>
-                                  <!-- Modal -->
-                                  <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                          ...
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                          <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                      </div>
-                                    </div> -->
-                                  </div>
                                 </div>
                               </div>
+                            </div>
+
                               <div class="form-group row">
                                 <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                 <div class="col-sm-7">
                                   <input ng-model="inputPrice" type="text" class="form-control form-control-sm " id="inputNum" placeholder="0">
                                 </div>
-                                <div class="col-sm-1">
-                                  <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputNumber1" class="col-sm-4 col-form-label form-control-sm">Tồn kho:</label>
-                                <div class="col-sm-7">
-                                  <input type="text" class="form-control form-control-sm" id="inputNumber1" placeholder="0">
-                                </div>
-                                <div class="col-sm-1">
-                                  <i class="fas fa-exclamation-circle"></i>
-                                </div>
                               </div>
                             </div>
+
                             <div class="col-6">
                               <div class="container">
                                 <div class="row">
@@ -140,10 +97,9 @@
                               </div>
                             </div>
                           </div>
-                          <div class="text-right">
-                            <button type="submit" class="btn btn-success btn-sm">Lưu</button>
-                            <button type="button" class="btn btn-success btn-sm">Lưu & Thêm mới</button>
-                            <button  type="button" class="btn btn-secondary btn-sm">Bỏ qua</button>
+                          <div class="text-right mt-3">
+                            <button type="submit" class="btn btn-success btn-sm">Lưu & thêm mới</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Đóng</button>
                           </div>
                       </form>
                     </div>
@@ -153,9 +109,6 @@
                     <div class="tab-pane fade" id="detailDescription" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     <div class="tab-pane fade" id="moreDishs" role="tabpanel" aria-labelledby="contact-tab">...</div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
               </div>
             </div>
@@ -196,12 +149,6 @@
               <td>
                 <span class="mr-2">{{x.nguyenlieu_PRICE}}đ</span>
               </td>
-              <!-- <td>
-                <div class="d-flex align-items-center">
-                  <span class="mr-2">qqq</span>
-
-                </div>
-              </td> -->
 
               <td class="text-right">
                 <div class="dropdown">
@@ -341,44 +288,32 @@
                                                   <input ng-model="resourcesDetails.nguyenlieu_NO" type="text" class="form-control form-control-sm" id="input1" placeholder="{{resourcesDetails.nguyenlieu_NO}}" >
 
                                                 </div>
-                                                <div class="col-sm-1">
-                                                  <i class="fas fa-exclamation-circle"></i>
-                                                </div>
                                               </div>
+
                                               <div class="form-group row">
                                                 <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên nguyên liệu:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_NAME" type="text" class="form-control form-control-sm" id="inputName" placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
-
-                                                </div>
-                                                <div class="col-sm-1">
-                                                  <i class="fas fa-exclamation-circle"></i>
                                                 </div>
                                               </div>
-                                              
+
                                               <div class="form-group row">
                                                 <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại nguyên liệu:</label>
                                                 <div class="col-sm-7">
                                                   <select class="form-control-sm" id="inputType" ng-model="resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID">
                                                     <option  ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}</option>
                                                   </select>
-
-                                                </div>
-                                                <div class="col-sm-1">
-                                                  <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
                                                 </div>
                                               </div>
+
                                               <div class="form-group row">
                                                 <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá nhập:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_PRICE" type="text" class="form-control form-control-sm " id="inputNum" placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
                                                 </div>
-                                                <div class="col-sm-1">
-                                                  <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-plus-square"></i></button>
-                                                </div>
                                               </div>
-                                              
                                             </div>
+
                                             <div class="col-6">
                                                 <div class="container">
                                                   <div class="row">
@@ -388,7 +323,7 @@
                                                     <div class="col-6"></div>
                                                   </div>
                                                   <div class="row mt-1">
-                                                    <div class=" form-control-sm custom-file  mb-3">
+                                                    <div class=" form-control-sm custom-file  mb-3 ml-2">
                                                       <input type="file" class="custom-file-input" id="customFile" name="filename">
                                                       <label class="custom-file-label" for="customFile">Choose file</label>
                                                     </div>
@@ -399,7 +334,7 @@
                                         </div>
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-success ">Lưu</button>
-                                            <button type="button" class="btn btn-secondary ">Bỏ qua</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                                         </div>
                                       </form>
                                     </div>

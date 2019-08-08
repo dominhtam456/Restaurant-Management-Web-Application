@@ -33,14 +33,9 @@ public class WebController {
 	@Autowired
 	NguyenLieuService repositoryNguyenLieu;
 	
-	/////////////////////////////// LOAI NGUYEN LIEU/////////////////////////
+	/////////////////////////////// LOAI NGUYEN LIEU /////////////////////////
 	
-	@RequestMapping(path = "/get_list_loainguyenlieu", produces = MediaType.APPLICATION_JSON_VALUE)
-	public java.util.List<LoaiNguyenLieu> getAllLoaiMonAn() {
-		// This returns a JSON or XML with the users
-		return repositoryLoaiNguyenLieu.findAll();
-	}
-
+	//LAY ALL LOAI NGUYEN LIEU
 	@RequestMapping(value = "/GetAllLoaiNguyenLieu", method = RequestMethod.GET)
 	public ResponseEntity<List<LoaiNguyenLieu>> listAllLoaiNguyenLieu() {
 		    List<LoaiNguyenLieu> listLoaiNguyenLieu = repositoryLoaiNguyenLieu.findAll();
@@ -61,6 +56,19 @@ public class WebController {
 		    }
 		return loainguyenlieu;
 	}
+	
+	//THEM LOAI NGUYEN LIEU
+		@RequestMapping(
+				value = "/InsertLoaiNguyenLieu/", 
+				method = RequestMethod.POST
+				
+				)
+		@ResponseBody
+		public LoaiNguyenLieu insertLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
+			//@Valid: kiem tra xem co ton tai object trong body
+			LoaiNguyenLieu lnl=repositoryLoaiNguyenLieu.save(loainguyenlieuForm);
+			return lnl;
+		}
 	
 	//CAP NHAT LOAI NGUYEN LIEU
 	@RequestMapping(value = "/UpdateLoaiNguyenLieu/", 
@@ -93,23 +101,11 @@ public class WebController {
 	}
 	
 	
-	//THEM LOAI NGUYEN LIEU
-	@RequestMapping(
-			value = "/InsertLoaiNguyenLieu/", 
-			method = RequestMethod.POST
-			
-			)
-	@ResponseBody
-	public LoaiNguyenLieu insertLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
-		//@Valid: kiem tra xem co ton tai object trong body
-		LoaiNguyenLieu lnl=repositoryLoaiNguyenLieu.save(loainguyenlieuForm);
-		return lnl;
-	}
 	
 	
-  /////////////////////////////// NGUYEN LIEU/ //////////////////////////
+  /////////////////////////////// NGUYEN LIEU ///////////////////////////
 	
-	//GET TEN LOAI NGUYEN LIEU
+	//LAY TEN LOAI NGUYEN LIEU
 	public String GetTenLoaiNguyenLieu(long idLoaiNguyenLieu) {
 		if(repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu)!=null) {
 			return repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu).getLOAINGUYENLIEU_NAME();
@@ -118,7 +114,8 @@ public class WebController {
 		}
 		 
 	}
-	//DANH SACH TAC CA NGUYEN LIEU
+	
+	//LAY ALL NGUYEN LIEU
 	@RequestMapping(path = "/GetAllNguyenLieu", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<NguyenLieu> getAllNguyenLieu() {
 		// This returns a JSON or XML with the users
@@ -131,7 +128,6 @@ public class WebController {
 	}
 
 	
-
 	// LAY 1 NGUYEN LIEU
 	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.GET)
 
@@ -143,7 +139,30 @@ public class WebController {
 		return nguyenlieu;
 	}
 	
-	//UP DATE NGUYEN LIEU
+	//THEM NGUYEN LIEU
+		@RequestMapping(
+				value = "/InsertNguyenLieu", 
+				method = RequestMethod.POST,
+				produces = { MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+	            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+				)
+		@ResponseBody
+		public NguyenLieu insertNguyenLieu(NguyenLieu nguyenlieuForm) {
+			/*
+			 * if(nguyenlieuForm!=null) {
+			 * 
+			 * }else { return null; }
+			 */
+			try {
+				return repositoryNguyenLieu.save(nguyenlieuForm);
+			}catch (Exception e) {
+				// TODO: handle exception
+				return null;
+			}
+			
+		}
+	
+	//CAP NHAT NGUYEN LIEU
 	@RequestMapping(value = "/UpdateNguyenLieu", 
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -163,7 +182,6 @@ public class WebController {
 	
 	
      //XOA NGUYEN LIEU
-	//cach 1
 	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.POST)
 	public ResponseEntity<NguyenLieu> deleteNguyenLieu1(@PathVariable(value = "id") Long id) {
 		NguyenLieu nl = repositoryNguyenLieu.getOne(id);
@@ -174,38 +192,4 @@ public class WebController {
 	    return ResponseEntity.ok().build();
 	}
 	
-	//cach 2
-	@RequestMapping(value = "/DeleteNguyenLieu", method = RequestMethod.POST)
-	public int deleteNguyenLieu(@Valid @RequestBody  NguyenLieu nguyeLieu) {
-		NguyenLieu nl = repositoryNguyenLieu.getOne(nguyeLieu.getNGUYENLIEU_ID());
-	    if(nl == null) {
-	        return 0;
-	    }
-	    repositoryNguyenLieu.delete(nl);//delete trong database
-	    return 1;
-	}
-	
-	
-	//THEM NGUYEN LIEU
-	@RequestMapping(
-			value = "/InsertNguyenLieu", 
-			method = RequestMethod.POST,
-			produces = { MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
-			)
-	@ResponseBody
-	public NguyenLieu insertNguyenLieu(NguyenLieu nguyenlieuForm) {
-		/*
-		 * if(nguyenlieuForm!=null) {
-		 * 
-		 * }else { return null; }
-		 */
-		try {
-			return repositoryNguyenLieu.save(nguyenlieuForm);
-		}catch (Exception e) {
-			// TODO: handle exception
-			return null;
-		}
-		
-	}
 }
