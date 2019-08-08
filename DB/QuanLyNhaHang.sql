@@ -141,7 +141,7 @@ CREATE TABLE `khachhang` (
   `KHACHHANG_ADD` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `KHACHHANG_PHONE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `KHACHHANG_EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `KHACHHANG_IMG` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `KHACHHANG_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`KHACHHANG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -213,12 +213,12 @@ DROP TABLE IF EXISTS `monan`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `monan` (
   `MONAN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `MONAN_NO` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `MONAN_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `MONAN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `MONAN_PRICE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `MONAN_UNIT` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `MONAN_STATUS` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `MONAN_IMG` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `MONAN_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `LOAIMONAN_LOAIMONAN_ID` int(11) NOT NULL,
   PRIMARY KEY (`MONAN_ID`),
   KEY `fk_MONAN_LOAIMONAN1_idx` (`LOAIMONAN_LOAIMONAN_ID`),
@@ -271,16 +271,18 @@ DROP TABLE IF EXISTS `nguyenlieu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nguyenlieu` (
   `NGUYENLIEU_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NGUYENLIEU_NO` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NGUYENLIEU_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `NGUYENLIEU_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NGUYENLIEU_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `NGUYENLIEU_PRICE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NGUYENLIEU_DATE` date DEFAULT NULL,
-  `NGUYENLIEU_IMG` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NGUYENLIEU_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `LOAINGUYENLIEU_LOAINGUYENLIEU_ID` int(11) DEFAULT NULL,
+  `tenloai_nguyenlieu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`NGUYENLIEU_ID`),
+  UNIQUE KEY `NGUYENLIEU_NO_UNIQUE` (`NGUYENLIEU_NO`),
   KEY `fk_NGUYENLIEU_LOAINGUYENLIEU1_idx` (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`),
   CONSTRAINT `fk_NGUYENLIEU_LOAINGUYENLIEU1` FOREIGN KEY (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`) REFERENCES `loainguyenlieu` (`LOAINGUYENLIEU_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,7 +291,7 @@ CREATE TABLE `nguyenlieu` (
 
 LOCK TABLES `nguyenlieu` WRITE;
 /*!40000 ALTER TABLE `nguyenlieu` DISABLE KEYS */;
-INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-09-02',NULL,1),(2,'1thd','Thịt heo đùi','80.000','2019-09-02',NULL,1),(3,'2rd','Rau dền','10.000','2019-09-02',NULL,2),(4,'2rcv','Rau chân vịt','9.000','2019-09-02',NULL,2),(6,'2kt','Khoai tây','22.000','2019-09-02',NULL,2),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2020-09-02',NULL,3),(8,'4ct','Cá thu','250.000','2019-09-02',NULL,4),(9,'4ctl','Cá thác lác','220.000','2019-09-02',NULL,4),(10,'5tv','Trứng gà tươi Dabaco hộp 10 quả','26.500','2019-09-02',NULL,5);
+INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000',NULL,NULL,1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-09-02',NULL,1,NULL),(3,'2rd','Rau dền','10.000','2019-09-02',NULL,2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-09-02',NULL,2,NULL),(6,'2kt','Khoai tây','22.000','2019-09-02',NULL,2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2020-09-02',NULL,3,NULL),(8,'4ct','Cá thu','250.000','2019-09-02',NULL,4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-09-02',NULL,4,NULL),(10,'5tv','Trứng gà tươi Dabaco hộp 10 quả','26.500','2019-09-02',NULL,5,NULL);
 /*!40000 ALTER TABLE `nguyenlieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,13 +304,13 @@ DROP TABLE IF EXISTS `nhanvien`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nhanvien` (
   `NHANVIEN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NHANVIEN_NO` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NHANVIEN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `NHANVIEN_PHONE` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NHANVIEN_EMAIL` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NHANVIEN_PASSWORD` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_PHONE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_PASSWORD` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NHANVIEN_LOAI` smallint(3) DEFAULT NULL,
-  `NHANVIEN_IMG` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CHUCVU_CHUCVU_ID` int(11) NOT NULL,
   PRIMARY KEY (`NHANVIEN_ID`),
   KEY `fk_NHANVIEN_CHUCVU_idx` (`CHUCVU_CHUCVU_ID`),
@@ -335,4 +337,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-07 10:16:10
+-- Dump completed on 2019-08-08 22:17:01

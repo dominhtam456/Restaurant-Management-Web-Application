@@ -7,13 +7,13 @@
 
 #Operating system: Window10
 
-#Technology: Bootstrap4, AngularJS, and Spring Boot 
+#Technology: Bootstrap4, AngularJS, and Spring Boot
 
-#Database: MySQL 
+#Database: MySQL
 
 #IDE: Atom, Visual Studio Code, and Spring Tool Suit4
 
-#Member: 
+#Member:
 - NGUYỄN THANH VIỆT (LEADER)
 - NGUYỄN VĂN HIỆP
 - ĐỖ MINH TÂM
@@ -23,5 +23,7 @@
 #Link:
 
 Link Github: https://github.com/VIETDEPTRAII/Restaurant-Management-Web-Application
+
+Link Redmine: http://pms.saigontech.edu.vn:8080/login
 
 Link Google Drive: https://drive.google.com/drive/folders/1Yt3IMEjHYuGb0ju6XyFtca0dDP8ND574
