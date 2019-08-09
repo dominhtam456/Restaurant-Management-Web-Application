@@ -122,11 +122,12 @@
               <th scope="col"></th>
             </tr>
           </thead>
-          <tbody ng-repeat="x in resources">
+          <tbody >
 
-            <tr  data-toggle="collapse" data-target="#a{{x.nguyenlieu_ID}}" class="clickable table-striped"  ng-click="getResourcesIndex(x)">
+            <tr ng-repeat-start="x in resources" data-toggle="collapse"  data-target="#a{{$index}}" class="clickable table-striped"
+                aria-expanded="true"  ng-click="getResourcesIndex(x)" >
               <td>
-                  {{x.nguyenlieu_ID}}
+                  {{$index}}
               </td>
               <td>
                   {{x.nguyenlieu_NO}}
@@ -156,8 +157,8 @@
                 </div>
               </td>
             </tr>
-            <tr>
-              <td  ng-model="resourcesDetails" colspan="8" id="a{{x.nguyenlieu_ID}}" class="collapse" >
+            <tr  ng-repeat-end id="a{{$index}}" class="collapse " data-parent="#accordionRow">
+              <td colspan="8"  class="hiddenRow" >
                 <div class="container">
                   <div class="row">
                     <div class="card-body border">
@@ -369,6 +370,7 @@
                 </div>
               </td>
             </tr>
+
           </tbody>
         </table>
       </div>
