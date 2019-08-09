@@ -72,18 +72,21 @@
                             </div>
 
                             <div class="col-6">
-                              <div class="container">
+                              <div class="container" ng-controller="UploadController">
                                 <div class="row">
                                   <div class="col-6">
-                                    <img src="https://via.placeholder.com/150x150" alt="">
+                                    <img ng-src="{{imageSrc}}" class="img-fluid" width="250" height="300" alt="">
                                   </div>
                                   <div class="col-6"></div>
                                 </div>
                                 <div class="row mt-1">
                                   <div class="file-field">
                                     <div class="btn form-control-file btn-sm btn-success ml-2">
-                                      <span>Choose file</span>
-                                      <input type="file">
+                                      <form>
+                                        <span>Choose file</span>
+                                        <input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+                                      </form>
+
                                     </div>
                                   </div>
                                 </div>
@@ -203,7 +206,7 @@
                             <div class="row p-2 mt-3 ">
                               <div class="col-4">
                                 <div class="card">
-                                  <img src="https://via.placeholder.com/250x300" />
+                                  <img class="img-fluid" width="250" height="300" src="assets/img/resources/{{x.nguyenlieu_IMG}}" alt="" />
                                 </div>
                               </div>
                               <div class="col-4">
@@ -314,7 +317,7 @@
                                                 <div class="container">
                                                   <div class="row">
                                                     <div class="col-6">
-                                                      <img src="https://via.placeholder.com/150x150" alt="">
+                                                      <img class="img-fluid" width="150" height="150" src="assets/img/resources/{{x.nguyenlieu_IMG}}" alt="" >
                                                     </div>
                                                     <div class="col-6"></div>
                                                   </div>

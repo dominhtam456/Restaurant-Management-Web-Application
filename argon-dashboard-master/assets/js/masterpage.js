@@ -13,7 +13,23 @@ app.config(function($routeProvider) {
   })
 });
 
-app.controller('ResourcesCtrl', function($scope, $http, $window) {
+app.directive("ngFileSelect",function(){
+
+  return {
+    link: function($scope,el){
+
+      el.bind("change", function(e){
+
+        $scope.file = (e.srcElement || e.target).files[0];
+        $scope.getFile();
+      })
+
+    }
+
+  }
+});
+
+app.controller('ResourcesCtrl', function($scope, $http, $window ) {
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
   $scope.resources = [
                 //{ Id: "SP000016", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
@@ -103,9 +119,21 @@ app.controller('ResourcesCtrl', function($scope, $http, $window) {
         $window.location.reload()
       });
   }
-});
-
-app.controller('addResources', function($scope, $http) {
 
 
 });
+
+app.controller('UploadController', function($scope , fileReader) {
+  console.log(fileReader)
+ $scope.getFile = function () {
+     $scope.progress = 0;
+     fileReader.readAsDataUrl($scope.file, $scope)
+                   .then(function(result) {
+                       $scope.imageSrc = result;
+                   });
+ };
+
+    $scope.$on("fileProgress", function(e, progress) {
+      $scope.progress = progress.loaded / progress.total;
+    });
+  });
