@@ -136,6 +136,9 @@ public class WebController {
 		    if (nguyenlieu == null) {
 			      ResponseEntity.notFound().build();
 		    }
+		    //SET TEN LOAI NGUYEN LIEU
+		    nguyenlieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenlieu.getNGUYENLIEU_ID()));
+		    //RESULT
 		return nguyenlieu;
 	}
 	
