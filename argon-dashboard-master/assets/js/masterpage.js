@@ -87,7 +87,7 @@ app.controller('ResourcesCtrl', function($scope, $http, $window) {
       url : "http://localhost:8080/api/NguyenLieu/" + resources.nguyenlieu_ID
     }).then(function mySuccess(response) {
         $scope.resourcesDetails = response.data;
-
+        $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID=$scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID.toString();
       });
 
   };
