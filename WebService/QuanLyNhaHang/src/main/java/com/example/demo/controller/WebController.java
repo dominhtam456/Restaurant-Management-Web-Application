@@ -54,6 +54,8 @@ public class WebController {
 		    if (loainguyenlieu == null) {
 			      ResponseEntity.notFound().build();
 		    }
+		    
+		    
 		return loainguyenlieu;
 	}
 	
@@ -137,7 +139,7 @@ public class WebController {
 			      ResponseEntity.notFound().build();
 		    }
 		    //SET TEN LOAI NGUYEN LIEU
-		    nguyenlieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenlieu.getNGUYENLIEU_ID()));
+		    nguyenlieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenlieu.getLOAINGUYENLIEU_LOAINGUYENLIEU_ID()));
 		    //RESULT
 		return nguyenlieu;
 	}
