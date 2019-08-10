@@ -70,8 +70,8 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
                     NGUYENLIEU_NAME: $scope.resourcesDetails.nguyenlieu_NAME,
                     NGUYENLIEU_PRICE: $scope.resourcesDetails.nguyenlieu_PRICE,
                     NGUYENLIEU_ID: $scope.resourcesDetails.nguyenlieu_ID,
-                    lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID
-
+                    lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID,
+                    NGUYENLIEU_DATE: $scope.resourcesDetails.nguyenlieu_DATE
                 });
 
         $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
@@ -87,7 +87,7 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
                         NGUYENLIEU_NAME: $scope.inputName,
                         NGUYENLIEU_PRICE: $scope.inputPrice,
                         lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.TypeId,
-                        NGUYENLIEU_DATE: '2019/09/01'
+                        NGUYENLIEU_DATE: $scope.inputDate
                     });
 
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
@@ -104,7 +104,10 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
     }).then(function mySuccess(response) {
         $scope.resourcesDetails = response.data;
         $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID=$scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID.toString();
+
       });
+
+
 
   };
 

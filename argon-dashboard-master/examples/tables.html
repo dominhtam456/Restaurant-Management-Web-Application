@@ -31,7 +31,7 @@
                   <div class="card-body border">
                       <div class="tab-content" id="myTabContent">
                           <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
-                            <form ng-submit="addResources()" ng-name="formAddMaterial"> 
+                            <form ng-submit="addResources()" ng-name="formAddMaterial">
                               <div class="container">
                                 <div class="row">
                                   <div class="col-6">
@@ -44,7 +44,7 @@
                                         <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                       </div>
                                     </div>
-      
+
                                     <div class="form-group row">
                                       <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên nguyên
                                         liệu:</label>
@@ -53,7 +53,7 @@
                                           id="inputName" placeholder=" " required>
                                       </div>
                                     </div>
-      
+
                                     <div class="form-group row">
                                       <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại nguyên
                                         liệu:</label>
@@ -75,8 +75,9 @@
                                       <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Hạn Sử
                                         Dụng:</label>
                                       <div class="col-sm-7">
-                                        <input ng-model="inputPrice" type="date" class="form-control form-control-sm "
+                                        <input ng-model="inputDate" type="date" class="form-control form-control-sm "
                                           id="inputNum" placeholder="0" required>
+
                                       </div>
                                     </div>
                                   </div>
@@ -84,15 +85,19 @@
                                     <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Hình Ảnh:</label>
                                     <div class="container" ng-controller="UploadController">
                                       <div class="row">
-                                        <div class="col-6 border">
-                                          <img ng-src="{{imageSrc}}" class="img-fluid" width="250" height="300" alt="">
+                                        <div class="card-body border">
+                                          <div class="col-6">
+                                            <img ng-src="{{imageSrc}}" width="150"
+                                              height="150" alt="">
+                                          </div>
                                         </div>
                                         <div class="col-6"></div>
                                       </div>
                                       <div class="row mt-1">
                                         <div class="file-field">
                                           <div class="btn form-control-file btn-sm btn-success ml-2">
-                                            <input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+                                            <input type="file" ng-file-select="onFileSelect($files)"
+                                              ng-model="imageSrc">
                                           </div>
                                         </div>
                                       </div>
@@ -107,7 +112,7 @@
                             </form>
                           </div>
                           <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="profile-tab">
-      
+
                           </div>
                           <div class="tab-pane fade" id="detailDescription" role="tabpanel" aria-labelledby="contact-tab">...
                           </div>
@@ -155,7 +160,7 @@
                   <span class="mr-2">{{x.nguyenlieu_PRICE}}đ</span>
                 </td>
                 <td>
-                  <span class="mr-2">01/1/2019</span>
+                  <span ng-bind="x.nguyenlieu_DATE | date:'MM/dd/yyyy'" class="mr-2">{{x.nguyenlieu_DATE}}</span>
                 </td>
                 <td class="text-right">
                   <div class="dropdown">
@@ -214,7 +219,7 @@
                                         <b>Loại Nguyên Liệu:</b>
                                       </td>
                                       <td>
-                                        {{resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID}}
+                                        {{resourcesDetails.tenloai_NGUYENLIEU}}
                                       </td>
                                     </tr>
                                     <tr>
@@ -319,8 +324,10 @@
                                                   <label for="inputNum"
                                                     class="col-sm-4 col-form-label form-control-sm">Hạn Sử Dụng:</label>
                                                   <div class="col-sm-7">
-                                                    <input type="date" class="form-control form-control-sm "
-                                                      id="inputNum">
+                                                    <input  type="date"
+                                                          ng-model="resourcesDetails.nguyenlieu_DATE "  class="form-control form-control-sm "
+                                                       id="inputdat">
+                                                     {{resourcesDetails.nguyenlieu_DATE}}
                                                   </div>
                                                 </div>
                                               </div>
@@ -332,8 +339,8 @@
                                                     <div class="row">
                                                       <div class="card-body border">
                                                         <div class="col-6">
-                                                          <img ng-src="{{imageSrc}}" class="img-fluid" width="250"
-                                                            height="300" alt="">
+                                                          <img ng-src="{{imageSrc}}"  width="150"
+                                                            height="150" alt="">
                                                         </div>
                                                       </div>
                                                       <div class="col-6"></div>
