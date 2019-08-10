@@ -97,9 +97,10 @@
                                         <div class="file-field">
                                           <div class="btn form-control-file btn-sm btn-success ml-2">
                                             <input type="file" ng-file-select="onFileSelect($files)"
-                                              ng-model="imageSrc">
+                                              ng-model="imageSrc" onchange="angular.element(this).scope().setFile(this)">
                                           </div>
                                         </div>
+
                                       </div>
                                     </div>
                                   </div>
@@ -339,7 +340,7 @@
                                                     <div class="row">
                                                       <div class="card-body border">
                                                         <div class="col-6">
-                                                          <img ng-src="{{imageSrc}}"  width="150"
+                                                          <img ng-src="{{imageSrc}}" src="assets/img/resources/{{x.nguyenlieu_IMG}}"  width="150"
                                                             height="150" alt="">
                                                         </div>
                                                       </div>
@@ -349,7 +350,7 @@
                                                       <div class="file-field">
                                                         <div class="btn form-control-file btn-sm btn-success ml-2">
                                                           <input type="file" ng-file-select="onFileSelect($files)"
-                                                            ng-model="imageSrc">
+                                                            ng-model="imageSrc" onchange="angular.element(this).scope().setFile(this)">
                                                         </div>
                                                       </div>
                                                     </div>

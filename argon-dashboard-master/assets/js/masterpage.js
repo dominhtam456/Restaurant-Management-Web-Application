@@ -30,6 +30,12 @@ app.directive("ngFileSelect",function(){
 });
 
 app.controller('ResourcesCtrl', function($scope, $http, $window ) {
+
+  $scope.setFile = function(element) {
+        $scope.$apply(function($scope) {
+            $scope.theFile = element.files[0];
+        });
+    };
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
   $scope.resources = [
                 //{ Id: "SP000016", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
@@ -62,7 +68,9 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
   }).then(function mySuccess(response) {
       $scope.resourcesType = response.data;
     });
-
+    $scope.test= function(){
+      alert($scope.theFile.name);
+    }
   //Add resources
   $scope.updateResources= function(){
         var data= $.param({
@@ -71,7 +79,8 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
                     NGUYENLIEU_PRICE: $scope.resourcesDetails.nguyenlieu_PRICE,
                     NGUYENLIEU_ID: $scope.resourcesDetails.nguyenlieu_ID,
                     lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID,
-                    NGUYENLIEU_DATE: $scope.resourcesDetails.nguyenlieu_DATE
+                    NGUYENLIEU_DATE: $scope.resourcesDetails.nguyenlieu_DATE,
+                    NGUYENLIEU_IMG: $scope.theFile.name
                 });
 
         $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
@@ -87,7 +96,8 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
                         NGUYENLIEU_NAME: $scope.inputName,
                         NGUYENLIEU_PRICE: $scope.inputPrice,
                         lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.TypeId,
-                        NGUYENLIEU_DATE: $scope.inputDate
+                        NGUYENLIEU_DATE: $scope.inputDate,
+                        NGUYENLIEU_IMG: $scope.theFile.name
                     });
 
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
