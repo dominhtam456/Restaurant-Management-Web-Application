@@ -29,7 +29,7 @@ app.directive("ngFileSelect",function(){
   }
 });
 
-app.controller('ResourcesCtrl', function($scope, $http, $window ) {
+app.controller('ResourcesCtrl', function($scope, $http, $window ,$filter) {
 
   $scope.setFile = function(element) {
         $scope.$apply(function($scope) {
@@ -129,7 +129,7 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
     }).then(function mySuccess(response) {
         $scope.resourcesDetails = response.data;
         $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID=$scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID.toString();
-
+        $scope.resourcesDetails.nguyenlieu_DATE=$filter("date")($scope.resourcesDetails.nguyenlieu_DATE, "yyyy-MM-dd");
       });
 
 
