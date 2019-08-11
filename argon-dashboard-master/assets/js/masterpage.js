@@ -99,14 +99,29 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
                         NGUYENLIEU_DATE: $scope.inputDate,
                         NGUYENLIEU_IMG: $scope.theFile.name
                     });
+                    var d=0
+                    angular.forEach($scope.resources, function(rs) {
+                      if(rs.nguyenlieu_NO == $scope.resourcesNo){
+                        d=1;
 
+                      }
+                    });
+
+
+            if(d==0){
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
               .then(function mySuccess(data) {
                 $window.location.reload()
               });
+            }
+            else{
+              alert("Mã nguyên liệu đã tồn tại");
+            }
+      }
+  $scope.test=function(){
 
-          }
-
+    alert(d);
+  }
   $scope.getResourcesIndex=function(resources){
     $http({
       method : "GET",

@@ -31,7 +31,7 @@
                   <div class="card-body border">
                       <div class="tab-content" id="myTabContent">
                           <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
-                            <form ng-submit="addResources()" ng-name="formAddMaterial">
+                            <form ng-submit="addResources()" name="formAddMaterial">
                               <div class="container">
                                 <div class="row">
                                   <div class="col-6">
@@ -39,8 +39,9 @@
                                       <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã nguyên
                                         liệu:</label>
                                       <div class="col-sm-7">
-                                        <input ng-model="resourcesNo" type="text" class="form-control form-control-sm"
-                                          id="input1" required>
+                                        <input name="resourcesNo" ng-model="resourcesNo" type="text" class="form-control form-control-sm"
+                                          id="input1" required >
+                                          <span style="font-size:10px;color:red;" ng-if="formAddMaterial.resourcesNo.$invalid">Không được để trống mã nguyên liệu</span>
                                         <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                       </div>
                                     </div>
@@ -49,8 +50,9 @@
                                       <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên nguyên
                                         liệu:</label>
                                       <div class="col-sm-7">
-                                        <input ng-model="inputName" type="text" class="form-control form-control-sm"
+                                        <input name="inputName" ng-model="inputName" type="text" class="form-control form-control-sm"
                                           id="inputName" placeholder=" " required>
+                                          <span style="font-size:10px;color:red;" ng-if="formAddMaterial.inputName.$invalid">Không được để trống tên nguyên liệu</span>
                                       </div>
                                     </div>
 
@@ -58,17 +60,18 @@
                                       <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại nguyên
                                         liệu:</label>
                                       <div class="col-sm-7">
-                                        <select class="form-control-sm" id="inputType" ng-model="TypeId" required>
+                                        <select name="TypeId" class="form-control-sm" id="inputType" ng-model="TypeId" required>
                                           <option ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}
                                           </option>
                                         </select>
+                                        <p style="font-size:10px;color:red;" ng-if="formAddMaterial.TypeId.$invalid">Không được để trống loại nguyên liệu</p>
                                       </div>
                                     </div>
                                     <div class="form-group row">
                                       <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá nhập:</label>
                                       <div class="col-sm-7">
                                         <input ng-model="inputPrice" type="text" class="form-control form-control-sm "
-                                          id="inputNum" placeholder="0" required>
+                                          id="inputNum" placeholder="0" >
                                       </div>
                                     </div>
                                     <div class="form-group row">
@@ -76,7 +79,7 @@
                                         Dụng:</label>
                                       <div class="col-sm-7">
                                         <input ng-model="inputDate" type="date" class="form-control form-control-sm "
-                                          id="inputNum" placeholder="0" required>
+                                          id="inputNum" placeholder="0" >
 
                                       </div>
                                     </div>
@@ -108,7 +111,7 @@
                               </div>
                               <div class="text-right mt-3">
                                 <button type="submit" class="btn btn-success btn-sm">Lưu & thêm mới</button>
-                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Đóng</button>
+                                <button type="button" ng-click="test()" class="btn btn-secondary btn-sm" data-dismiss="modal">Đóng</button>
                               </div>
                             </form>
                           </div>
