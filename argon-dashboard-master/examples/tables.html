@@ -29,32 +29,7 @@
                     </li>
                   </ul>
                   <div class="card-body border">
-<<<<<<< HEAD
-                    <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
-                        <form ng-submit="addResources()" ng-name="formAddMaterial">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="form-group row">
-                                  <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã nguyên
-                                    liệu:</label>
-                                  <div class="col-sm-7">
-                                    <input ng-model="resourcesNo" type="text" class="form-control form-control-sm"
-                                      id="input1" required>
-                                    <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
-                                  </div>
-                                </div>
 
-                                <div class="form-group row">
-                                  <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên nguyên
-                                    liệu:</label>
-                                  <div class="col-sm-7">
-                                    <input ng-model="inputName" type="text" class="form-control form-control-sm"
-                                      id="inputName" placeholder=" " required>
-                                  </div>
-                                </div>
-=======
                       <div class="tab-content" id="myTabContent">
                           <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
                             <form ng-submit="addResources()" name="formAddMaterial">
@@ -106,7 +81,9 @@
                                       <div class="col-sm-7">
                                         <input ng-model="inputDate" type="date" class="form-control form-control-sm "
                                           id="inputNum" placeholder="0" >
->>>>>>> 64f9dc36b118723b8c1a029b175e150cecaddf2a
+                                        </div>
+                                </div>
+
 
                                 <div class="form-group row">
                                   <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại nguyên
@@ -156,18 +133,9 @@
                                   </div>
                                 </div>
                               </div>
-<<<<<<< HEAD
-                            </div>
-=======
-                              <div class="text-right mt-3">
-                                <button type="submit" class="btn btn-success btn-sm">Lưu & thêm mới</button>
-                                <button type="button" ng-click="test()" class="btn btn-secondary btn-sm" data-dismiss="modal">Đóng</button>
-                              </div>
-                            </form>
-                          </div>
-                          <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="profile-tab">
 
->>>>>>> 64f9dc36b118723b8c1a029b175e150cecaddf2a
+                            </div>
+
                           </div>
                           <div class="text-right mt-3">
                             <button type="submit" class="btn btn-success btn-sm">Lưu & thêm mới</button>
@@ -382,16 +350,8 @@
                                                     class="form-control form-control-sm " id="inputNum"
                                                     placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
                                                 </div>
-<<<<<<< HEAD
-                                              </div>
-                                              <div class="form-group row">
-                                                <label for="inputNum"
-                                                  class="col-sm-4 col-form-label form-control-sm">Hạn Sử Dụng:</label>
-                                                <div class="col-sm-7">
-                                                  <input type="date" ng-model="resourcesDetails.nguyenlieu_DATE "
-                                                    class="form-control form-control-sm " id="inputdat">
-                                                  {{resourcesDetails.nguyenlieu_DATE}}
-=======
+
+                                               </div>
                                                 <div class="form-group row">
                                                   <label for="inputNum"
                                                     class="col-sm-4 col-form-label form-control-sm">Hạn Sử Dụng:</label>
@@ -400,7 +360,7 @@
                                                           ng-model="resourcesDetails.nguyenlieu_DATE" value="{{resourcesDetails.nguyenlieu_DATE}}" class="form-control form-control-sm ">
                                                      
                                                   </div>
->>>>>>> 64f9dc36b118723b8c1a029b175e150cecaddf2a
+
                                                 </div>
                                               </div>
                                             </div>
