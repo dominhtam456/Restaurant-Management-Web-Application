@@ -30,14 +30,14 @@
                   <div class="card-body border">
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
-                        <form ng-submit="addResources()" ng-name="formAddMaterial">
+                        <form ng-submit="addFood()" ng-name="formAddMaterial">
                           <div class="container">
                             <div class="row">
                               <div class="col-6">
                                 <div class="form-group row">
                                   <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã món ăn:</label>
                                   <div class="col-sm-7">
-                                    <input ng-model="resourcesNo" type="text" class="form-control form-control-sm"
+                                    <input ng-model="foodNo" type="text" class="form-control form-control-sm"
                                       id="input1" required>
                                     <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                   </div>
@@ -54,10 +54,11 @@
                                 <div class="form-group row">
                                   <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại món ăn:</label>
                                   <div class="col-sm-7">
-                                    <select class="form-control-sm" id="inputType" ng-model="TypeId" required>
-                                      <option ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}
+                                    <select class="form-control-sm" id="inputType" ng-model="TypeId"  required>
+                                      <option ng-repeat="x in foodsType" value="{{x.id}}">{{x.loaimonan_NAME}}
                                       </option>
                                     </select>
+
                                     <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter" disabled><i class="fas fa-plus-square"></i></button>
                                   </div>
                                 </div>
@@ -71,7 +72,7 @@
                                 <div class="form-group row">
                                   <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Đơn Vị Tính:</label>
                                   <div class="col-sm-7">
-                                    <input ng-model="inputDate" type="text" class="form-control form-control-sm "
+                                    <input ng-model="inputUnit" type="text" class="form-control form-control-sm "
                                       id="inputNum" placeholder="0" required>
                                   </div>
                                 </div>
@@ -126,14 +127,15 @@
               <th scope="col">Hình Ảnh</th>
               <th scope="col">Mã Món Ăn</th>
               <th scope="col">Tên Món Ăn</th>
-              <th scope="col">Loại thực đơn</th>
+              <th scope="col">Loại món ăn</th>
               <th scope="col">Giá bán </th>
               <th scope="col">Giá Đơn Vị Tính</th>
               <th scope="col"></th>
-              </tr>
+
             </thead>
             <tbody>
-              <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+              <tr data-toggle="collapse" data-target="#a{{$index}}" class="clickable" ng-repeat-start="x in foods"
+                  ng-click="getFoodIndex(x)" aria-expanded="true">
                 <th>
                     <span>_</span>
                 </th>
@@ -144,27 +146,27 @@
                 </th>
                 <th scope="row">
                   <div class="media align-items-center">
-                    
+
                     <div class="media-body">
-                      <span class="mb-0 text-sm">SP000016</span>
+                      <span class="mb-0 text-sm">{{x.monan_NO}}</span>
                     </div>
                   </div>
                 </th>
                 <td>
-                  Lemon Tea
+                  {{x.monan_NAME}}
                 </td>
                 <td>
                   <span class="badge badge-dot">
-                    Khác
+                    {{x.tenloai_LOAIMONAN}}
                   </span>
                 </td>
                 <td>
-                  <span class="mr-2">15,000</span>
+                  <span class="mr-2">{{x.monan_PRICE}}</span>
                 </td>
                 <td>
                   <div class="d-flex align-items-center">
-                    <span class="mr-2">15,000</span>
-  
+                    <span class="mr-2">{{x.monan_UNIT}}</span>
+
                   </div>
                 </td>
                 <td class="text-right">
@@ -180,8 +182,8 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td colspan="8" id="accordion" class="collapse">
+              <tr ng-repeat-end id="a{{$index}}" class="collapse " data-parent="#accordionRow">
+                <td colspan="8" >
                   <div class="container">
                     <div class="row">
                       <div class="card-body border">
@@ -202,7 +204,7 @@
                         <div class="tab-content" id="myTabContent">
                           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="container border">
-                              <h2 mt-1>Thuốc Lá</h2>
+                              <h2 mt-1>{{foodDetails.monan_NAME}}</h2>
                               <div class="row">
                                 <div class="col-9">
                                   <div class="container">
@@ -226,7 +228,7 @@
                               <div class="row p-2 mt-3 ">
                                 <div class="col-4">
                                   <div class="card">
-                                    <img src="https://via.placeholder.com/250x300" />
+                                    <img width="250" height="300" src="assets/img/resources/Mon_an_va_nuoc/{{x.monan_IMG}}" />
                                   </div>
                                 </div>
                                 <div class="col-4">
@@ -236,7 +238,7 @@
                                         Mã món ăn:
                                       </td>
                                       <td>
-                                        SP000025
+                                        {{foodDetails.monan_NO}}
                                       </td>
                                     </tr>
                                     <tr>
@@ -244,7 +246,7 @@
                                         Loại ón ăn:
                                       </td>
                                       <td>
-                                        Khác
+                                        {{foodDetails.tenloai_LOAIMONAN}}
                                       </td>
                                     </tr>
                                     <tr>
@@ -252,7 +254,7 @@
                                         Giá Bán:
                                       </td>
                                       <td>
-                                        30,000
+                                        {{foodDetails.monan_PRICE}}
                                       </td>
                                     </tr>
                                   </table>
@@ -283,9 +285,9 @@
                             </div>
                             <div>
                               <div class="float-md-right mt-3">
-                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#modifyFoods"><i class="fas fa-plus-circle"></i> Cập Nhật</button>
+                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#b{{x.monan_ID}}"><i class="fas fa-plus-circle"></i> Cập Nhật</button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="modifyFoods" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="b{{x.monan_ID}}" tabindex="-1" role="dialog"
                                 aria-labelledby="modifyFoodsTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                   <div class="modal-content">
@@ -305,7 +307,7 @@
                                                 <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã
                                                   món ăn:</label>
                                                 <div class="col-sm-7">
-                                                  <input ng-model="resourcesDetails.nguyenlieu_NO" type="text"
+                                                  <input ng-model="foodDetails.monan_NO" type="text"
                                                     class="form-control form-control-sm" id="input1"
                                                     placeholder="{{resourcesDetails.nguyenlieu_NO}}">
                                                 </div>
@@ -315,7 +317,7 @@
                                                 <label for="inputName"
                                                   class="col-sm-4 col-form-label form-control-sm">Tên món ăn:</label>
                                                 <div class="col-sm-7">
-                                                  <input ng-model="resourcesDetails.nguyenlieu_NAME" type="text"
+                                                  <input ng-model="foodDetails.monan_NAME" type="text"
                                                     class="form-control form-control-sm" id="inputName"
                                                     placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
                                                 </div>
@@ -326,22 +328,23 @@
                                                   class="col-sm-4 col-form-label form-control-sm">Loại món ăn:</label>
                                                 <div class="col-sm-7">
                                                   <select class="form-control-sm" id="inputType"
-                                                    ng-model="resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID">
-                                                    <option ng-repeat="x in resourcesType" value="{{x.id}}">
-                                                      {{x.loainguyenlieu_NAME}}</option>
+                                                    ng-model="foodDetails.loaimonan_LOAIMONAN_ID">
+                                                    <option ng-repeat="x in foodsType" value="{{x.id}}">
+                                                      {{x.loaimonan_NAME}}</option>
                                                   </select>
+
                                                 </div>
                                               </div>
                                               <div class="form-group row">
                                                 <label for="inputNum"
                                                   class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                                 <div class="col-sm-7">
-                                                  <input ng-model="resourcesDetails.nguyenlieu_PRICE" type="text"
+                                                  <input ng-model="foodDetails.monan_PRICE" type="text"
                                                     class="form-control form-control-sm " id="inputNum"
                                                     placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
                                                 </div>
                                               </div>
-                                              
+
                                             </div>
                                             <div class="col-6">
                                               <div class="col-6">
@@ -352,8 +355,8 @@
                                                     <div class="card-body border">
                                                       <div class="col-6">
                                                         <img ng-src="{{imageSrc}}"
-                                                          src="assets/img/resources/{{x.nguyenlieu_IMG}}" width="150"
-                                                          height="150" alt="">
+                                                          src="assets/img/resources/Mon_an_va_nuoc/{{x.monan_IMG}}" width="150"
+                                                          height="150" value="assets/img/resources/Mon_an_va_nuoc/{{x.monan_IMG}}"alt="">
                                                       </div>
                                                     </div>
                                                     <div class="col-6"></div>
