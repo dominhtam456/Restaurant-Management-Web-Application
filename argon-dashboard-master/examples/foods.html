@@ -30,15 +30,16 @@
                   <div class="card-body border">
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
-                        <form ng-submit="addFood()" ng-name="formAddMaterial">
+                        <form ng-submit="addFood()" name="formAddMaterial">
                           <div class="container">
                             <div class="row">
                               <div class="col-6">
                                 <div class="form-group row">
                                   <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã món ăn:</label>
                                   <div class="col-sm-7">
-                                    <input ng-model="foodNo" type="text" class="form-control form-control-sm"
+                                    <input name="foodNo" ng-model="foodNo" type="text" class="form-control form-control-sm"
                                       id="input1" required>
+                                      <span style="font-size:10px;color:red;" ng-if="formAddMaterial.foodNo.$invalid">Không được để trống mã món ăn</span>
                                     <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                   </div>
                                 </div>
@@ -46,19 +47,20 @@
                                 <div class="form-group row">
                                   <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên món ăn:</label>
                                   <div class="col-sm-7">
-                                    <input ng-model="inputName" type="text" class="form-control form-control-sm"
+                                    <input name="inputName" ng-model="inputName" type="text" class="form-control form-control-sm"
                                       id="inputName" placeholder=" " required>
+                                      <span style="font-size:10px;color:red;" ng-if="formAddMaterial.inputName.$invalid">Không được để trống tên món ăn</span>
                                   </div>
                                 </div>
 
                                 <div class="form-group row">
                                   <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại món ăn:</label>
                                   <div class="col-sm-7">
-                                    <select class="form-control-sm" id="inputType" ng-model="TypeId"  required>
+                                    <select name="TypeId" class="form-control-sm" id="inputType" ng-model="TypeId"  required>
                                       <option ng-repeat="x in foodsType" value="{{x.id}}">{{x.loaimonan_NAME}}
                                       </option>
                                     </select>
-
+                                    <span style="font-size:10px;color:red;" ng-if="formAddMaterial.TypeId.$invalid">Không được để trống tên món ăn</span>
                                     <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter" disabled><i class="fas fa-plus-square"></i></button>
                                   </div>
                                 </div>
@@ -66,14 +68,14 @@
                                   <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                   <div class="col-sm-7">
                                     <input ng-model="inputPrice" type="text" class="form-control form-control-sm "
-                                      id="inputNum" placeholder="0" required>
+                                      id="inputNum" placeholder="0" >
                                   </div>
                                 </div>
                                 <div class="form-group row">
                                   <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Đơn Vị Tính:</label>
                                   <div class="col-sm-7">
                                     <input ng-model="inputUnit" type="text" class="form-control form-control-sm "
-                                      id="inputNum" placeholder="0" required>
+                                      id="inputNum" placeholder="0" >
                                   </div>
                                 </div>
                               </div>
@@ -299,7 +301,7 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      <form ng-submit="updateResources()">
+                                      <form ng-submit="updateFood()">
                                         <div class="container">
                                           <div class="row">
                                             <div class="col-6">
@@ -308,8 +310,7 @@
                                                   món ăn:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="foodDetails.monan_NO" type="text"
-                                                    class="form-control form-control-sm" id="input1"
-                                                    placeholder="{{resourcesDetails.nguyenlieu_NO}}">
+                                                    class="form-control form-control-sm" id="input1">
                                                 </div>
                                               </div>
 
@@ -318,8 +319,8 @@
                                                   class="col-sm-4 col-form-label form-control-sm">Tên món ăn:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="foodDetails.monan_NAME" type="text"
-                                                    class="form-control form-control-sm" id="inputName"
-                                                    placeholder="{{resourcesDetails.nguyenlieu_NAME}}">
+                                                    class="form-control form-control-sm" id="inputName">
+
                                                 </div>
                                               </div>
 
@@ -340,8 +341,8 @@
                                                   class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="foodDetails.monan_PRICE" type="text"
-                                                    class="form-control form-control-sm " id="inputNum"
-                                                    placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
+                                                    class="form-control form-control-sm " id="inputNum">
+
                                                 </div>
                                               </div>
 
@@ -403,11 +404,11 @@
                                     </div>
                                     <div class="modal-body">
                                       <p style="white-space: normal">Bạn sẽ xóa sản phẩm có mã là
-                                        <b>{{resourcesDetails.nguyenlieu_NO}}</b> có tên là
-                                        <b>{{resourcesDetails.nguyenlieu_NAME}}</b></p>
+                                        <b>{{foodDetails.monan_NO}}</b> có tên là
+                                        <b>{{foodDetails.monan_NAME}}</b></p>
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" ng-click="deleteResources(x)" class="btn btn-secondary"
+                                      <button type="button" ng-click="deleteFood(x)" class="btn btn-secondary"
                                         data-dismiss="modal">Đồng ý</button>
                                       <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
                                     </div>

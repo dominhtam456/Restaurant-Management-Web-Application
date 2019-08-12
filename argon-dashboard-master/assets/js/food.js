@@ -40,7 +40,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
                       MONAN_NO: $scope.foodNo,
                       MONAN_NAME: $scope.inputName,
                       MONAN_PRICE: $scope.inputPrice,
-                      LOAIMONAN_LOAIMONAN_ID: $scope.TypeId,
+                      lOAIMONAN_LOAIMONAN_ID: $scope.TypeId,
                       MONAN_IMG: $scope.theFile.name,
                       MONAN_UNIT: $scope.inputUnit
                   });
@@ -48,11 +48,8 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
                   angular.forEach($scope.foods, function(rs) {
                     if(rs.monan_NO == $scope.foodNo){
                       d=1;
-
                     }
                   });
-
-
           if(d==0){
           $http.post("http://localhost:8080/api/InsertMonAn/",data)
             .then(function mySuccess(data) {
@@ -63,6 +60,43 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
             alert("Mã món ăn đã tồn tại");
           }
     }
+
+    $scope.updateFood= function(){
+      var foodIMG="";
+        if(angular.isDefined($scope.theFile)){
+          foodIMG=$scope.theFile.name;
+        }
+        else{
+          foodIMG=$scope.foodDetails.monan_IMG;
+        }
+          var data= $.param({
+                      MONAN_NO: $scope.foodDetails.monan_NO,
+                      MONAN_NAME: $scope.foodDetails.monan_NAME,
+                      MONAN_PRICE: $scope.foodDetails.monan_PRICE,
+                      lOAIMONAN_LOAIMONAN_ID: $scope.foodDetails.loaimonan_LOAIMONAN_ID,
+                      MONAN_IMG: foodIMG,
+                      MONAN_ID: $scope.foodDetails.monan_ID
+
+                  });
+
+          $http.post("http://localhost:8080/api/InsertMonAn/",data)
+            .then(function mySuccess(data) {
+              $window.location.reload()
+            });
+
+        }
+
+
+        $scope.deleteFood= function(food){
+          var data= $.param({
+                      MONAN_ID: food.monan_ID
+                  });
+          $http.post("http://localhost:8080/api/MonAn/" + food.monan_ID,data)
+            .then(function mySuccess(response){
+              alert("Bạn đã xóa nguyên liệu thành công");
+              $window.location.reload()
+            });
+        }
 
 });
 
