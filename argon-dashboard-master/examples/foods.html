@@ -126,25 +126,19 @@
           <table class="table align-items-center table-flush accordion" id="accordionRow">
             <thead class="thead-light">
               <th scope="col">STT</th>
-              <th scope="col">Hình Ảnh</th>
               <th scope="col">Mã Món Ăn</th>
               <th scope="col">Tên Món Ăn</th>
               <th scope="col">Loại món ăn</th>
               <th scope="col">Giá bán </th>
-              <th scope="col">Giá Đơn Vị Tính</th>
-              <th scope="col"></th>
+              <th scope="col">Đơn Vị Tính</th>
+              <th scope="col">Trạng thái</th>
 
             </thead>
             <tbody>
               <tr data-toggle="collapse" data-target="#a{{$index}}" class="clickable" ng-repeat-start="x in foods"
                   ng-click="getFoodIndex(x)" aria-expanded="true">
                 <th>
-                    <span>_</span>
-                </th>
-                <th>
-                    <a href="#" class="avatar rounded-circle mr-3">
-                        <img alt="Image placeholder" src="../assets/img/theme/react.jpg">
-                    </a>
+                    <span>{{x.monan_ID}}</span>
                 </th>
                 <th scope="row">
                   <div class="media align-items-center">
@@ -168,7 +162,11 @@
                 <td>
                   <div class="d-flex align-items-center">
                     <span class="mr-2">{{x.monan_UNIT}}</span>
-
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2">{{x.monan_STATUS}}</span>
                   </div>
                 </td>
                 <td class="text-right">
