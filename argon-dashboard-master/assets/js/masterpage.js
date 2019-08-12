@@ -7,6 +7,9 @@ app.config(function($routeProvider) {
   .when("/icons", {
     templateUrl : "/examples/dashboard.html"
   })
+  .when("/foods", {
+    templateUrl : "/examples/foods.html"
+  })
   .when("/tables", {
     templateUrl : "/examples/tables.html",
     controller : "ResourcesCtrl"

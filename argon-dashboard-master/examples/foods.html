@@ -1,20 +1,19 @@
 <div class="row">
-  <div class="col">
-    <div class="card shadow">
-      <div class="card-header border-0">
-        <h3 class="mb-0">Nguyên Liệu</h3>
-        <div class="float-md-right mb-3">
-          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAddMaterials"><i
-              class="fas fa-plus-circle"></i> Thêm Mới</button>
-          <button type="button" class="btn btn-secondary btn-sm" disabled>Button</button>
-          <button type="button" class="btn btn-secondary btn-sm" disabled>Button</button>
-          <div class="modal fade" id="modalAddMaterials" tabindex="-1" role="dialog" aria-labelledby="modalAddMaterials"
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Thực Đơn</h3>
+          <div class="float-md-right mb-3">
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAddFoods"><i class="fas fa-plus-circle"></i> Thêm Mới</button>
+            <button type="button" class="btn btn-secondary btn-sm" disabled>Button</button>
+            <button type="button" class="btn btn-secondary btn-sm" disabled>Button</button>
+            <div class="modal fade" id="modalAddFoods" tabindex="-1" role="dialog" aria-labelledby="modalAddFoods"
             aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content ">
                 <div class="modal-header">
-                  <h1 class="modal-title" id="modalAddMaterials">
-                    Thêm nguyên liệu
+                  <h1 class="modal-title" id="modalAddFoods">
+                    Thêm Món Ăn
                   </h1>
                   <hr>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -36,8 +35,7 @@
                             <div class="row">
                               <div class="col-6">
                                 <div class="form-group row">
-                                  <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã nguyên
-                                    liệu:</label>
+                                  <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã món ăn:</label>
                                   <div class="col-sm-7">
                                     <input ng-model="resourcesNo" type="text" class="form-control form-control-sm"
                                       id="input1" required>
@@ -46,8 +44,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                  <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên nguyên
-                                    liệu:</label>
+                                  <label for="inputName" class="col-sm-4 col-form-label form-control-sm">Tên món ăn:</label>
                                   <div class="col-sm-7">
                                     <input ng-model="inputName" type="text" class="form-control form-control-sm"
                                       id="inputName" placeholder=" " required>
@@ -55,28 +52,26 @@
                                 </div>
 
                                 <div class="form-group row">
-                                  <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại nguyên
-                                    liệu:</label>
+                                  <label for="inputType" class="col-sm-4 col-form-label form-control-sm">Loại món ăn:</label>
                                   <div class="col-sm-7">
                                     <select class="form-control-sm" id="inputType" ng-model="TypeId" required>
                                       <option ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}
                                       </option>
                                     </select>
+                                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter" disabled><i class="fas fa-plus-square"></i></button>
                                   </div>
                                 </div>
                                 <div class="form-group row">
-                                  <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá
-                                    nhập:</label>
+                                  <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                   <div class="col-sm-7">
                                     <input ng-model="inputPrice" type="text" class="form-control form-control-sm "
                                       id="inputNum" placeholder="0" required>
                                   </div>
                                 </div>
                                 <div class="form-group row">
-                                  <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Hạn Sử
-                                    Dụng:</label>
+                                  <label for="inputNum" class="col-sm-4 col-form-label form-control-sm">Đơn Vị Tính:</label>
                                   <div class="col-sm-7">
-                                    <input ng-model="inputDate" type="date" class="form-control form-control-sm "
+                                    <input ng-model="inputDate" type="text" class="form-control form-control-sm "
                                       id="inputNum" placeholder="0" required>
                                   </div>
                                 </div>
@@ -122,150 +117,180 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table  align-items-center table-flush accordion table-hover" id="accordionRow">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Stt</th>
-              <th scope="col">Mã Nguyên Liệu</th>
-              <th scope="col">Nguyên Liệu</th>
-              <th scope="col">Loại nguyên liệu</th>
-              <th scope="col">Giá nhập</th>
-              <th scope="col">Hạn Sử Dụng</th>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush accordion" id="accordionRow">
+            <thead class="thead-light">
+              <th scope="col">STT</th>
+              <th scope="col">Hình Ảnh</th>
+              <th scope="col">Mã Món Ăn</th>
+              <th scope="col">Tên Món Ăn</th>
+              <th scope="col">Loại thực đơn</th>
+              <th scope="col">Giá bán </th>
+              <th scope="col">Giá Đơn Vị Tính</th>
               <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat-start="x in resources" data-toggle="collapse" data-target="#a{{$index}}"
-              class="clickable table-striped" aria-expanded="true" ng-click="getResourcesIndex(x)">
-              <td>
-                {{$index}}
-              </td>
-              <td>
-                {{x.nguyenlieu_NO}}
-              </td>
-              <td>
-                {{x.nguyenlieu_NAME}}
-              </td>
-              <td ng-model="resourcesTypeId">
-                <span class="badge badge-dot">
-                  {{x.tenloai_NGUYENLIEU}}
-                </span>
-              </td>
-              <td>
-                <span class="mr-2">{{x.nguyenlieu_PRICE}}đ</span>
-              </td>
-              <td>
-                <span ng-bind="x.nguyenlieu_DATE | date:'MM/dd/yyyy'" class="mr-2">{{x.nguyenlieu_DATE}}</span>
-              </td>
-              <td class="text-right">
-                <div class="dropdown">
-                  <a class="btn btn-sm btn-icon-only text-light" href="#!tables" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+                <th>
+                    <span>_</span>
+                </th>
+                <th>
+                    <a href="#" class="avatar rounded-circle mr-3">
+                        <img alt="Image placeholder" src="../assets/img/theme/react.jpg">
+                    </a>
+                </th>
+                <th scope="row">
+                  <div class="media align-items-center">
+                    
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">SP000016</span>
+                    </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-            <tr ng-repeat-end id="a{{$index}}" class="collapse " data-parent="#accordionRow">
-              <td colspan="8" class="hiddenRow">
-                <div class="container">
-                  <div class="row">
-                    <div class="card-body border">
-                      <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">Thông Tin</a>
-                        </li>
-                      </ul>
-                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                          <div class="container border">
-                            <h1 mt-1>Nguyên Liệu: {{resourcesDetails.nguyenlieu_NAME}}</h1>
-                            <hr>
-                            <div class="row">
-                              <div class="col-9">
-
-                              </div>
-                            </div>
-                            <div class="row p-2 mt-3 ">
-                              <div class="col-4">
-                                <div class="card">
-                                  <img class="img-fluid" width="250" height="300"
-                                    src="assets/img/resources/{{x.nguyenlieu_IMG}}" alt="" />
+                </th>
+                <td>
+                  Lemon Tea
+                </td>
+                <td>
+                  <span class="badge badge-dot">
+                    Khác
+                  </span>
+                </td>
+                <td>
+                  <span class="mr-2">15,000</span>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2">15,000</span>
+  
+                  </div>
+                </td>
+                <td class="text-right">
+                  <div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#!tables" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="8" id="accordion" class="collapse">
+                  <div class="container">
+                    <div class="row">
+                      <div class="card-body border">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                          <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Thông Tin</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Thẻ Kho</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Tồn Kho</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Món Thêm</a>
+                          </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="container border">
+                              <h2 mt-1>Thuốc Lá</h2>
+                              <div class="row">
+                                <div class="col-9">
+                                  <div class="container">
+                                    <div class="row mt-3">
+                                      <div class="col-3 ">
+                                        <i class="fas fa-check "></i>
+                                        <a href="#">Được bán trực tiếp</a>
+                                      </div>
+                                      <div class="col-3 ">
+                                        <i class="fas fa-times"></i>
+                                        <a href="#">Được tích điểm</a>
+                                      </div>
+                                      <div class="col-3 ">
+                                        <i class="fas fa-times"></i>
+                                        <a href="#">Không là món thêm (Extra topping)</a>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                              <div class="col-4">
-                                <table>
-                                  <tr class="p-2">
-                                    <td>
-                                      <b>Mã Nguyên Liệu:</b>
-                                    </td>
-                                    <td>
-                                      <h4><b>{{resourcesDetails.nguyenlieu_NO}}</b></h4>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <b>Loại Nguyên Liệu:</b>
-                                    </td>
-                                    <td>
-                                      {{resourcesDetails.tenloai_NGUYENLIEU}}
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <b>Giá Nhập:</b>
-                                    </td>
-                                    <td>
-                                      {{resourcesDetails.nguyenlieu_PRICE}}đ
-                                    </td>
-                                  </tr>
-                                </table>
-                              </div>
-                              <div class="col-4">
-                                <table>
-                                  <tr>
-                                    <!-- <td>
-                                        <b>Mô tả:</b>
-                                      </td> -->
-                                    <td>
-                                      <div class="card">
+                              <div class="row p-2 mt-3 ">
+                                <div class="col-4">
+                                  <div class="card">
+                                    <img src="https://via.placeholder.com/250x300" />
+                                  </div>
+                                </div>
+                                <div class="col-4">
+                                  <table>
+                                    <tr class="p-2">
+                                      <td>
+                                        Mã món ăn:
+                                      </td>
+                                      <td>
+                                        SP000025
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Loại ón ăn:
+                                      </td>
+                                      <td>
+                                        Khác
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Giá Bán:
+                                      </td>
+                                      <td>
+                                        30,000
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                                <div class="col-4">
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        Mô tả:
+                                      </td>
+                                      <td>
+                                        <div class="card">
+                                          <!-- content -->
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Ghi Chú:
+                                      </td>
+                                      <td>
                                         <!-- content -->
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <!-- <td>
-                                        <b>Ghi Chú:</b>
-                                      </td> -->
-                                    <td>
-                                      <!-- content -->
-                                    </td>
-                                  </tr>
-                                </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div>
-                            <div class="float-md-right mt-3">
-                              <button type="button" class="btn btn-success" data-toggle="modal"
-                                data-target="#b{{x.nguyenlieu_ID}}"><i class="fas fa-plus-circle"></i> Cập
-                                Nhật</button>
-                              <!-- Modal -->
-                              <div class="modal fade" id="b{{x.nguyenlieu_ID}}" tabindex="-1" role="dialog"
-                                aria-labelledby="modifyMaterialTitle" aria-hidden="true">
+                            <div>
+                              <div class="float-md-right mt-3">
+                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#modifyFoods"><i class="fas fa-plus-circle"></i> Cập Nhật</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modifyFoods" tabindex="-1" role="dialog"
+                                aria-labelledby="modifyFoodsTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h2 class="modal-title" id="modifyMaterialTitle">Cập Nhật Thông Tin Nguyên Liệu
+                                      <h2 class="modal-title" id="modifyFoodsTitle">Cập Nhật Thông Tin Món Ăn
                                       </h2>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -278,7 +303,7 @@
                                             <div class="col-6">
                                               <div class="form-group row">
                                                 <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã
-                                                  hàng hóa:</label>
+                                                  món ăn:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_NO" type="text"
                                                     class="form-control form-control-sm" id="input1"
@@ -288,8 +313,7 @@
 
                                               <div class="form-group row">
                                                 <label for="inputName"
-                                                  class="col-sm-4 col-form-label form-control-sm">Tên nguyên
-                                                  liệu:</label>
+                                                  class="col-sm-4 col-form-label form-control-sm">Tên món ăn:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_NAME" type="text"
                                                     class="form-control form-control-sm" id="inputName"
@@ -299,8 +323,7 @@
 
                                               <div class="form-group row">
                                                 <label for="inputType"
-                                                  class="col-sm-4 col-form-label form-control-sm">Loại nguyên
-                                                  liệu:</label>
+                                                  class="col-sm-4 col-form-label form-control-sm">Loại món ăn:</label>
                                                 <div class="col-sm-7">
                                                   <select class="form-control-sm" id="inputType"
                                                     ng-model="resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID">
@@ -311,22 +334,14 @@
                                               </div>
                                               <div class="form-group row">
                                                 <label for="inputNum"
-                                                  class="col-sm-4 col-form-label form-control-sm">Giá nhập:</label>
+                                                  class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_PRICE" type="text"
                                                     class="form-control form-control-sm " id="inputNum"
                                                     placeholder="{{resourcesDetails.nguyenlieu_PRICE}}">
                                                 </div>
                                               </div>
-                                              <div class="form-group row">
-                                                <label for="inputNum"
-                                                  class="col-sm-4 col-form-label form-control-sm">Hạn Sử Dụng:</label>
-                                                <div class="col-sm-7">
-                                                  <input type="date" ng-model="resourcesDetails.nguyenlieu_DATE "
-                                                    class="form-control form-control-sm " id="inputdat">
-                                                  {{resourcesDetails.nguyenlieu_DATE}}
-                                                </div>
-                                              </div>
+                                              
                                             </div>
                                             <div class="col-6">
                                               <div class="col-6">
@@ -396,49 +411,47 @@
                                   </div>
                                 </div>
                               </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...
-                        </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...
+                          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-footer py-4">
-        <nav aria-label="...">
-          <ul class="pagination justify-content-end mb-0">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">
-                <i class="fas fa-angle-left"></i>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                <i class="fas fa-angle-right"></i>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <ul class="pagination justify-content-end mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">
+                  <i class="fas fa-angle-left"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <i class="fas fa-angle-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Dark table -->
-</div>
+  <!-- Dark table -->
+  </div>
