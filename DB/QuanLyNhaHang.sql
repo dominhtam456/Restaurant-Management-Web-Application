@@ -167,7 +167,7 @@ CREATE TABLE `loaimonan` (
   `LOAIMONAN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `LOAIMONAN_DES` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`LOAIMONAN_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +176,7 @@ CREATE TABLE `loaimonan` (
 
 LOCK TABLES `loaimonan` WRITE;
 /*!40000 ALTER TABLE `loaimonan` DISABLE KEYS */;
-INSERT INTO `loaimonan` VALUES (1,'Món chiên',NULL),(2,'Cơm',NULL),(3,'Món xào',NULL),(4,'Món mặn',NULL),(5,'Món nướng',NULL),(6,'Món tráng miệng',NULL),(7,'Nước',NULL);
+INSERT INTO `loaimonan` VALUES (1,'Món chiên',NULL),(2,'Cơm',NULL),(3,'Món xào',NULL),(4,'Món mặn',NULL),(5,'Món nướng',NULL),(6,'Món tráng miệng',NULL),(7,'Nước',NULL),(8,'Sinh tố',NULL),(9,'Món lẩu',NULL),(10,'Món chay',NULL);
 /*!40000 ALTER TABLE `loaimonan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,10 +221,11 @@ CREATE TABLE `monan` (
   `MONAN_STATUS` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `MONAN_IMG` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `LOAIMONAN_LOAIMONAN_ID` int(11) NOT NULL,
+  `tenloai_monan` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MONAN_ID`),
   KEY `fk_MONAN_LOAIMONAN1_idx` (`LOAIMONAN_LOAIMONAN_ID`),
   CONSTRAINT `fk_MONAN_LOAIMONAN1` FOREIGN KEY (`LOAIMONAN_LOAIMONAN_ID`) REFERENCES `loaimonan` (`LOAIMONAN_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +234,7 @@ CREATE TABLE `monan` (
 
 LOCK TABLES `monan` WRITE;
 /*!40000 ALTER TABLE `monan` DISABLE KEYS */;
-INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50.000','VND','Còn',NULL,1),(2,'1dhcnm','Đùi heo chiên nước mắm','50.000','VND','Còn',NULL,1),(4,'2ccdc','Cơm chiên dương châu','35.000','Dĩa','Còn',NULL,2),(5,'2cchs','Cơm chiên hải sản','40.000','Dĩa','Còn',NULL,2),(6,'3rdxt','Rau dền xào tỏi','25.000','Dĩa','Còn',NULL,3),(7,'3rcvxt','Rau chân vịt xào trứng','20.000','Dĩa','Còn',NULL,3),(8,'4thq','Thịt heo quay','30.000','Dĩa','Còn',NULL,4),(9,'4ctkd','Cà tím kho đậu','40.000','Thố','Còn',NULL,4),(10,'5bnxq','Món nướng bò rau xiên que','35.000','Dĩa','Còn',NULL,5),(11,'5ctlns','Cá thác lác nướng sả','35.000','Dĩa','Còn',NULL,5),(12,'6rc','Rau câu','15.000','Ly','Còn',NULL,6),(13,'6tctc','Trái cây thập cẩm','18.000','Dĩa','Hết',NULL,6),(14,'7cpsd','Cà phê sữa đá','17.000','Ly','Còn',NULL,7),(15,'7ns','Nước suối','5.000','Chai','Còn',NULL,7);
+INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50.000','Dĩa','Còn',NULL,1,NULL),(2,'1dhcnm','Đùi heo chiên nước mắm','50.000','Dĩa','Còn',NULL,1,NULL),(3,'2ccdc','Cơm chiên dương châu','35.000','Dĩa','Còn',NULL,2,NULL),(4,'2cchs','Cơm chiên hải sản','40.000','Dĩa','Còn',NULL,2,NULL),(5,'3rdxt','Rau dền xào tỏi','25.000','Dĩa','Còn',NULL,3,NULL),(6,'3rcvxt','Rau chân vịt xào trứng','20.000','Dĩa','Còn',NULL,3,NULL),(7,'4thq','Thịt heo quay','30.000','Dĩa','Còn',NULL,4,NULL),(8,'4ctkd','Cà tím kho đậu','40.000','Thố','Còn',NULL,4,NULL),(9,'5bnxq','Món nướng bò rau xiên que','35.000','Dĩa','Còn',NULL,5,NULL),(10,'5ctlns','Cá thác lác nướng sả','35.000','Dĩa','Còn',NULL,5,NULL),(11,'6rc','Rau câu','15.000','Ly','Còn',NULL,6,NULL),(12,'6tctc','Trái cây thập cẩm','18.000','Dĩa','Hết',NULL,6,NULL),(13,'7cpsd','Cà phê sữa đá','17.000','Ly','Còn',NULL,7,NULL),(14,'7ns','Nước suối','5.000','Chai','Còn',NULL,7,NULL);
 /*!40000 ALTER TABLE `monan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,4 +340,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-10 23:41:59
+-- Dump completed on 2019-08-11 15:19:44

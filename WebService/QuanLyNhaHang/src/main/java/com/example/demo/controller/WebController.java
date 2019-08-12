@@ -20,18 +20,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.LoaiNguyenLieuService;
 import com.example.demo.Service.NguyenLieuService;
+import com.example.demo.Service.LoaiMonAnService;
+import com.example.demo.Service.MonAnService;
+
+
 import com.example.demo.model.LoaiNguyenLieu;
 import com.example.demo.model.NguyenLieu;
+import com.example.demo.model.LoaiMonAn;
+import com.example.demo.model.MonAn;
 
 import ch.qos.logback.classic.Logger;
 
 @RestController
 @RequestMapping("/api")
 public class WebController {
+	
 	@Autowired
 	LoaiNguyenLieuService repositoryLoaiNguyenLieu;
 	@Autowired
 	NguyenLieuService repositoryNguyenLieu;
+	@Autowired
+	MonAnService repositoryMonAn;
+	@Autowired
+	LoaiMonAnService repositoryLoaiMonAn;
+	
 	
 	/////////////////////////////// LOAI NGUYEN LIEU /////////////////////////
 	
@@ -107,7 +119,7 @@ public class WebController {
 	
   /////////////////////////////// NGUYEN LIEU ///////////////////////////
 	
-	//LAY TEN LOAI NGUYEN LIEU
+	//LAY TEN LOAI NGUYEN LIEU CHO TABLE NGUYEN LIEU THONG QUA ID LOAI NGUYEN LIEU
 	public String GetTenLoaiNguyenLieu(long idLoaiNguyenLieu) {
 		if(repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu)!=null) {
 			return repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu).getLOAINGUYENLIEU_NAME();
@@ -197,4 +209,173 @@ public class WebController {
 	    return ResponseEntity.ok().build();
 	}
 	
+	/////////////////////////////// LOAI MON AN /////////////////////////
+	
+		//LAY ALL LOAI MON AN
+		@RequestMapping(value = "/GetAllLoaiMonAn", method = RequestMethod.GET)
+		public ResponseEntity<List<LoaiMonAn>> listAllLoaiMonAn() {
+			    List<LoaiMonAn> listLoaiMonAn = repositoryLoaiMonAn.findAll();
+			if (listLoaiMonAn.isEmpty()) {
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
+			// return ResponseEntity<List<Contact>>(listContact, HttpStatus.OK);
+			return new ResponseEntity<List<LoaiMonAn>>(listLoaiMonAn, HttpStatus.OK);
+		}
+	
+		//LAY 1 LOAI MON AN
+		@RequestMapping(value = "/LoaiMonAn/{id}", method = RequestMethod.GET)
+		public LoaiMonAn findLoaiMonAnByID(@PathVariable("id") long id) {
+			   LoaiMonAn loaimonan = repositoryLoaiMonAn.getOne(id);
+			    if (loaimonan == null) {
+				      ResponseEntity.notFound().build();
+			    }
+			    	    
+			return loaimonan;
+		}
+		
+		//THEM LOAI MON AN
+		@RequestMapping(
+				value = "/InsertLoaiMonAn", 
+				method = RequestMethod.POST	
+				)
+		@ResponseBody
+		public LoaiMonAn insertLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
+			//@Valid: kiem tra xem co ton tai object trong body
+			LoaiMonAn lma = repositoryLoaiMonAn.save(loaimonanForm);
+			return lma;
+		}
+		
+		//CAP NHAT LOAI MON AN
+		@RequestMapping(value = "/UpdateLoaiMonAn", 
+				method = RequestMethod.POST)
+		public ResponseEntity<LoaiMonAn> updateLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
+			LoaiMonAn lma = repositoryLoaiMonAn.getOne(loaimonanForm.getId());
+		    if(lma == null) {
+		        return ResponseEntity.notFound().build();
+		    }
+		    
+		    lma.setLOAIMONAN_NAME(loaimonanForm.getLOAIMONAN_NAME());
+		    lma.setLOAIMONAN_DES(loaimonanForm.getLOAIMONAN_DES());
+
+		    LoaiMonAn updatedLoaiMonAn = repositoryLoaiMonAn.save(lma);//update trong database
+		    return ResponseEntity.ok(updatedLoaiMonAn);
+		}
+		
+		//XOA LOAI MON AN
+		@RequestMapping(value = "/DeleteLoaiMonAn", method = RequestMethod.POST)
+		public int deleteLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonan) {
+			//@PathVariable(value=""): lay bien tu url
+			//@RequestBody: lay object duoc gui trong body
+			LoaiMonAn lma = repositoryLoaiMonAn.getOne(loaimonan.getId());
+		    if(lma == null) {
+		        return 0;
+		    }
+		    repositoryLoaiMonAn.delete(lma);//delete trong database
+		    return 1;
+		}
+		
+		
+		/////////////////////////////// MON AN ///////////////////////////
+		
+		//LAY TEN LOAI MON AN cho TABLE MON AN THONG QUA ID LOAIMONAN
+			public String GetTenLoaiMonAn(long idLoaiMonAn) {
+				if(repositoryLoaiMonAn.getOne(idLoaiMonAn)!=null) {
+					return repositoryLoaiMonAn.getOne(idLoaiMonAn).getLOAIMONAN_NAME();
+				}
+				else 
+				{
+					return "null";
+				}		 
+			}
+		
+		//LAY ALL MON AN
+			@RequestMapping(path = "/GetAllMonAn", produces = MediaType.APPLICATION_JSON_VALUE)
+			public java.util.List<MonAn> getAllMonAn() {
+				// This returns a JSON or XML with the users
+				  for (MonAn monan : repositoryMonAn.findAll()) {
+					  //Set ten loai nguyen lieu
+					 
+					  monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
+				}
+				return repositoryMonAn.findAll();
+			}
+			
+		// LAY 1 MON AN
+			@RequestMapping(value = "/MonAn/{id}", method = RequestMethod.GET)
+
+			public MonAn findMonAnByID(@PathVariable("id") long id) {
+				   MonAn monan = repositoryMonAn.getOne(id);
+				    if (monan == null) {
+					      ResponseEntity.notFound().build();
+				    }
+				    //SET TEN LOAI MON AN
+				    monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
+				    //RESULT
+				return monan;
+			}
+			
+		//THEM MON AN
+			@RequestMapping(
+					value = "/InsertMonAn", 
+					method = RequestMethod.POST,
+					produces = { MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+		            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+					)
+			@ResponseBody
+			public MonAn insertMonAn(MonAn monanForm) {
+				try 
+				{
+					return repositoryMonAn.save(monanForm);
+				}
+				catch (Exception e) 
+				{
+					// TODO: handle exception
+					return null;
+				}
+				
+			}
+			
+		//CAP NHAT MON AN
+			@RequestMapping(value = "/UpdateMonAn", 
+					method = RequestMethod.POST,
+					consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+			public ResponseEntity<MonAn> updateMonAn(@Valid MonAn monanForm) {
+				MonAn ma = repositoryMonAn.getOne(monanForm.getMONAN_ID());
+			    if(ma == null) {
+			        return ResponseEntity.notFound().build();
+			    }
+			    
+			    ma.setMONAN_NAME(monanForm.getMONAN_NAME());
+			    ma.setMONAN_PRICE(monanForm.getMONAN_PRICE());
+		        ma.setMONAN_UNIT(monanForm.getMONAN_UNIT());
+		        ma.setMONAN_STATUS(monanForm.getMONAN_STATUS());
+		        
+		       
+			    MonAn updatedMonAn = repositoryMonAn.save(ma);//update trong database
+			    return ResponseEntity.ok(updatedMonAn);
+			}
+			
+		//XOA MON AN
+			@RequestMapping(value = "/MonAn/{id}", method = RequestMethod.POST)
+			public ResponseEntity<MonAn> deleteMonAn(@PathVariable(value = "id") Long id) {
+				MonAn ma = repositoryMonAn.getOne(id);
+			    if(ma == null) {
+			        return ResponseEntity.notFound().build();
+			    }
+			    repositoryMonAn.delete(ma);//delete trong database
+			    return ResponseEntity.ok().build();
+			}
+			
+		
+			
+			
+		
+			
+			
+			
+			
+			
+			
+			
+		
 }

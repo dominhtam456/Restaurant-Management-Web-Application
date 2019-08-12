@@ -32,7 +32,7 @@ app.directive("ngFileSelect",function(){
   }
 });
 
-app.controller('ResourcesCtrl', function($scope, $http, $window ) {
+app.controller('ResourcesCtrl', function($scope, $http, $window ,$filter) {
 
   $scope.setFile = function(element) {
         $scope.$apply(function($scope) {
@@ -102,14 +102,29 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
                         NGUYENLIEU_DATE: $scope.inputDate,
                         NGUYENLIEU_IMG: $scope.theFile.name
                     });
+                    var d=0
+                    angular.forEach($scope.resources, function(rs) {
+                      if(rs.nguyenlieu_NO == $scope.resourcesNo){
+                        d=1;
 
+                      }
+                    });
+
+
+            if(d==0){
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
               .then(function mySuccess(data) {
                 $window.location.reload()
               });
+            }
+            else{
+              alert("Mã nguyên liệu đã tồn tại");
+            }
+      }
+  $scope.test=function(){
 
-          }
-
+    alert(d);
+  }
   $scope.getResourcesIndex=function(resources){
     $http({
       method : "GET",
@@ -117,7 +132,7 @@ app.controller('ResourcesCtrl', function($scope, $http, $window ) {
     }).then(function mySuccess(response) {
         $scope.resourcesDetails = response.data;
         $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID=$scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID.toString();
-
+        $scope.resourcesDetails.nguyenlieu_DATE=$filter("date")($scope.resourcesDetails.nguyenlieu_DATE, "yyyy-MM-dd");
       });
 
 
