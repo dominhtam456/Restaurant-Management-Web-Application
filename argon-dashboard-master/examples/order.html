@@ -95,8 +95,8 @@
                       Thanh Toán
                     </button>
                     <!-- Modal -->
-                    <div class="modal fade" id="btnPayment" tabindex="-1" role="dialog" aria-labelledby="btnPaymentTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered " role="document ">
+                    <div class="modal fade modal-custom" id="btnPayment" tabindex="-1" role="dialog" aria-labelledby="btnPaymentTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-xl " role="document ">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="btnPayment"><h1>Thanh Toán</h1></h5>
@@ -105,13 +105,67 @@
                             </button>
                           </div>
                           <div class="modal-body">
+                              <div><span>Bàn 1</span></div>
                               <div class="container">
-                                <!-- contenth -->
+                                <hr>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    
+                                    <div class="table-responsive">
+                                      <table class="table  align-items-center table-flush accordion  " id="accordionRow">
+                                        <thead class="thead-light">
+                                          <tr>
+                                            <th scope="col">Stt</th>
+                                            <th scope="col">Tên Món Ăn</th>
+                                            <th scope="col">Số Lượng</th>
+                                            <th scope="col">Đơn Giá</th>
+                                            <th scope="col">Thành Tiền</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>1</td>
+                                            <td>Thịt cầy</td>
+                                            <td>
+                                              <input type="number" name="" value="" style="width:4em">
+                                            </td>
+                                            <td>30.000</td>
+                                            <td>50.000</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 border-left">
+                                      <table class="table  align-items-center table-flush accordion border-0 ">
+                                          <tr>
+                                          <td>Tổng Tiền Hàng</td>
+                                          <td>30,000</td>
+                                          </tr>
+                                          <tr>
+                                          <td>Giảm Giá</td>
+                                          <td>0</td>
+                                          </tr>
+                                          <tr>
+                                          <td><b>Khách Cần Trả</b></td>
+                                          <td><b style="color: #F5365C;">30.000</b></td>
+                                          </tr>
+                                          <tr>
+                                          <td>Khách Thanh Toán</td>
+                                          <td><input type="text" value=""/></td>
+                                          </tr>
+                                          <tr>
+                                          <td>Tiền Thừa Trả Khách </td>
+                                          <td>000000</td>
+                                          </tr>
+                                          </tbody>
+                                          </table>
+                                  </div>
+                                </div>
                               </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-success">Thanh Toán</button>
                           </div>
                         </div>
                       </div>
