@@ -15,4 +15,9 @@ app.config(function($routeProvider) {
     templateUrl : "/examples/tables.html",
     controller : "ResourcesCtrl"
   })
+  .when("/order", {
+    templateUrl : "/examples/order.html",
+    controller : "TablesCtrl"
+  })
+
 });

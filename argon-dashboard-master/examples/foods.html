@@ -39,7 +39,7 @@
                                   <div class="col-sm-7">
                                     <input name="foodNo" ng-model="foodNo" type="text" class="form-control form-control-sm"
                                       id="input1" required>
-                                      <span style="font-size:10px;color:red;" ng-if="formAddMaterial.foodNo.$invalid">Không được để trống mã món ăn</span>
+                                      <span style="font-size:10px;color:red;" ng-if="formAddMaterial.foodNo.$invalid && formAddMaterial.foodNo.$touched">Không được để trống mã món ăn</span>
                                     <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                   </div>
                                 </div>
@@ -49,7 +49,7 @@
                                   <div class="col-sm-7">
                                     <input name="inputName" ng-model="inputName" type="text" class="form-control form-control-sm"
                                       id="inputName" placeholder=" " required>
-                                      <span style="font-size:10px;color:red;" ng-if="formAddMaterial.inputName.$invalid">Không được để trống tên món ăn</span>
+                                      <span style="font-size:10px;color:red;" ng-if="formAddMaterial.inputName.$invalid && formAddMaterial.inputName.$touched">Không được để trống tên món ăn</span>
                                   </div>
                                 </div>
 
@@ -60,7 +60,7 @@
                                       <option ng-repeat="x in foodsType" value="{{x.id}}">{{x.loaimonan_NAME}}
                                       </option>
                                     </select>
-                                    <span style="font-size:10px;color:red;" ng-if="formAddMaterial.TypeId.$invalid">Không được để trống tên món ăn</span>
+                                    <span style="font-size:10px;color:red;" ng-if="formAddMaterial.TypeId.$invalid && formAddMaterial.TypeId.$touched">Không được để trống loại món ăn</span>
                                     <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#exampleModalCenter" disabled><i class="fas fa-plus-square"></i></button>
                                   </div>
                                 </div>

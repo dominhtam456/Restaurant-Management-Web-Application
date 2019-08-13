@@ -10,7 +10,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
   //Get foods
   $http({
     method : "GET",
-    url : "http://localhost:8080/api//GetAllMonAn"
+    url : "http://localhost:8080/api/GetAllMonAn"
   }).then(function mySuccess(response) {
       $scope.foods = response.data;
     },function myError(response) {

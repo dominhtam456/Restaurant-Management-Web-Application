@@ -41,7 +41,7 @@
                                       <div class="col-sm-7">
                                         <input name="resourcesNo" ng-model="resourcesNo" type="text" class="form-control form-control-sm"
                                           id="input1" required >
-                                          <span style="font-size:10px;color:red;" ng-if="formAddMaterial.resourcesNo.$invalid">Không được để trống mã nguyên liệu</span>
+                                          <span style="font-size:10px;color:red;" ng-if="formAddMaterial.resourcesNo.$invalid && formAddMaterial.resourcesNo.$touched">Không được để trống mã nguyên liệu</span>
                                         <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                       </div>
                                     </div>
@@ -52,7 +52,7 @@
                                       <div class="col-sm-7">
                                         <input name="inputName" ng-model="inputName" type="text" class="form-control form-control-sm"
                                           id="inputName" placeholder=" " required>
-                                          <span style="font-size:10px;color:red;" ng-if="formAddMaterial.inputName.$invalid">Không được để trống tên nguyên liệu</span>
+                                          <span style="font-size:10px;color:red;" ng-if="formAddMaterial.inputName.$invalid && formAddMaterial.inputName.$touched">Không được để trống tên nguyên liệu</span>
                                       </div>
                                     </div>
 
@@ -64,7 +64,7 @@
                                           <option ng-repeat="x in resourcesType" value="{{x.id}}">{{x.loainguyenlieu_NAME}}
                                           </option>
                                         </select>
-                                        <p style="font-size:10px;color:red;" ng-if="formAddMaterial.TypeId.$invalid">Không được để trống loại nguyên liệu</p>
+                                        <p style="font-size:10px;color:red;" ng-if="formAddMaterial.TypeId.$invalid && formAddMaterial.TypeId.$touched">Không được để trống loại nguyên liệu</p>
                                       </div>
                                     </div>
                                     <div class="form-group row">
