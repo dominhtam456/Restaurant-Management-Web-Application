@@ -3,7 +3,7 @@
   module.controller('TablesCtrl', function($scope, $http, $window, $filter) {
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     //Get tables
-    $scope.array=[];
+    $scope.array = [];
     $http({
       method: "GET",
       url: "http://localhost:8080/api/GetAllBan"
@@ -55,8 +55,7 @@
       $scope.tablesArray = response.data;
 
       angular.forEach($scope.tablesArray, function(k) {
-        $scope.dataTable =
-        {
+        $scope.dataTable = {
           "IdBan": k.ban_ID,
           "value": []
         };
@@ -64,28 +63,36 @@
       })
       $scope.addFood = function(food) {
 
-          $scope.data =
-          {
-                  "foodName":  food.monan_NAME,
-                  "foodID": food.monan_ID,
-                  "foodPrice": food.monan_PRICE
+        $scope.data = {
+          "foodName": food.monan_NAME,
+          "foodID": food.monan_ID,
+          "foodPrice": food.monan_PRICE
+        }
+        var d = 0;
+        angular.forEach($scope.array, function(k) {
+          if (k.IdBan == $scope.tableIndex) {
+            d = d + 1;
+            k.value.push($scope.data);
+
           }
-          var d=0;
-          angular.forEach($scope.array, function(k) {
-            if(k.IdBan==$scope.tableIndex){
-              d=d+1;
-              k.value.push($scope.data);
+        })
 
-            }
-          })
-
-        };
+      };
 
 
     }, function myError(response) {
       $scope.tablesArray = response.statusText;
     });
 
+    $scope.deleteFood = function(x) {
+      angular.forEach($scope.array, function(k) {
+        if (k.IdBan == $scope.tableIndex) {
+          k.value.splice(x, 1);
+        }
+      })
+
+
+    };
 
 
 

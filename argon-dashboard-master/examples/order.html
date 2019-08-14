@@ -77,10 +77,10 @@
 
                             <tr ng-if="y.IdBan==tableIndex" ng-repeat="z in y.value">
                               <td >{{$index+1}}</td>
-                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px"></i></td>
+                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px" ng-click="deleteFood($index)"></i></td>
                               <td ng-model="">{{z.foodName}}</td>
                               <td>
-                                <input type="number" name="" value="" style="width:4em">
+                                <input type="number" name="" value="1" style="width:4em">
                               </td>
                               <td>{{z.foodPrice}}</td>
                               <td>50.000</td>
