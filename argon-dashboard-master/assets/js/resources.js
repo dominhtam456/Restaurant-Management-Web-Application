@@ -91,7 +91,7 @@
                           NGUYENLIEU_NO: $scope.resourcesNo,
                           NGUYENLIEU_NAME: $scope.inputName,
                           NGUYENLIEU_PRICE: $scope.inputPrice,
-                          LOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.TypeId,
+                          lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.TypeId,
                           NGUYENLIEU_DATE: $scope.inputDate,
                           NGUYENLIEU_IMG: $scope.theFile.name
                       });
