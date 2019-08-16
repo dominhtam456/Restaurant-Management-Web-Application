@@ -1,6 +1,7 @@
 (function (module) {
 
 module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
+
   $scope.setFile = function(element) {
         $scope.$apply(function($scope) {
             $scope.theFile = element.files[0];
@@ -12,9 +13,9 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
     method : "GET",
     url : "http://localhost:8080/api/GetAllMonAn"
   }).then(function mySuccess(response) {
-      $scope.foods = response.data;
+      $scope.searched = response.data;
     },function myError(response) {
-      $scope.foods = response.statusText;
+      $scope.searched = response.statusText;
   });
 
   //Get foods type
@@ -97,6 +98,29 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
               $window.location.reload()
             });
         }
+
+        $scope.findFoods= function(key){
+          if(key!="" && key!= null){
+          $http({
+            method : "GET",
+            url : "http://localhost:8080/api//SearchFoods/" + key
+          }).then(function mySuccess(response) {
+              $scope.searched = response.data;
+            },function myError(response) {
+              $scope.searched = response.statusText;
+          });
+        }
+        else{
+          $http({
+            method : "GET",
+            url : "http://localhost:8080/api/GetAllMonAn"
+          }).then(function mySuccess(response) {
+              $scope.searched = response.data;
+            },function myError(response) {
+              $scope.searched = response.statusText;
+          });
+        }
+      }
 
 });
 

@@ -20,12 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.LoaiNguyenLieuService;
 import com.example.demo.Service.NguyenLieuService;
+import com.example.demo.Service.BanService;
+import com.example.demo.Service.HoaDonService;
 import com.example.demo.Service.LoaiMonAnService;
 import com.example.demo.Service.MonAnService;
 
-
 import com.example.demo.model.LoaiNguyenLieu;
 import com.example.demo.model.NguyenLieu;
+import com.example.demo.model.Ban;
+import com.example.demo.model.HoaDon;
 import com.example.demo.model.LoaiMonAn;
 import com.example.demo.model.MonAn;
 
@@ -34,7 +37,7 @@ import ch.qos.logback.classic.Logger;
 @RestController
 @RequestMapping("/api")
 public class WebController {
-	
+
 	@Autowired
 	LoaiNguyenLieuService repositoryLoaiNguyenLieu;
 	@Autowired
@@ -43,14 +46,13 @@ public class WebController {
 	MonAnService repositoryMonAn;
 	@Autowired
 	LoaiMonAnService repositoryLoaiMonAn;
-	
-	
+
 	/////////////////////////////// LOAI NGUYEN LIEU /////////////////////////
-	
-	//LAY ALL LOAI NGUYEN LIEU
+
+	// LAY ALL LOAI NGUYEN LIEU
 	@RequestMapping(value = "/GetAllLoaiNguyenLieu", method = RequestMethod.GET)
 	public ResponseEntity<List<LoaiNguyenLieu>> listAllLoaiNguyenLieu() {
-		    List<LoaiNguyenLieu> listLoaiNguyenLieu = repositoryLoaiNguyenLieu.findAll();
+		List<LoaiNguyenLieu> listLoaiNguyenLieu = repositoryLoaiNguyenLieu.findAll();
 		if (listLoaiNguyenLieu.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
@@ -58,324 +60,452 @@ public class WebController {
 		return new ResponseEntity<List<LoaiNguyenLieu>>(listLoaiNguyenLieu, HttpStatus.OK);
 	}
 
-	//LAY 1 LOAI NGUYEN LIEU
+	// LAY 1 LOAI NGUYEN LIEU
 	@RequestMapping(value = "/LoaiNguyenLieu/{id}", method = RequestMethod.GET)
 
 	public LoaiNguyenLieu findLoaiNguyenLieuByID(@PathVariable("id") long id) {
-		   LoaiNguyenLieu loainguyenlieu = repositoryLoaiNguyenLieu.getOne(id);
-		    if (loainguyenlieu == null) {
-			      ResponseEntity.notFound().build();
-		    }
-		    
-		    
+		LoaiNguyenLieu loainguyenlieu = repositoryLoaiNguyenLieu.getOne(id);
+		if (loainguyenlieu == null) {
+			ResponseEntity.notFound().build();
+		}
+
 		return loainguyenlieu;
 	}
-	
-	//THEM LOAI NGUYEN LIEU
-		@RequestMapping(
-				value = "/InsertLoaiNguyenLieu/", 
-				method = RequestMethod.POST
-				
-				)
-		@ResponseBody
-		public LoaiNguyenLieu insertLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
-			//@Valid: kiem tra xem co ton tai object trong body
-			LoaiNguyenLieu lnl=repositoryLoaiNguyenLieu.save(loainguyenlieuForm);
-			return lnl;
-		}
-	
-	//CAP NHAT LOAI NGUYEN LIEU
-	@RequestMapping(value = "/UpdateLoaiNguyenLieu/", 
-			method = RequestMethod.POST)
+
+	// THEM LOAI NGUYEN LIEU
+	@RequestMapping(value = "/InsertLoaiNguyenLieu/", method = RequestMethod.POST
+
+	)
+	@ResponseBody
+	public LoaiNguyenLieu insertLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
+		// @Valid: kiem tra xem co ton tai object trong body
+		LoaiNguyenLieu lnl = repositoryLoaiNguyenLieu.save(loainguyenlieuForm);
+		return lnl;
+	}
+
+	// CAP NHAT LOAI NGUYEN LIEU
+	@RequestMapping(value = "/UpdateLoaiNguyenLieu/", method = RequestMethod.POST)
 	public ResponseEntity<LoaiNguyenLieu> updateLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
 		LoaiNguyenLieu lnl = repositoryLoaiNguyenLieu.getOne(loainguyenlieuForm.getId());
-	    if(lnl == null) {
-	        return ResponseEntity.notFound().build();
-	    }
-	    
-	    lnl.setLOAINGUYENLIEU_NAME(loainguyenlieuForm.getLOAINGUYENLIEU_NAME());
-	    lnl.setLOAINGUYENLIEU_UNIT(loainguyenlieuForm.getLOAINGUYENLIEU_UNIT());
+		if (lnl == null) {
+			return ResponseEntity.notFound().build();
+		}
 
-	    LoaiNguyenLieu updatedLoaiNguyenLieu = repositoryLoaiNguyenLieu.save(lnl);//update trong database
-	    return ResponseEntity.ok(updatedLoaiNguyenLieu);
+		lnl.setLOAINGUYENLIEU_NAME(loainguyenlieuForm.getLOAINGUYENLIEU_NAME());
+		lnl.setLOAINGUYENLIEU_UNIT(loainguyenlieuForm.getLOAINGUYENLIEU_UNIT());
+
+		LoaiNguyenLieu updatedLoaiNguyenLieu = repositoryLoaiNguyenLieu.save(lnl);// update trong database
+		return ResponseEntity.ok(updatedLoaiNguyenLieu);
 	}
-	
-	
-    //XOA LOAI NGUYEN LIEU
+
+	// XOA LOAI NGUYEN LIEU
 	@RequestMapping(value = "/DeleteLoaiNguyenLieu", method = RequestMethod.POST)
 	public int deleteLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieu) {
-		//@PathVariable(value=""): lay bien tu url
-		//@RequestBody: lay object duoc gui trong body
+		// @PathVariable(value=""): lay bien tu url
+		// @RequestBody: lay object duoc gui trong body
 		LoaiNguyenLieu lnl = repositoryLoaiNguyenLieu.getOne(loainguyenlieu.getId());
-	    if(lnl == null) {
-	        return 0;
-	    }
-	    repositoryLoaiNguyenLieu.delete(lnl);//delete trong database
-	    return 1;
+		if (lnl == null) {
+			return 0;
+		}
+		repositoryLoaiNguyenLieu.delete(lnl);// delete trong database
+		return 1;
 	}
-	
-	
-	
-	
-  /////////////////////////////// NGUYEN LIEU ///////////////////////////
-	
-	//LAY TEN LOAI NGUYEN LIEU CHO TABLE NGUYEN LIEU THONG QUA ID LOAI NGUYEN LIEU
+
+	/////////////////////////////// NGUYEN LIEU ///////////////////////////
+
+	// LAY TEN LOAI NGUYEN LIEU CHO TABLE NGUYEN LIEU THONG QUA ID LOAI NGUYEN LIEU
 	public String GetTenLoaiNguyenLieu(long idLoaiNguyenLieu) {
-		if(repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu)!=null) {
+		if (repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu) != null) {
 			return repositoryLoaiNguyenLieu.getOne(idLoaiNguyenLieu).getLOAINGUYENLIEU_NAME();
-		}else {
+		} else {
 			return "null";
 		}
-		 
+
 	}
-	
-	//LAY ALL NGUYEN LIEU
+
+	// LAY ALL NGUYEN LIEU
 	@RequestMapping(path = "/GetAllNguyenLieu", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<NguyenLieu> getAllNguyenLieu() {
 		// This returns a JSON or XML with the users
-		  for (NguyenLieu nguyenLieu : repositoryNguyenLieu.findAll()) {
-			  //Set ten loai nguyen lieu
-			 
-			 nguyenLieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenLieu.getLOAINGUYENLIEU_LOAINGUYENLIEU_ID()));
+		for (NguyenLieu nguyenLieu : repositoryNguyenLieu.findAll()) {
+			// Set ten loai nguyen lieu
+
+			nguyenLieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenLieu.getLOAINGUYENLIEU_LOAINGUYENLIEU_ID()));
 		}
 		return repositoryNguyenLieu.findAll();
 	}
 
-	
 	// LAY 1 NGUYEN LIEU
 	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.GET)
 
 	public NguyenLieu findNguyenLieuByID(@PathVariable("id") long id) {
-		   NguyenLieu nguyenlieu = repositoryNguyenLieu.getOne(id);
-		    if (nguyenlieu == null) {
-			      ResponseEntity.notFound().build();
-		    }
-		    //SET TEN LOAI NGUYEN LIEU
-		    nguyenlieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenlieu.getLOAINGUYENLIEU_LOAINGUYENLIEU_ID()));
-		    //RESULT
+		NguyenLieu nguyenlieu = repositoryNguyenLieu.getOne(id);
+		if (nguyenlieu == null) {
+			ResponseEntity.notFound().build();
+		}
+		// SET TEN LOAI NGUYEN LIEU
+		nguyenlieu.setTENLOAI_NGUYENLIEU(GetTenLoaiNguyenLieu(nguyenlieu.getLOAINGUYENLIEU_LOAINGUYENLIEU_ID()));
+		// RESULT
 		return nguyenlieu;
 	}
-	
-	//THEM NGUYEN LIEU
-		@RequestMapping(
-				value = "/InsertNguyenLieu", 
-				method = RequestMethod.POST,
-				produces = { MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
-	            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
-				)
-		@ResponseBody
-		public NguyenLieu insertNguyenLieu(NguyenLieu nguyenlieuForm) {
-			/*
-			 * if(nguyenlieuForm!=null) {
-			 * 
-			 * }else { return null; }
-			 */
-			try {
-				return repositoryNguyenLieu.save(nguyenlieuForm);
-			}catch (Exception e) {
-				// TODO: handle exception
-				return null;
-			}
-			
+
+	// THEM NGUYEN LIEU
+	@RequestMapping(value = "/InsertNguyenLieu", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_ATOM_XML_VALUE,
+			MediaType.APPLICATION_JSON_VALUE }, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@ResponseBody
+	public NguyenLieu insertNguyenLieu(NguyenLieu nguyenlieuForm) {
+		/*
+		 * if(nguyenlieuForm!=null) {
+		 * 
+		 * }else { return null; }
+		 */
+		try {
+			return repositoryNguyenLieu.save(nguyenlieuForm);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
 		}
-	
-	//CAP NHAT NGUYEN LIEU
-	@RequestMapping(value = "/UpdateNguyenLieu", 
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+
+	}
+
+	// CAP NHAT NGUYEN LIEU
+	@RequestMapping(value = "/UpdateNguyenLieu", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<NguyenLieu> updateNguyenLieu(@Valid NguyenLieu nguyenlieuForm) {
 		NguyenLieu nl = repositoryNguyenLieu.getOne(nguyenlieuForm.getNGUYENLIEU_ID());
-	    if(nl == null) {
-	        return ResponseEntity.notFound().build();
-	    }
-	    
-	    nl.setNGUYENLIEU_NAME(nguyenlieuForm.getNGUYENLIEU_NAME());
-	    nl.setNGUYENLIEU_PRICE(nguyenlieuForm.getNGUYENLIEU_PRICE());
-        nl.setNGUYENLIEU_DATE(nguyenlieuForm.getNGUYENLIEU_DATE());
-       
-	    NguyenLieu updatedNguyenLieu = repositoryNguyenLieu.save(nl);//update trong database
-	    return ResponseEntity.ok(updatedNguyenLieu);
+		if (nl == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		nl.setNGUYENLIEU_NAME(nguyenlieuForm.getNGUYENLIEU_NAME());
+		nl.setNGUYENLIEU_PRICE(nguyenlieuForm.getNGUYENLIEU_PRICE());
+		nl.setNGUYENLIEU_DATE(nguyenlieuForm.getNGUYENLIEU_DATE());
+
+		NguyenLieu updatedNguyenLieu = repositoryNguyenLieu.save(nl);// update trong database
+		return ResponseEntity.ok(updatedNguyenLieu);
 	}
-	
-	
-     //XOA NGUYEN LIEU
+
+	// XOA NGUYEN LIEU
 	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.POST)
 	public ResponseEntity<NguyenLieu> deleteNguyenLieu1(@PathVariable(value = "id") Long id) {
 		NguyenLieu nl = repositoryNguyenLieu.getOne(id);
-	    if(nl == null) {
-	        return ResponseEntity.notFound().build();
-	    }
-	    repositoryNguyenLieu.delete(nl);//delete trong database
-	    return ResponseEntity.ok().build();
+		if (nl == null) {
+			return ResponseEntity.notFound().build();
+		}
+		repositoryNguyenLieu.delete(nl);// delete trong database
+		return ResponseEntity.ok().build();
 	}
 	
-	/////////////////////////////// LOAI MON AN /////////////////////////
-	
-		//LAY ALL LOAI MON AN
-		@RequestMapping(value = "/GetAllLoaiMonAn", method = RequestMethod.GET)
-		public ResponseEntity<List<LoaiMonAn>> listAllLoaiMonAn() {
-			    List<LoaiMonAn> listLoaiMonAn = repositoryLoaiMonAn.findAll();
-			if (listLoaiMonAn.isEmpty()) {
-				return new ResponseEntity(HttpStatus.NO_CONTENT);
-			}
-			// return ResponseEntity<List<Contact>>(listContact, HttpStatus.OK);
-			return new ResponseEntity<List<LoaiMonAn>>(listLoaiMonAn, HttpStatus.OK);
-		}
-	
-		//LAY 1 LOAI MON AN
-		@RequestMapping(value = "/LoaiMonAn/{id}", method = RequestMethod.GET)
-		public LoaiMonAn findLoaiMonAnByID(@PathVariable("id") long id) {
-			   LoaiMonAn loaimonan = repositoryLoaiMonAn.getOne(id);
-			    if (loaimonan == null) {
-				      ResponseEntity.notFound().build();
-			    }
-			    	    
-			return loaimonan;
-		}
-		
-		//THEM LOAI MON AN
-		@RequestMapping(
-				value = "/InsertLoaiMonAn", 
-				method = RequestMethod.POST	
-				)
-		@ResponseBody
-		public LoaiMonAn insertLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
-			//@Valid: kiem tra xem co ton tai object trong body
-			LoaiMonAn lma = repositoryLoaiMonAn.save(loaimonanForm);
-			return lma;
-		}
-		
-		//CAP NHAT LOAI MON AN
-		@RequestMapping(value = "/UpdateLoaiMonAn", 
-				method = RequestMethod.POST)
-		public ResponseEntity<LoaiMonAn> updateLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
-			LoaiMonAn lma = repositoryLoaiMonAn.getOne(loaimonanForm.getId());
-		    if(lma == null) {
-		        return ResponseEntity.notFound().build();
-		    }
-		    
-		    lma.setLOAIMONAN_NAME(loaimonanForm.getLOAIMONAN_NAME());
-		    lma.setLOAIMONAN_DES(loaimonanForm.getLOAIMONAN_DES());
-
-		    LoaiMonAn updatedLoaiMonAn = repositoryLoaiMonAn.save(lma);//update trong database
-		    return ResponseEntity.ok(updatedLoaiMonAn);
-		}
-		
-		//XOA LOAI MON AN
-		@RequestMapping(value = "/DeleteLoaiMonAn", method = RequestMethod.POST)
-		public int deleteLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonan) {
-			//@PathVariable(value=""): lay bien tu url
-			//@RequestBody: lay object duoc gui trong body
-			LoaiMonAn lma = repositoryLoaiMonAn.getOne(loaimonan.getId());
-		    if(lma == null) {
-		        return 0;
-		    }
-		    repositoryLoaiMonAn.delete(lma);//delete trong database
-		    return 1;
-		}
-		
-		
-		/////////////////////////////// MON AN ///////////////////////////
-		
-		//LAY TEN LOAI MON AN cho TABLE MON AN THONG QUA ID LOAIMONAN
-			public String GetTenLoaiMonAn(long idLoaiMonAn) {
-				if(repositoryLoaiMonAn.getOne(idLoaiMonAn)!=null) {
-					return repositoryLoaiMonAn.getOne(idLoaiMonAn).getLOAIMONAN_NAME();
-				}
-				else 
-				{
-					return "null";
-				}		 
-			}
-		
-		//LAY ALL MON AN
-			@RequestMapping(path = "/GetAllMonAn", produces = MediaType.APPLICATION_JSON_VALUE)
-			public java.util.List<MonAn> getAllMonAn() {
-				// This returns a JSON or XML with the users
-				  for (MonAn monan : repositoryMonAn.findAll()) {
-					  //Set ten loai nguyen lieu
-					 
-					  monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
-				}
-				return repositoryMonAn.findAll();
-			}
-			
-		// LAY 1 MON AN
-			@RequestMapping(value = "/MonAn/{id}", method = RequestMethod.GET)
-
-			public MonAn findMonAnByID(@PathVariable("id") long id) {
-				   MonAn monan = repositoryMonAn.getOne(id);
-				    if (monan == null) {
-					      ResponseEntity.notFound().build();
-				    }
-				    //SET TEN LOAI MON AN
-				    monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
-				    //RESULT
-				return monan;
-			}
-			
-		//THEM MON AN
-			@RequestMapping(
-					value = "/InsertMonAn", 
-					method = RequestMethod.POST,
-					produces = { MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
-		            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
-					)
-			@ResponseBody
-			public MonAn insertMonAn(MonAn monanForm) {
-				try 
-				{
-					return repositoryMonAn.save(monanForm);
-				}
-				catch (Exception e) 
-				{
+	// TIM KIEM
+			@RequestMapping(value = "/SearchResources/{key}", method = RequestMethod.GET)
+			public List<NguyenLieu> SearchResources(@PathVariable(value = "key") String key) {
+				try {
+					return repositoryNguyenLieu.TimNguyenLieuTheoTen(key);
+				} catch (Exception e) {
 					// TODO: handle exception
 					return null;
 				}
-				
 			}
-			
-		//CAP NHAT MON AN
-			@RequestMapping(value = "/UpdateMonAn", 
-					method = RequestMethod.POST,
-					consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-			public ResponseEntity<MonAn> updateMonAn(@Valid MonAn monanForm) {
-				MonAn ma = repositoryMonAn.getOne(monanForm.getMONAN_ID());
-			    if(ma == null) {
-			        return ResponseEntity.notFound().build();
-			    }
-			    
-			    ma.setMONAN_NAME(monanForm.getMONAN_NAME());
-			    ma.setMONAN_PRICE(monanForm.getMONAN_PRICE());
-		        ma.setMONAN_UNIT(monanForm.getMONAN_UNIT());
-		        ma.setMONAN_STATUS(monanForm.getMONAN_STATUS());
-		        
-		       
-			    MonAn updatedMonAn = repositoryMonAn.save(ma);//update trong database
-			    return ResponseEntity.ok(updatedMonAn);
+
+	/////////////////////////////// LOAI MON AN /////////////////////////
+
+	// LAY ALL LOAI MON AN
+	@RequestMapping(value = "/GetAllLoaiMonAn", method = RequestMethod.GET)
+	public ResponseEntity<List<LoaiMonAn>> listAllLoaiMonAn() {
+		List<LoaiMonAn> listLoaiMonAn = repositoryLoaiMonAn.findAll();
+		if (listLoaiMonAn.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
+		// return ResponseEntity<List<Contact>>(listContact, HttpStatus.OK);
+		return new ResponseEntity<List<LoaiMonAn>>(listLoaiMonAn, HttpStatus.OK);
+	}
+
+	// LAY 1 LOAI MON AN
+	@RequestMapping(value = "/LoaiMonAn/{id}", method = RequestMethod.GET)
+	public LoaiMonAn findLoaiMonAnByID(@PathVariable("id") long id) {
+		LoaiMonAn loaimonan = repositoryLoaiMonAn.getOne(id);
+		if (loaimonan == null) {
+			ResponseEntity.notFound().build();
+		}
+
+		return loaimonan;
+	}
+
+	// THEM LOAI MON AN
+	@RequestMapping(value = "/InsertLoaiMonAn", method = RequestMethod.POST)
+	@ResponseBody
+	public LoaiMonAn insertLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
+		// @Valid: kiem tra xem co ton tai object trong body
+		LoaiMonAn lma = repositoryLoaiMonAn.save(loaimonanForm);
+		return lma;
+	}
+
+	// CAP NHAT LOAI MON AN
+	@RequestMapping(value = "/UpdateLoaiMonAn", method = RequestMethod.POST)
+	public ResponseEntity<LoaiMonAn> updateLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
+		LoaiMonAn lma = repositoryLoaiMonAn.getOne(loaimonanForm.getId());
+		if (lma == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		lma.setLOAIMONAN_NAME(loaimonanForm.getLOAIMONAN_NAME());
+		lma.setLOAIMONAN_DES(loaimonanForm.getLOAIMONAN_DES());
+
+		LoaiMonAn updatedLoaiMonAn = repositoryLoaiMonAn.save(lma);// update trong database
+		return ResponseEntity.ok(updatedLoaiMonAn);
+	}
+
+	// XOA LOAI MON AN
+	@RequestMapping(value = "/DeleteLoaiMonAn", method = RequestMethod.POST)
+	public int deleteLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonan) {
+		// @PathVariable(value=""): lay bien tu url
+		// @RequestBody: lay object duoc gui trong body
+		LoaiMonAn lma = repositoryLoaiMonAn.getOne(loaimonan.getId());
+		if (lma == null) {
+			return 0;
+		}
+		repositoryLoaiMonAn.delete(lma);// delete trong database
+		return 1;
+	}
+
+	/////////////////////////////// MON AN ///////////////////////////
+
+	// LAY TEN LOAI MON AN cho TABLE MON AN THONG QUA ID LOAIMONAN
+	public String GetTenLoaiMonAn(long idLoaiMonAn) {
+		if (repositoryLoaiMonAn.getOne(idLoaiMonAn) != null) {
+			return repositoryLoaiMonAn.getOne(idLoaiMonAn).getLOAIMONAN_NAME();
+		} else {
+			return "null";
+		}
+	}
+
+	// LAY ALL MON AN
+	@RequestMapping(path = "/GetAllMonAn", produces = MediaType.APPLICATION_JSON_VALUE)
+	public java.util.List<MonAn> getAllMonAn() {
+		// This returns a JSON or XML with the users
+		for (MonAn monan : repositoryMonAn.findAll()) {
+			// Set ten loai nguyen lieu
+
+			monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
+		}
+		return repositoryMonAn.findAll();
+	}
+
+	// LAY 1 MON AN
+	@RequestMapping(value = "/MonAn/{id}", method = RequestMethod.GET)
+
+	public MonAn findMonAnByID(@PathVariable("id") long id) {
+		MonAn monan = repositoryMonAn.getOne(id);
+		if (monan == null) {
+			ResponseEntity.notFound().build();
+		}
+		// SET TEN LOAI MON AN
+		monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
+		// RESULT
+		return monan;
+	}
+
+	// THEM MON AN
+	@RequestMapping(value = "/InsertMonAn", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_ATOM_XML_VALUE,
+			MediaType.APPLICATION_JSON_VALUE }, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@ResponseBody
+	public MonAn insertMonAn(MonAn monanForm) {
+		if (String.valueOf(monanForm.getLOAIMONAN_LOAIMONAN_ID()) == "null") {
+			return null;
+		}
+		try {
+			return repositoryMonAn.save(monanForm);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+
+	}
+
+	// CAP NHAT MON AN
+	@RequestMapping(value = "/UpdateMonAn", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity<MonAn> updateMonAn(@Valid MonAn monanForm) {
+		MonAn ma = repositoryMonAn.getOne(monanForm.getMONAN_ID());
+		if (ma == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		ma.setMONAN_NAME(monanForm.getMONAN_NAME());
+		ma.setMONAN_PRICE(monanForm.getMONAN_PRICE());
+		ma.setMONAN_UNIT(monanForm.getMONAN_UNIT());
+		ma.setMONAN_STATUS(monanForm.getMONAN_STATUS());
+
+		MonAn updatedMonAn = repositoryMonAn.save(ma);// update trong database
+		return ResponseEntity.ok(updatedMonAn);
+	}
+
+	// XOA MON AN
+	@RequestMapping(value = "/MonAn/{id}", method = RequestMethod.POST)
+	public ResponseEntity<MonAn> deleteMonAn(@PathVariable(value = "id") Long id) {
+		MonAn ma = repositoryMonAn.getOne(id);
+		if (ma == null) {
+			return ResponseEntity.notFound().build();
+		}
+		repositoryMonAn.delete(ma);// delete trong database
+		return ResponseEntity.ok().build();
+	}
+
+	// TIM KIEM
+		@RequestMapping(value = "/SearchFoods/{key}", method = RequestMethod.GET)
+		public List<MonAn> SearchFoods(@PathVariable(value = "key") String key) {
+			try {
+				return repositoryMonAn.TimMonAnTheoTen(key);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return null;
 			}
-			
-		//XOA MON AN
-			@RequestMapping(value = "/MonAn/{id}", method = RequestMethod.POST)
-			public ResponseEntity<MonAn> deleteMonAn(@PathVariable(value = "id") Long id) {
-				MonAn ma = repositoryMonAn.getOne(id);
-			    if(ma == null) {
-			        return ResponseEntity.notFound().build();
-			    }
-			    repositoryMonAn.delete(ma);//delete trong database
-			    return ResponseEntity.ok().build();
+		}
+	/////////////////////// QUAN LY BAN //////////////////////////////////
+
+	@Autowired
+	BanService repositoryBan;
+
+	// LAY ALL BAN
+	@RequestMapping(path = "/GetAllBan", produces = MediaType.APPLICATION_JSON_VALUE)
+	public java.util.List<Ban> GetAllBans() {
+		// This returns a JSON or XML with the users
+		return repositoryBan.GetAllBans();
+	}
+
+	// LAY 1 BAN
+	@RequestMapping(value = "/Ban/{id}", method = RequestMethod.GET)
+	public Ban FindBanByID(@PathVariable("id") long id) {
+		return repositoryBan.GetBan(id);
+	}
+
+	// THEM BAN
+	@RequestMapping(value = "/InsertBan", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_ATOM_XML_VALUE,
+			MediaType.APPLICATION_JSON_VALUE }, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@ResponseBody
+	public boolean InsertBan(Ban banForm) {
+
+		try {
+			return repositoryBan.InsertBan(banForm);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+
+	}
+
+	// CAP NHAT BAN
+	@RequestMapping(value = "/UpdateBan", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public boolean UpdateBan(@Valid Ban banForm) {
+		try {
+			return repositoryBan.UpdateBan(banForm);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+
+	}
+
+	// XOA BAN
+	@RequestMapping(value = "/BAN/{id}", method = RequestMethod.POST)
+	public boolean DeleteBan(@PathVariable(value = "id") Long id) {
+		try {
+			return repositoryBan.DeleteBan(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	// TIM KIEM
+	@RequestMapping(value = "/SearchBans/{key}", method = RequestMethod.GET)
+	public List<Ban> SearchBans(@PathVariable(value = "key") String key) {
+		try {
+			return repositoryBan.SearchBans(key);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	// CAP NHAT TRANG THAI BAN
+
+	@RequestMapping(
+			value = "/UpdateStatusBan",
+		    method = RequestMethod.GET)
+	 public void UpdateStatusBan() { 
+		repositoryBan.CapNhatTrangThaiBan("aaa", "Bàn 1");
+	 }
+	 
+	
+								
+ ////////////////////////////QUAN LY HOA DON//////////////////////////////
+		
+		@Autowired
+		HoaDonService repositoryHoaDon;
+
+		// LAY ALL BAN
+		@RequestMapping(path = "/GetAllHoaDon", produces = MediaType.APPLICATION_JSON_VALUE)
+		public java.util.List<HoaDon> GetAllHoaDons() {
+			// This returns a JSON or XML with the users
+			return repositoryHoaDon.GetAllHoaDons();
+		}
+
+		// LAY 1 HoaDon
+		@RequestMapping(value = "/HoaDon/{id}", method = RequestMethod.GET)
+		public HoaDon FindHoaDonByID(@PathVariable("id") long id) {
+			return repositoryHoaDon.GetHoaDon(id);
+		}
+
+		// THEM HoaDon
+	/*
+	 * @RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST,
+	 * produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
+	 * MediaType.APPLICATION_JSON_VALUE }, consumes =
+	 * MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	 * 
+	 * @ResponseBody public boolean InsertBan(HoaDon hdForm) {
+	 * 
+	 * try { return repositoryHoaDon.InsertHoaDon(hdForm); } catch (Exception e) {
+	 * // TODO: handle exception return false; }
+	 * 
+	 * }
+	 */
+		@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST
+				)
+				@ResponseBody
+				public boolean InserHoaDon(HoaDon hd) {
+					// @Valid: kiem tra xem co ton tai object trong body
+					return repositoryHoaDon.InsertHoaDon(hd);
+					
+				}
+		// CAP NHAT HoaDon
+		@RequestMapping(value = "/UpdateHoaDon", 
+				method = RequestMethod.POST, 
+				consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+		public boolean UpdateHoaDon(@Valid HoaDon hdForm) {
+			try {
+				return repositoryHoaDon.UpdateHoaDon(hdForm);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
 			}
-			
-		
-			
-			
-		
-			
-			
-			
-			
-			
-			
-			
-		
+
+		}
+
+		// XOA HoaDon
+		@RequestMapping(value = "/HoaDon/{id}", 
+				method = RequestMethod.POST)
+		public boolean DeleteHoaDon(@PathVariable(value = "id") Long id) {
+			try {
+				return repositoryHoaDon.DeleteHoaDon(id);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+		}
+
+	
+	
 }

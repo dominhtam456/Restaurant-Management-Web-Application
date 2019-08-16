@@ -5,10 +5,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,11 +21,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "monan")
 public class MonAn implements Serializable{
-	
+	     
 		 private static final long serialVersionUID = 1L;
 		 @Id
 		 @GeneratedValue(strategy = GenerationType.IDENTITY)
-		 @Column(name = "MONAN_ID")
+		 
+	/*
+	 * @OneToMany( targetEntity=Employee.class ) private List employeelist;
+	 */
+		 //  @ManyToOne(fetch=FetchType.LAZY)
+		 //LAZY: can deN goi den moi lay DU LIEU
+		 //EG: 
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name="LOAIMONAN_LOAIMONAN_ID") private LoaiMonAn loaimonan;
+	 */
+		
+		@Column(name = "MONAN_ID")
 		 private long MONAN_ID;
 		 
 		 @Column(name="MONAN_NO")
@@ -43,10 +61,31 @@ public class MonAn implements Serializable{
 		 
 		 @Column(name = "LOAIMONAN_LOAIMONAN_ID")
 		 private int LOAIMONAN_LOAIMONAN_ID;
-		 	 
-		 
+		 @Transient
 		 private String TENLOAI_MONAN;
 		 
+		//khoi tao
+		 protected MonAn() {
+		 	 super();
+		 }
+	
+		 
+		 public MonAn(String mONAN_NAME, String mONAN_PRICE, String mONAN_UNIT,
+				 String mONAN_STATUS ,@Null int lOAIMONAN_LOAIMONAN_ID) {
+			super( );
+		 	MONAN_NAME = mONAN_NAME;
+		 	MONAN_PRICE = mONAN_PRICE;
+		 	MONAN_UNIT = mONAN_UNIT;
+		 	MONAN_STATUS = mONAN_STATUS;
+		 	LOAIMONAN_LOAIMONAN_ID = lOAIMONAN_LOAIMONAN_ID;
+		 	
+		 }
+		//GETER AND SETER 
+	/*
+	 * public LoaiMonAn getLoaimonan() { return loaimonan; } public void
+	 * setLoaimonan(LoaiMonAn loaimonan) { this.loaimonan = loaimonan; }
+	 */
+
 		 public String getTENLOAI_LOAIMONAN() {
 		 	return TENLOAI_MONAN;
 		 }
@@ -54,21 +93,7 @@ public class MonAn implements Serializable{
 		 public void setTENLOAI_LOAIMONAN(String tENLOAI_MONAN) {
 		 	TENLOAI_MONAN = tENLOAI_MONAN;
 		 }
-	
-		 protected MonAn() {
-		 	 
-		 }
-	
-		 public MonAn(String mONAN_NAME, String mONAN_PRICE, String mONAN_UNIT,
-				 String mONAN_STATUS , int lOAIMONAN_LOAIMONAN_ID) {
-		 	
-		 	MONAN_NAME = mONAN_NAME;
-		 	MONAN_PRICE = mONAN_PRICE;
-		 	MONAN_UNIT = mONAN_UNIT;
-		 	MONAN_STATUS = mONAN_STATUS;
-		 	LOAIMONAN_LOAIMONAN_ID = lOAIMONAN_LOAIMONAN_ID;
-		 }
-
+		
 		public long getMONAN_ID() {
 			return MONAN_ID;
 		}

@@ -44,10 +44,10 @@
       method : "GET",
       url : "http://localhost:8080/api/GetAllNguyenLieu"
     }).then(function mySuccess(response) {
-        $scope.resources = response.data;
+        $scope.searched = response.data;
 
       },function myError(response) {
-        $scope.resources = response.statusText;
+        $scope.searched = response.statusText;
     });
 
     //Get resources type
@@ -145,6 +145,29 @@
           $window.location.reload()
         });
     }
+    $scope.findResources= function(key){
+      if(key!="" && key!= null){
+      $http({
+        method : "GET",
+        url : "http://localhost:8080/api//SearchResources/" + key
+      }).then(function mySuccess(response) {
+          $scope.searched = response.data;
+        },function myError(response) {
+          $scope.searched = response.statusText;
+      });
+    }
+
+    else{
+      $http({
+        method : "GET",
+        url : "http://localhost:8080/api/GetAllNguyenLieu"
+      }).then(function mySuccess(response) {
+          $scope.searched = response.data;
+        },function myError(response) {
+          $scope.searched = response.statusText;
+      });
+    }
+  }
 
 
   });
@@ -163,5 +186,6 @@
         $scope.progress = progress.loaded / progress.total;
       });
     });
+
 
 }(angular.module("myApp")));

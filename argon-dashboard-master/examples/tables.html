@@ -7,8 +7,8 @@
           <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#modalAddMaterials"><i
               class="fas fa-plus-circle"></i> Thêm Mới</button>
               <form class="form-inline float-sm-right form-search-custom">
-                <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search" >
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                <input ng-model="searchInput" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search" >
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" ng-click="findResources(searchInput)">Search</button>
               </form>
           <div class="modal fade" id="modalAddMaterials" tabindex="-1" role="dialog" aria-labelledby="modalAddMaterials"
             aria-hidden="true">
@@ -144,9 +144,9 @@
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody dir-paginate="x in searched|itemsPerPage:5">
 
-              <tr ng-repeat-start="x in resources" data-toggle="collapse" data-target="#a{{$index}}"
+              <tr data-toggle="collapse" data-target="#a{{x.nguyenlieu_ID}}"
                 class="clickable table-striped" aria-expanded="true" ng-click="getResourcesIndex(x)">
                 <td>
                   {{$index+1}}
@@ -182,7 +182,7 @@
                   </div>
                 </td>
               </tr>
-              <tr ng-repeat-end id="a{{$index}}" class="collapse " data-parent="#accordionRow">
+              <tr  id="a{{x.nguyenlieu_ID}}" class="collapse " data-parent="#accordionRow">
                 <td colspan="8" class="hiddenRow">
                   <div class="container">
                     <div class="row">
@@ -417,8 +417,12 @@
               </tr>
             </tbody>
           </table>
+          <dir-pagination-controls
+			       boundary-links="true"
+			       direction-links="true" >
+			    </dir-pagination-controls>
         </div>
-        <div class="card-footer py-4">
+        <!--<div class="card-footer py-4">
           <nav aria-label="...">
             <ul class="pagination justify-content-end mb-0">
               <li class="page-item disabled">
@@ -442,7 +446,7 @@
               </li>
             </ul>
           </nav>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
