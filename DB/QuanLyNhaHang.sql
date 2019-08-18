@@ -98,7 +98,6 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
-INSERT INTO `hoadon` VALUES (1,'HD01','2019-08-14','Đã thanh toán',NULL,1,1,1);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +126,6 @@ CREATE TABLE `hoadonchitiet` (
 
 LOCK TABLES `hoadonchitiet` WRITE;
 /*!40000 ALTER TABLE `hoadonchitiet` DISABLE KEYS */;
-INSERT INTO `hoadonchitiet` VALUES (1,1,'50.000',2),(1,13,'17.000',1);
 /*!40000 ALTER TABLE `hoadonchitiet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +228,7 @@ CREATE TABLE `monan` (
   PRIMARY KEY (`MONAN_ID`),
   KEY `fk_MONAN_LOAIMONAN1_idx` (`LOAIMONAN_LOAIMONAN_ID`),
   CONSTRAINT `fk_MONAN_LOAIMONAN1` FOREIGN KEY (`LOAIMONAN_LOAIMONAN_ID`) REFERENCES `loaimonan` (`LOAIMONAN_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +237,7 @@ CREATE TABLE `monan` (
 
 LOCK TABLES `monan` WRITE;
 /*!40000 ALTER TABLE `monan` DISABLE KEYS */;
-INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50.000','Dĩa','Còn',NULL,1,NULL),(2,'1dhcnm','Đùi heo chiên nước mắm','50.000','Dĩa','Còn',NULL,1,NULL),(3,'2ccdc','Cơm chiên dương châu','35.000','Dĩa','Còn',NULL,2,NULL),(4,'2cchs','Cơm chiên hải sản','40.000','Dĩa','Còn',NULL,2,NULL),(5,'3rdxt','Rau dền xào tỏi','25.000','Dĩa','Còn',NULL,3,NULL),(6,'3rcvxt','Rau chân vịt xào trứng','20.000','Dĩa','Còn',NULL,3,NULL),(7,'4thq','Thịt heo quay','30.000','Dĩa','Còn',NULL,4,NULL),(8,'4ctkd','Cà tím kho đậu','40.000','Thố','Còn',NULL,4,NULL),(9,'5bnxq','Món nướng bò rau xiên que','35.000','Dĩa','Còn',NULL,5,NULL),(10,'5ctlns','Cá thác lác nướng sả','35.000','Dĩa','Còn',NULL,5,NULL),(11,'6rc','Rau câu','15.000','Ly','Còn',NULL,6,NULL),(12,'6tctc','Trái cây thập cẩm','18.000','Dĩa','Hết',NULL,6,NULL),(13,'7cpsd','Cà phê sữa đá','17.000','Ly','Còn',NULL,7,NULL),(14,'7ns','Nước suối','5.000','Chai','Còn',NULL,7,NULL);
+INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50.000',NULL,NULL,'Bò_lúc_lắc_với_khoai_tây_chiên.jpg',1,NULL),(2,'1dhcnm','Đùi heo chiên nước mắm','50.000',NULL,NULL,'Đùi_heo_chiên_nước_mắm.jpg',1,NULL),(3,'2ccdc','Cơm chiên dương châu','35.000',NULL,NULL,'Cơm_chiên_dương_châu.jpg',2,NULL),(4,'2cchs','Cơm chiên hải sản','40.000',NULL,NULL,'Cơm_chiên_hải_sản.jpg',2,NULL),(5,'3rdxt','Rau dền xào tỏi','25.000',NULL,NULL,'Rau_dền_xào_tỏi.JPG',3,NULL),(6,'3rcvxt','Rau chân vịt xào trứng','20.000',NULL,NULL,'Rau_chân_vịt_xào_trứng.webp',3,NULL),(7,'4thq','Thịt heo quay','30.000',NULL,NULL,'Thịt_heo_quay.jpg',4,NULL),(8,'4ctkd','Cà tím kho đậu','40.000',NULL,NULL,'Cà_tím_kho_đậu.jpg',4,NULL),(9,'5bnxq','Món nướng bò rau xiên que','35.000',NULL,NULL,'Món_nướng_bò_rau_xiên_que.jpg',5,NULL),(10,'5ctlns','Cá thác lác nướng sả','35.000',NULL,NULL,'Cá_thác_lác_nướng_sả.jpg',5,NULL),(11,'6rc','Rau câu','15.000',NULL,NULL,'Rau_câu.jpg',6,NULL),(12,'6tctc','Trái cây thập cẩm','18.000',NULL,NULL,'Trái_cây_thập_cẩm.jfif',6,NULL),(13,'7cpsd','Cà phê sữa đá','17.000',NULL,NULL,'Coffee_sữa_đá.jpg',7,NULL),(14,'7ns','Nước suối','5.000',NULL,NULL,'Nước_suối.png',7,NULL);
 /*!40000 ALTER TABLE `monan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +288,7 @@ CREATE TABLE `nguyenlieu` (
   UNIQUE KEY `NGUYENLIEU_NO_UNIQUE` (`NGUYENLIEU_NO`),
   KEY `fk_NGUYENLIEU_LOAINGUYENLIEU1_idx` (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`),
   CONSTRAINT `fk_NGUYENLIEU_LOAINGUYENLIEU1` FOREIGN KEY (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`) REFERENCES `loainguyenlieu` (`LOAINGUYENLIEU_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +297,7 @@ CREATE TABLE `nguyenlieu` (
 
 LOCK TABLES `nguyenlieu` WRITE;
 /*!40000 ALTER TABLE `nguyenlieu` DISABLE KEYS */;
-INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-10-10','Beef.jpg',1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-10-10','Pork.jpg',1,NULL),(3,'2rd','Rau dền','10.000','2019-10-10','Rau_den.png',2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-10-10','Rau_chan_vit.jpg',2,NULL),(6,'2kt','Khoai tây','22.000','2019-10-10','Potato.jpg',2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2019-10-10','milk.jpg',3,NULL),(8,'4ct','Cá thu','250.000','2019-10-10','Mackerel.jpg',4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-10-10','Cá_thác_lác.jpg',4,NULL),(15,'5tv','Trứng vịt','30000','2019-10-10','Duck\'s_egg.jpg',5,NULL),(16,'5tg','Trứng gà tươi','30000','2019-10-10','Eggs.jpg',5,NULL),(18,'5tc','Trứng cút','28.500','2019-10-10','Trứng_cút.jpg',5,NULL);
+INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-10-10','Beef.jpg',1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-10-10','Pork.jpg',1,NULL),(3,'2rd','Rau dền','10.000','2019-10-10','Rau_den.png',2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-10-10','Rau_chan_vit.jpg',2,NULL),(6,'2kt','Khoai tây','22.000','2019-10-10','Potato.jpg',2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2019-10-10','milk.jpg',3,NULL),(8,'4ct','Cá thu','250.000','2019-10-10','Mackerel.jpg',4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-10-10','Cá_thác_lác.jpg',4,NULL),(15,'5tv','Trứng vịt','30000','2019-10-10','Duck\'s_egg.jpg',5,NULL),(16,'5tg','Trứng gà tươi','30000','2019-10-10','Eggs.jpg',5,NULL),(18,'5tc','Trứng cút','28.500','2019-10-10','Trứng_cút.jpg',5,NULL),(25,'5tn','Trứng ngỗng','30000','2019-12-17','Pork.jpg',5,NULL),(26,'5tdd','Trứng đà điễu','32000','2019-12-17','Mackerel.jpg',5,NULL);
 /*!40000 ALTER TABLE `nguyenlieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,14 +314,14 @@ CREATE TABLE `nhanvien` (
   `NHANVIEN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `NHANVIEN_PHONE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NHANVIEN_EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NHANVIEN_PASSWORD` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_PASSWORD` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NHANVIEN_LOAI` smallint(3) DEFAULT NULL,
   `NHANVIEN_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CHUCVU_CHUCVU_ID` int(11) NOT NULL,
   PRIMARY KEY (`NHANVIEN_ID`),
   KEY `fk_NHANVIEN_CHUCVU_idx` (`CHUCVU_CHUCVU_ID`),
   CONSTRAINT `fk_NHANVIEN_CHUCVU` FOREIGN KEY (`CHUCVU_CHUCVU_ID`) REFERENCES `chucvu` (`CHUCVU_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +330,7 @@ CREATE TABLE `nhanvien` (
 
 LOCK TABLES `nhanvien` WRITE;
 /*!40000 ALTER TABLE `nhanvien` DISABLE KEYS */;
-INSERT INTO `nhanvien` VALUES (1,'001','VIETDEPTRAI','0904716299','nguyenthanhviet31031998@gmail.com','1234567',2,NULL,2),(2,'002','HIEP','1234567890','nguyenvanhiep1998@gmail.com','1234567',1,NULL,1),(3,'003','TAM','0987654321','dominhtam1998@gmail.com','1234567',2,NULL,2),(4,'004','DANH','0908771234','buingocdanh123@gmail.com','',NULL,NULL,3),(5,'005','KHANG','1239874561','dinhkhang1998@gmail.com','1234567',1,NULL,1);
+INSERT INTO `nhanvien` VALUES (1,'001','VIETDEPTRAI','0904716299','nguyenthanhviet31031998@gmail.com','$2a$10$0aJcB6Vv7VQMqrC3Vn79u.5dmhLj5lmQRe6hCXjkc3RhXnqqMa2MG',2,NULL,2),(2,'002','HIEP','1234567890','nguyenvanhiep1998@gmail.com','$2a$10$0aJcB6Vv7VQMqrC3Vn79u.5dmhLj5lmQRe6hCXjkc3RhXnqqMa2MG',1,NULL,1),(3,'003','TAM','0987654321','dominhtam1998@gmail.com','$2a$10$0aJcB6Vv7VQMqrC3Vn79u.5dmhLj5lmQRe6hCXjkc3RhXnqqMa2MG',2,NULL,2),(4,'004','DANH','0908771234','buingocdanh123@gmail.com','$2a$10$0aJcB6Vv7VQMqrC3Vn79u.5dmhLj5lmQRe6hCXjkc3RhXnqqMa2MG',1,NULL,3),(5,'005','KHANG','1239874561','dinhkhang1998@gmail.com','$2a$10$0aJcB6Vv7VQMqrC3Vn79u.5dmhLj5lmQRe6hCXjkc3RhXnqqMa2MG',1,NULL,1);
 /*!40000 ALTER TABLE `nhanvien` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -345,4 +343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-14  8:52:10
+-- Dump completed on 2019-08-18 21:03:31
