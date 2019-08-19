@@ -1,6 +1,12 @@
 (function (module) {
 
 module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
+        
+
+        initController();
+
+        function initController() {
+        }
 
   $scope.setFile = function(element) {
         $scope.$apply(function($scope) {
@@ -8,11 +14,13 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
         });
     };
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
   //Get foods
   $http({
     method : "GET",
     url : "http://localhost:8080/api/GetAllMonAn"
   }).then(function mySuccess(response) {
+
       $scope.searched = response.data;
     },function myError(response) {
       $scope.searched = response.statusText;
@@ -103,7 +111,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
           if(key!="" && key!= null){
           $http({
             method : "GET",
-            url : "http://localhost:8080/api//SearchFoods/" + key
+            url : "http://localhost:8080/api/SearchFoods/" + key
           }).then(function mySuccess(response) {
               $scope.searched = response.data;
             },function myError(response) {

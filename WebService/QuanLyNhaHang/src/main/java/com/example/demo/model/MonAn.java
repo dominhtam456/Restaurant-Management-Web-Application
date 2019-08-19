@@ -5,12 +5,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Null;
@@ -58,6 +55,7 @@ public class MonAn implements Serializable{
 		 
 		 @Column(name="MONAN_IMG")
 		 private String MONAN_IMG;
+		 
 		 
 		 @Column(name = "LOAIMONAN_LOAIMONAN_ID")
 		 private int LOAIMONAN_LOAIMONAN_ID;

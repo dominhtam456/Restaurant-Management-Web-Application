@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
@@ -10,32 +9,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Service.LoaiNguyenLieuService;
-import com.example.demo.Service.NguyenLieuService;
-import com.example.demo.Service.BanService;
-import com.example.demo.Service.HoaDonService;
-import com.example.demo.Service.LoaiMonAnService;
-import com.example.demo.Service.MonAnService;
-
 import com.example.demo.model.LoaiNguyenLieu;
 import com.example.demo.model.NguyenLieu;
+import com.example.demo.service.BanService;
+import com.example.demo.service.HoaDonService;
+import com.example.demo.service.LoaiMonAnService;
+import com.example.demo.service.LoaiNguyenLieuService;
+import com.example.demo.service.MonAnService;
+import com.example.demo.service.NguyenLieuService;
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
 import com.example.demo.model.LoaiMonAn;
 import com.example.demo.model.MonAn;
 
-import ch.qos.logback.classic.Logger;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class WebController {
 
 	@Autowired
@@ -54,7 +52,7 @@ public class WebController {
 	public ResponseEntity<List<LoaiNguyenLieu>> listAllLoaiNguyenLieu() {
 		List<LoaiNguyenLieu> listLoaiNguyenLieu = repositoryLoaiNguyenLieu.findAll();
 		if (listLoaiNguyenLieu.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<LoaiNguyenLieu>>(HttpStatus.NO_CONTENT);
 		}
 		// return ResponseEntity<List<Contact>>(listContact, HttpStatus.OK);
 		return new ResponseEntity<List<LoaiNguyenLieu>>(listLoaiNguyenLieu, HttpStatus.OK);
@@ -214,7 +212,7 @@ public class WebController {
 	public ResponseEntity<List<LoaiMonAn>> listAllLoaiMonAn() {
 		List<LoaiMonAn> listLoaiMonAn = repositoryLoaiMonAn.findAll();
 		if (listLoaiMonAn.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<LoaiMonAn>>(HttpStatus.NO_CONTENT);
 		}
 		// return ResponseEntity<List<Contact>>(listContact, HttpStatus.OK);
 		return new ResponseEntity<List<LoaiMonAn>>(listLoaiMonAn, HttpStatus.OK);
@@ -278,8 +276,9 @@ public class WebController {
 			return "null";
 		}
 	}
-
+	
 	// LAY ALL MON AN
+	
 	@RequestMapping(path = "/GetAllMonAn", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<MonAn> getAllMonAn() {
 		// This returns a JSON or XML with the users
@@ -352,15 +351,23 @@ public class WebController {
 	}
 
 	// TIM KIEM
+	@CrossOrigin
 		@RequestMapping(value = "/SearchFoods/{key}", method = RequestMethod.GET)
 		public List<MonAn> SearchFoods(@PathVariable(value = "key") String key) {
 			try {
+				for (MonAn monan : repositoryMonAn.TimMonAnTheoTen(key)) {
+					// Set ten loai nguyen lieu
+
+					monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
+				}
 				return repositoryMonAn.TimMonAnTheoTen(key);
 			} catch (Exception e) {
 				// TODO: handle exception
 				return null;
 			}
 		}
+	
+	
 	/////////////////////// QUAN LY BAN //////////////////////////////////
 
 	@Autowired
