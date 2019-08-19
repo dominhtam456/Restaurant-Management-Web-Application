@@ -137,7 +137,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" ng-model="vm.username" placeholder="Email" type="email">
+                    <input class="form-control" ng-model="vm.username" placeholder="Email" type="email" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -145,7 +145,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" ng-model="vm.password" placeholder="Password" type="password">
+                    <input class="form-control" ng-model="vm.password" placeholder="Password" type="password" required>
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -157,6 +157,7 @@
                 <div class="text-center">
                   <button type="button" ng-click="vm.login()" class="btn btn-primary my-4">Sign in</button>
                 </div>
+                <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
               </form>
             </div>
           </div>
