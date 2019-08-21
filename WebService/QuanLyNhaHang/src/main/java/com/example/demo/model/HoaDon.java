@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,7 +21,7 @@ public class HoaDon implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "HOADON_ID")
-	private long HOADON_ID;
+	private Long HOADON_ID;
 
 	@Column(name = "HOADON_NO")
 	private String HOADON_NO;
@@ -29,32 +30,32 @@ public class HoaDon implements Serializable {
 	private Date HOADON_DATE;
 
 	@Column(name = "HOADON_STATUS")
-	private String HOADON_STATUS;
+	private Boolean HOADON_STATUS;
 
 	@Column(name = "HOADON_TAX")
 	private String HOADON_TAX;
 
 	@Column(name = "KHACHHANG_KHACHHANG_ID")
-	private int KHACHHANG_KHACHHANG_ID;
+	private Integer KHACHHANG_KHACHHANG_ID;
 
-	@Column(name = "BAN_BAN_ID")
-	private int BAN_BAN_ID;
+	@JoinColumn(name = "BAN_BAN_ID")
+	private Integer BAN_BAN_ID;
 
-	@Column(name = "NHANVIEN_NHANVIEN_ID")
-	private int NHANVIEN_NHANVIEN_ID;
+	@JoinColumn(name = "NHANVIEN_NHANVIEN_ID")
+	private Integer NHANVIEN_NHANVIEN_ID;
 	/*
 	 * @Transient private String TENLOAI_MONAN;
 	 */
 
 	// KHOI TAO
 	public HoaDon() {
-		//super();
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public HoaDon(String hOADON_NO, Date hOADON_DATE, String hOADON_STATUS, String hOADON_TAX,
+	public HoaDon(String hOADON_NO, Date hOADON_DATE, boolean hOADON_STATUS, String hOADON_TAX,
 			int kHACHHANG_KHACHHANG_ID, int bAN_BAN_ID, int nHANVIEN_ID) {
-		//super();
+		super();
 		HOADON_NO = hOADON_NO;
 		HOADON_DATE = hOADON_DATE;
 		HOADON_STATUS = hOADON_STATUS;
@@ -66,11 +67,11 @@ public class HoaDon implements Serializable {
 	}
 	// GETTER
 
-	public long getHOADON_ID() {
+	public Long getHOADON_ID() {
 		return HOADON_ID;
 	}
 
-	public void setHOADON_ID(long hOADON_ID) {
+	public void setHOADON_ID(Long hOADON_ID) {
 		HOADON_ID = hOADON_ID;
 	}
 
@@ -90,11 +91,11 @@ public class HoaDon implements Serializable {
 		HOADON_DATE = hOADON_DATE;
 	}
 
-	public String getHOADON_STATUS() {
+	public Boolean getHOADON_STATUS() {
 		return HOADON_STATUS;
 	}
 
-	public void setHOADON_STATUS(String hOADON_STATUS) {
+	public void setHOADON_STATUS(Boolean hOADON_STATUS) {
 		HOADON_STATUS = hOADON_STATUS;
 	}
 
@@ -106,7 +107,7 @@ public class HoaDon implements Serializable {
 		HOADON_TAX = hOADON_TAX;
 	}
 
-	public int getKHACHHANG_KHACHHANG_ID() {
+	public Integer getKHACHHANG_KHACHHANG_ID() {
 		return KHACHHANG_KHACHHANG_ID;
 	}
 
@@ -114,19 +115,19 @@ public class HoaDon implements Serializable {
 		KHACHHANG_KHACHHANG_ID = kHACHHANG_KHACHHANG_ID;
 	}
 
-	public int getBAN_BAN_ID() {
+	public Integer getBAN_BAN_ID() {
 		return BAN_BAN_ID;
 	}
 
-	public void setBAN_BAN_ID(int bAN_BAN_ID) {
+	public void setBAN_BAN_ID(Integer bAN_BAN_ID) {
 		BAN_BAN_ID = bAN_BAN_ID;
 	}
 
-	public int getNHANVIEN_NHANVIEN_ID() {
+	public Integer getNHANVIEN_NHANVIEN_ID() {
 		return NHANVIEN_NHANVIEN_ID;
 	}
 
-	public void setNHANVIEN_NHANVIEN_ID(int nHANVIEN_NHANVIEN_ID) {
+	public void setNHANVIEN_NHANVIEN_ID(Integer nHANVIEN_NHANVIEN_ID) {
 		NHANVIEN_NHANVIEN_ID = nHANVIEN_NHANVIEN_ID;
 	}
 

@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.LoaiNguyenLieu;
 import com.example.demo.model.NguyenLieu;
 import com.example.demo.service.BanService;
+import com.example.demo.service.HoaDonChiTietService;
 import com.example.demo.service.HoaDonService;
 import com.example.demo.service.LoaiMonAnService;
 import com.example.demo.service.LoaiNguyenLieuService;
@@ -27,9 +27,10 @@ import com.example.demo.service.MonAnService;
 import com.example.demo.service.NguyenLieuService;
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
+import com.example.demo.model.HoaDonChiTiet;
+import com.example.demo.model.HoaDonChiTietID;
 import com.example.demo.model.LoaiMonAn;
 import com.example.demo.model.MonAn;
-
 
 @RestController
 @RequestMapping("/api")
@@ -193,17 +194,17 @@ public class WebController {
 		repositoryNguyenLieu.delete(nl);// delete trong database
 		return ResponseEntity.ok().build();
 	}
-	
+
 	// TIM KIEM
-			@RequestMapping(value = "/SearchResources/{key}", method = RequestMethod.GET)
-			public List<NguyenLieu> SearchResources(@PathVariable(value = "key") String key) {
-				try {
-					return repositoryNguyenLieu.TimNguyenLieuTheoTen(key);
-				} catch (Exception e) {
-					// TODO: handle exception
-					return null;
-				}
-			}
+	@RequestMapping(value = "/SearchResources/{key}", method = RequestMethod.GET)
+	public List<NguyenLieu> SearchResources(@PathVariable(value = "key") String key) {
+		try {
+			return repositoryNguyenLieu.TimNguyenLieuTheoTen(key);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 
 	/////////////////////////////// LOAI MON AN /////////////////////////
 
@@ -276,9 +277,9 @@ public class WebController {
 			return "null";
 		}
 	}
-	
+
 	// LAY ALL MON AN
-	
+
 	@RequestMapping(path = "/GetAllMonAn", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<MonAn> getAllMonAn() {
 		// This returns a JSON or XML with the users
@@ -352,22 +353,21 @@ public class WebController {
 
 	// TIM KIEM
 	@CrossOrigin
-		@RequestMapping(value = "/SearchFoods/{key}", method = RequestMethod.GET)
-		public List<MonAn> SearchFoods(@PathVariable(value = "key") String key) {
-			try {
-				for (MonAn monan : repositoryMonAn.TimMonAnTheoTen(key)) {
-					// Set ten loai nguyen lieu
+	@RequestMapping(value = "/SearchFoods/{key}", method = RequestMethod.GET)
+	public List<MonAn> SearchFoods(@PathVariable(value = "key") String key) {
+		try {
+			for (MonAn monan : repositoryMonAn.TimMonAnTheoTen(key)) {
+				// Set ten loai nguyen lieu
 
-					monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
-				}
-				return repositoryMonAn.TimMonAnTheoTen(key);
-			} catch (Exception e) {
-				// TODO: handle exception
-				return null;
+				monan.setTENLOAI_LOAIMONAN(GetTenLoaiMonAn(monan.getLOAIMONAN_LOAIMONAN_ID()));
 			}
+			return repositoryMonAn.TimMonAnTheoTen(key);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
 		}
-	
-	
+	}
+
 	/////////////////////// QUAN LY BAN //////////////////////////////////
 
 	@Autowired
@@ -438,34 +438,30 @@ public class WebController {
 
 	// CAP NHAT TRANG THAI BAN
 
-	@RequestMapping(
-			value = "/UpdateStatusBan",
-		    method = RequestMethod.GET)
-	 public void UpdateStatusBan() { 
+	@RequestMapping(value = "/UpdateStatusBan", method = RequestMethod.GET)
+	public void UpdateStatusBan() {
 		repositoryBan.CapNhatTrangThaiBan("aaa", "Bàn 1");
-	 }
-	 
-	
-								
- ////////////////////////////QUAN LY HOA DON//////////////////////////////
-		
-		@Autowired
-		HoaDonService repositoryHoaDon;
+	}
 
-		// LAY ALL BAN
-		@RequestMapping(path = "/GetAllHoaDon", produces = MediaType.APPLICATION_JSON_VALUE)
-		public java.util.List<HoaDon> GetAllHoaDons() {
-			// This returns a JSON or XML with the users
-			return repositoryHoaDon.GetAllHoaDons();
-		}
+	//////////////////////////// QUAN LY HOA DON//////////////////////////////
 
-		// LAY 1 HoaDon
-		@RequestMapping(value = "/HoaDon/{id}", method = RequestMethod.GET)
-		public HoaDon FindHoaDonByID(@PathVariable("id") long id) {
-			return repositoryHoaDon.GetHoaDon(id);
-		}
+	@Autowired
+	HoaDonService repositoryHoaDon;
 
-		// THEM HoaDon
+	// LAY ALL HOA DON
+	@RequestMapping(path = "/GetAllHoaDon", produces = MediaType.APPLICATION_JSON_VALUE)
+	public java.util.List<HoaDon> GetAllHoaDons() {
+		// This returns a JSON or XML with the users
+		return repositoryHoaDon.GetAllHoaDons();
+	}
+
+	// LAY 1 HoaDon
+	@RequestMapping(value = "/HoaDon/{id}", method = RequestMethod.GET)
+	public HoaDon FindHoaDonByID(@PathVariable("id") long id) {
+		return repositoryHoaDon.GetHoaDon(id);
+	}
+
+	// THEM HoaDon
 	/*
 	 * @RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST,
 	 * produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
@@ -479,40 +475,88 @@ public class WebController {
 	 * 
 	 * }
 	 */
-		@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST
-				)
-				@ResponseBody
-				public boolean InserHoaDon(HoaDon hd) {
-					// @Valid: kiem tra xem co ton tai object trong body
-					return repositoryHoaDon.InsertHoaDon(hd);
-					
-				}
-		// CAP NHAT HoaDon
-		@RequestMapping(value = "/UpdateHoaDon", 
-				method = RequestMethod.POST, 
-				consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-		public boolean UpdateHoaDon(@Valid HoaDon hdForm) {
-			try {
-				return repositoryHoaDon.UpdateHoaDon(hdForm);
-			} catch (Exception e) {
-				// TODO: handle exception
-				return false;
-			}
+	@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@ResponseBody
+	public boolean InserHoaDon(HoaDon hd) {
+		// @Valid: kiem tra xem co ton tai object trong body
+		return repositoryHoaDon.InsertHoaDon(hd);
 
+	}
+
+	// CAP NHAT HoaDon
+	@RequestMapping(value = "/UpdateHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public boolean UpdateHoaDon(@Valid HoaDon hdForm) {
+		try {
+			return repositoryHoaDon.UpdateHoaDon(hdForm);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
 		}
 
-		// XOA HoaDon
-		@RequestMapping(value = "/HoaDon/{id}", 
-				method = RequestMethod.POST)
-		public boolean DeleteHoaDon(@PathVariable(value = "id") Long id) {
-			try {
-				return repositoryHoaDon.DeleteHoaDon(id);
-			} catch (Exception e) {
-				// TODO: handle exception
-				return false;
-			}
+	}
+
+	// XOA HoaDon
+	@RequestMapping(value = "/HoaDon/{id}", method = RequestMethod.POST)
+	public boolean DeleteHoaDon(@PathVariable(value = "id") Long id) {
+		try {
+			return repositoryHoaDon.DeleteHoaDon(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
 		}
+	}
+
+	// GET HOA DON TO STATUS
+	// LAY ALL HOA DON
+	@RequestMapping(path = "/GetHoaDonToStatus/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public java.util.List<HoaDon> GetHoaDonToStatus(@PathVariable(value = "status") boolean status) {
+		// This returns a JSON or XML with the users
+		return repositoryHoaDon.GetHoaDonToStatus(status);
+	}
+
+	// ----------------------Quan ly chi tiet hoa don-----------------------------//
+	@Autowired
+	HoaDonChiTietService repositoryHDCT;
+
+	// LAY ALL HOA DON
+	@RequestMapping(path = "/GetAllHoaDonChiTiet", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<HoaDonChiTiet> GetAllHoaDonChiTiets() {
+		// This returns a JSON or XML with the users
+		return repositoryHDCT.GetAllHoaDonChiTiets();
+	}
+
+	// LAY 1 Hoa Don Chi Tiet
+	@RequestMapping(value = "/HoaDonChiTiet/{hoadon_ID}&{monan_ID}", method = RequestMethod.GET)
+	public HoaDonChiTiet FindHoaDonChiTietByID(@PathVariable("hoadon_ID") Integer hoadon_ID, @PathVariable("monan_ID") Integer monan_ID) {
+		return repositoryHDCT.GetHoaDonChiTiet(new HoaDonChiTietID(hoadon_ID,monan_ID));
+	}
 
 	
-	
+	// Them Chi Tiet Hoa Don
+	@RequestMapping(value = "/InsertHoaDonChiTiet", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@ResponseBody
+	public boolean InserHoaDon(HoaDonChiTiet hdct) {
+		return repositoryHDCT.InSertHDCT(hdct);
+
+	}
+  
+	// Update chi tiet hao don
+	@RequestMapping(value = "/UpdateHoaDonChiTiet",
+			method = RequestMethod.POST)
+	public boolean UpdateHoaDonChiTiet(@RequestBody HoaDonChiTiet hdctForm) {
+			return repositoryHDCT.UpdateHoaDonChiTiet(hdctForm);
+
+	}
+/*
+	// XOA HoaDonChiTiet
+	@RequestMapping(value = "/DeleteHoaDonChiTiet", method = RequestMethod.POST)
+	public boolean DeleteHoaDonChiTiet(@RequestBody HoaDonChiTiet hdct) {
+		try {
+			return repositoryHDCT.DeLeTeCTHD(hdct);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+	*/
 }

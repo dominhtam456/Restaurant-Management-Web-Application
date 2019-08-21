@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `quanlynhahang` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `quanlynhahang`;
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlynhahang
@@ -76,7 +78,7 @@ CREATE TABLE `hoadon` (
   `HOADON_ID` int(11) NOT NULL AUTO_INCREMENT,
   `HOADON_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `HOADON_DATE` date DEFAULT NULL,
-  `HOADON_STATUS` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `HOADON_STATUS` bit(1) DEFAULT NULL,
   `HOADON_TAX` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `KHACHHANG_KHACHHANG_ID` int(11) DEFAULT NULL,
   `BAN_BAN_ID` int(11) NOT NULL,
@@ -89,7 +91,7 @@ CREATE TABLE `hoadon` (
   CONSTRAINT `fk_HOADON_BAN1` FOREIGN KEY (`BAN_BAN_ID`) REFERENCES `ban` (`BAN_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_HOADON_KHACHHANG1` FOREIGN KEY (`KHACHHANG_KHACHHANG_ID`) REFERENCES `khachhang` (`KHACHHANG_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_HOADON_NHANVIEN1` FOREIGN KEY (`NHANVIEN_NHANVIEN_ID`) REFERENCES `nhanvien` (`NHANVIEN_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +100,7 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
+INSERT INTO `hoadon` VALUES (3,'HD001','2019-04-04',_binary '',NULL,1,1,1),(10,'HD002',NULL,NULL,NULL,1,1,1),(11,'HD003',NULL,NULL,NULL,1,1,1),(12,'HD004',NULL,_binary '\0',NULL,1,1,1);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +291,7 @@ CREATE TABLE `nguyenlieu` (
   UNIQUE KEY `NGUYENLIEU_NO_UNIQUE` (`NGUYENLIEU_NO`),
   KEY `fk_NGUYENLIEU_LOAINGUYENLIEU1_idx` (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`),
   CONSTRAINT `fk_NGUYENLIEU_LOAINGUYENLIEU1` FOREIGN KEY (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`) REFERENCES `loainguyenlieu` (`LOAINGUYENLIEU_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,7 +300,7 @@ CREATE TABLE `nguyenlieu` (
 
 LOCK TABLES `nguyenlieu` WRITE;
 /*!40000 ALTER TABLE `nguyenlieu` DISABLE KEYS */;
-INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-10-10','Beef.jpg',1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-10-10','Pork.jpg',1,NULL),(3,'2rd','Rau dền','10.000','2019-10-10','Rau_den.png',2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-10-10','Rau_chan_vit.jpg',2,NULL),(6,'2kt','Khoai tây','22.000','2019-10-10','Potato.jpg',2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2019-10-10','milk.jpg',3,NULL),(8,'4ct','Cá thu','250.000','2019-10-10','Mackerel.jpg',4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-10-10','Cá_thác_lác.jpg',4,NULL),(15,'5tv','Trứng vịt','30000','2019-10-10','Duck\'s_egg.jpg',5,NULL),(16,'5tg','Trứng gà tươi','30000','2019-10-10','Eggs.jpg',5,NULL),(18,'5tc','Trứng cút','28.500','2019-10-10','Trứng_cút.jpg',5,NULL),(25,'5tn','Trứng ngỗng','30000','2019-12-17','Pork.jpg',5,NULL),(26,'5tdd','Trứng đà điễu','32000','2019-12-17','Mackerel.jpg',5,NULL);
+INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-10-10','Beef.jpg',1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-10-10','Pork.jpg',1,NULL),(3,'2rd','Rau dền','10.000','2019-10-10','Rau_den.png',2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-10-10','Rau_chan_vit.jpg',2,NULL),(6,'2kt','Khoai tây','22.000','2019-10-10','Potato.jpg',2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2019-10-10','milk.jpg',3,NULL),(8,'4ct','Cá thu','250.000','2019-10-10','Mackerel.jpg',4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-10-10','Cá_thác_lác.jpg',4,NULL),(15,'5tv','Trứng vịt','30000','2019-10-10','Duck\'s_egg.jpg',5,NULL),(16,'5tg','Trứng gà tươi','30000','2019-10-10','Eggs.jpg',5,NULL),(18,'5tc','Trứng cút','28.500','2019-10-10','Trứng_cút.jpg',5,NULL),(25,'5tn','Trứng ngỗng','30000','2019-12-17','Pork.jpg',5,NULL),(26,'5tdd','Trứng đà điễu','32000','2019-12-17','Mackerel.jpg',5,NULL),(27,'NL01','A','1000','2019-08-08','Beef.jpg',2,NULL);
 /*!40000 ALTER TABLE `nguyenlieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-18 21:03:31
+-- Dump completed on 2019-08-21 12:29:54
