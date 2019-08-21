@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 import javax.validation.Valid;
 
@@ -25,6 +26,9 @@ import com.example.demo.service.LoaiMonAnService;
 import com.example.demo.service.LoaiNguyenLieuService;
 import com.example.demo.service.MonAnService;
 import com.example.demo.service.NguyenLieuService;
+
+import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
+
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
 import com.example.demo.model.HoaDonChiTiet;
@@ -415,7 +419,7 @@ public class WebController {
 	}
 
 	// XOA BAN
-	@RequestMapping(value = "/BAN/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/DeleteBan/{id}", method = RequestMethod.POST)
 	public boolean DeleteBan(@PathVariable(value = "id") Long id) {
 		try {
 			return repositoryBan.DeleteBan(id);
@@ -462,23 +466,11 @@ public class WebController {
 	}
 
 	// THEM HoaDon
-	/*
-	 * @RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST,
-	 * produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
-	 * MediaType.APPLICATION_JSON_VALUE }, consumes =
-	 * MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	 * 
-	 * @ResponseBody public boolean InsertBan(HoaDon hdForm) {
-	 * 
-	 * try { return repositoryHoaDon.InsertHoaDon(hdForm); } catch (Exception e) {
-	 * // TODO: handle exception return false; }
-	 * 
-	 * }
-	 */
+	
 	@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
-	public boolean InserHoaDon(HoaDon hd) {
-		// @Valid: kiem tra xem co ton tai object trong body
+	public boolean InserHoaDon(@Valid HoaDon hd) {
+		
 		return repositoryHoaDon.InsertHoaDon(hd);
 
 	}
@@ -496,7 +488,7 @@ public class WebController {
 	}
 
 	// XOA HoaDon
-	@RequestMapping(value = "/HoaDon/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/DeleteHoaDon/{id}", method = RequestMethod.POST)
 	public boolean DeleteHoaDon(@PathVariable(value = "id") Long id) {
 		try {
 			return repositoryHoaDon.DeleteHoaDon(id);
@@ -507,7 +499,6 @@ public class WebController {
 	}
 
 	// GET HOA DON TO STATUS
-	// LAY ALL HOA DON
 	@RequestMapping(path = "/GetHoaDonToStatus/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<HoaDon> GetHoaDonToStatus(@PathVariable(value = "status") boolean status) {
 		// This returns a JSON or XML with the users
@@ -518,7 +509,7 @@ public class WebController {
 	@Autowired
 	HoaDonChiTietService repositoryHDCT;
 
-	// LAY ALL HOA DON
+	// LAY ALL HOA DON CHI TIET
 	@RequestMapping(path = "/GetAllHoaDonChiTiet", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<HoaDonChiTiet> GetAllHoaDonChiTiets() {
 		// This returns a JSON or XML with the users
@@ -527,36 +518,38 @@ public class WebController {
 
 	// LAY 1 Hoa Don Chi Tiet
 	@RequestMapping(value = "/HoaDonChiTiet/{hoadon_ID}&{monan_ID}", method = RequestMethod.GET)
-	public HoaDonChiTiet FindHoaDonChiTietByID(@PathVariable("hoadon_ID") Integer hoadon_ID, @PathVariable("monan_ID") Integer monan_ID) {
-		return repositoryHDCT.GetHoaDonChiTiet(new HoaDonChiTietID(hoadon_ID,monan_ID));
+	public HoaDonChiTiet FindHoaDonChiTietByID(@PathVariable("hoadon_ID") Integer hoadon_ID,
+			@PathVariable("monan_ID") Integer monan_ID) {
+		return repositoryHDCT.GetHoaDonChiTiet(new HoaDonChiTietID(hoadon_ID, monan_ID));
 	}
 
-	
 	// Them Chi Tiet Hoa Don
-	@RequestMapping(value = "/InsertHoaDonChiTiet", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@RequestMapping(value = "/InsertHoaDonChiTiet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
 	public boolean InserHoaDon(HoaDonChiTiet hdct) {
 		return repositoryHDCT.InSertHDCT(hdct);
 
 	}
-  
+
 	// Update chi tiet hao don
-	@RequestMapping(value = "/UpdateHoaDonChiTiet",
-			method = RequestMethod.POST)
-	public boolean UpdateHoaDonChiTiet(@RequestBody HoaDonChiTiet hdctForm) {
-			return repositoryHDCT.UpdateHoaDonChiTiet(hdctForm);
+	@RequestMapping(value = "/UpdateHoaDonChiTiet", method = RequestMethod.POST)
+	public boolean UpdateHoaDonChiTiet(HoaDonChiTiet hdctForm) {
+		return repositoryHDCT.UpdateHoaDonChiTiet(hdctForm);
 
 	}
-/*
+
 	// XOA HoaDonChiTiet
-	@RequestMapping(value = "/DeleteHoaDonChiTiet", method = RequestMethod.POST)
-	public boolean DeleteHoaDonChiTiet(@RequestBody HoaDonChiTiet hdct) {
-		try {
-			return repositoryHDCT.DeLeTeCTHD(hdct);
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
+	@RequestMapping(value = "/DeleteHoaDonChiTiet/{hoadon_ID}&{monan_ID}", method = RequestMethod.GET)
+	public boolean DeleteHDCT(@PathVariable("hoadon_ID") Integer hoadon_ID,
+			@PathVariable("monan_ID") Integer monan_ID) {
+		return repositoryHDCT.DeLeTeCTHD(new HoaDonChiTietID(hoadon_ID, monan_ID));
+	}
+	/*
+    //Get Hoa Don Chi Tiet Theo ID Hoa Don
+	@RequestMapping(path = "/GetHDCTHoaDonID//{hoadon_ID}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Future<Optional<List<HoaDonChiTiet>>> GetHDCTHoaDonID(@PathVariable("hoadon_ID") Integer hoadon_ID) {
+		// This returns a JSON or XML with the users
+		return repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadon_ID);
 	}
 	*/
 }

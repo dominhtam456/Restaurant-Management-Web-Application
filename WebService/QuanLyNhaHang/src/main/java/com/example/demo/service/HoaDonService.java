@@ -13,8 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.HoaDon;
 
-import javassist.expr.NewArray;
-import net.bytebuddy.asm.Advice.This;
 @Repository
 public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 	  // private default List<HoaDon> dshd=this.List<HoaDon> findByHOADON_STATUS(Boolean hOADON_STATUS);;
@@ -45,9 +43,10 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 		}
 		
 		//INSERT HoaDon
-		//@SuppressWarnings("unused")
+		@SuppressWarnings("unused")
 		public default boolean InsertHoaDon(HoaDon o) {
 			o.setHOADON_NO("HD00"+String.valueOf(this.count()+1));
+			//mac dinh khahc hanng le=1
 			o.setKHACHHANG_KHACHHANG_ID(1);
 			if(o!=null) {
 			   this.save(o);

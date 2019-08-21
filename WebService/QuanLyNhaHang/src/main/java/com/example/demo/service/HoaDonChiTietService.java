@@ -1,12 +1,20 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.concurrent.Future;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Async;
 
-import com.example.demo.model.HoaDon;
+import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDonChiTiet;
 import com.example.demo.model.HoaDonChiTietID;
+
+import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDonChiTietID> {
 
@@ -36,16 +44,7 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 		}
 
 	}
-   /*
-	public default HoaDonChiTiet getOnes(long hoadon_HOADON_ID, long monan_MONAN_ID) {
-		for (HoaDonChiTiet o : this.findAll()) {
-			if (o.getHOADON_HOADON_ID() == hoadon_HOADON_ID && o.getMONAN_MONAN_ID() == monan_MONAN_ID) {
-				return o;
-			}
-		}
-		return null;
-	}
-	*/
+  
 	// Update Hoa Don Chi Tiet
 	public default boolean UpdateHoaDonChiTiet(HoaDonChiTiet o) {
 		 HoaDonChiTiet temp = this.getOne(o.getHoadonchitietID());
@@ -61,18 +60,25 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 		 }
 		 
 	}
-/*
+
 
 	// Delete CTHD
-	public default boolean DeLeTeCTHD(HoaDonChiTiet o) {
-		if (o != null) {
-			HoaDonChiTiet temp = this.getOnes(o.getHOADON_HOADON_ID(), o.getMONAN_MONAN_ID());
-			this.delete(temp);
+	public default boolean DeLeTeCTHD(HoaDonChiTietID hdctID) {
+		if (hdctID != null) {
+			this.deleteById(hdctID);
 			return true;
 		} else {
 			return false;
 		}
 
 	}
-	*/
+	
+	
+	//GET CHI TIET HOA DON THEO ID_HOADON
+	/*
+	@Async
+	@Query("SELECT h FROM Hoadonchitiet h WHERE h.HOADON_HOADON_ID = ?hoadonID")
+	public  List<HoaDonChiTiet> GetHoaDonChiTietToHoaDonID(@Param("hoadonID") Integer hoadonID);
+*/
+	
 }

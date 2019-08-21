@@ -1,13 +1,9 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,6 +27,7 @@ public class HoaDonChiTiet implements Serializable {
 	@Column(name = "HOADONCHITIET_SOLUONG")
 	private Integer HOADONCHITIET_SOLUONG;
 
+	//HAM TAO
 	public HoaDonChiTiet(HoaDonChiTietID hoadonchitietID, String hOADONCHITIET_PRICE,
 			int hOADONCHITIET_SOLUONG) {
 		super();
@@ -45,7 +42,7 @@ public class HoaDonChiTiet implements Serializable {
 	}
 
 	
-
+    //HAM GET SET
 	public String getHOADONCHITIET_PRICE() {
 		return HOADONCHITIET_PRICE;
 	}
