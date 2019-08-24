@@ -44,15 +44,15 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 		
 		//INSERT HoaDon
 		@SuppressWarnings("unused")
-		public default boolean InsertHoaDon(HoaDon o) {
+		public default HoaDon InsertHoaDon(HoaDon o) {
 			o.setHOADON_NO("HD00"+String.valueOf(this.count()+1));
 			//mac dinh khahc hanng le=1
 			o.setKHACHHANG_KHACHHANG_ID(1);
 			if(o!=null) {
-			   this.save(o);
-				return true;
+			   return save(o);
+				
 			}else {
-				return false;
+				return null;
 			}
 		}
 		

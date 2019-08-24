@@ -1,12 +1,6 @@
 (function (module) {
 
 module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
-        
-
-        initController();
-
-        function initController() {
-        }
 
   $scope.setFile = function(element) {
         $scope.$apply(function($scope) {

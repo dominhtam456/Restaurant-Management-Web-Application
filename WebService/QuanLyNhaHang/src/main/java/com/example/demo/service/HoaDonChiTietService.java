@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -31,16 +32,16 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 
 	
 	// Them chi tiet hoa don
-	public default boolean InSertHDCT(HoaDonChiTiet o) {
+	public default HoaDonChiTiet InSertHDCT(HoaDonChiTiet o) {
 		/*
 		 * o.setHOADON_HOADON_ID(10); o.setMONAN_MONAN_ID(1);
 		 * o.setHOADONCHITIET_PRICE("100000"); o.setHOADONCHITIET_SOLUONG(3);
 		 */
 		if (o != null) {
-			this.save(o);
-			return true;
+			return save(o);
+			
 		} else {
-			return false;
+			return null;
 		}
 
 	}
@@ -75,6 +76,16 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 	
 	
 	//GET CHI TIET HOA DON THEO ID_HOADON
+	
+		public default List<HoaDonChiTiet> GetHoaDonChiTietToHoaDonID(int hoadonID) {
+			List<HoaDonChiTiet> list=new ArrayList<HoaDonChiTiet>();
+			for (HoaDonChiTiet o : this.findAll()) {
+				if(o.getHoadonchitietID().getHOADON_HOADON_ID()==hoadonID) {
+					list.add(o);
+				}
+			}
+			return list;
+		}
 	/*
 	@Async
 	@Query("SELECT h FROM Hoadonchitiet h WHERE h.HOADON_HOADON_ID = ?hoadonID")

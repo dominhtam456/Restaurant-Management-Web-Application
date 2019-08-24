@@ -383,6 +383,7 @@ public class WebController {
 		// This returns a JSON or XML with the users
 		return repositoryBan.GetAllBans();
 	}
+	
 
 	// LAY 1 BAN
 	@RequestMapping(value = "/Ban/{id}", method = RequestMethod.GET)
@@ -467,9 +468,9 @@ public class WebController {
 
 	// THEM HoaDon
 	
-	@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public boolean InserHoaDon(@Valid HoaDon hd) {
+	public HoaDon InserHoaDon(@Valid @RequestBody HoaDon hd) {
 		
 		return repositoryHoaDon.InsertHoaDon(hd);
 
@@ -516,6 +517,11 @@ public class WebController {
 		return repositoryHDCT.GetAllHoaDonChiTiets();
 	}
 
+	// LAY CTHD THEO ID_HOADON
+		@RequestMapping(path = "/GetHDCTByID/{hoadonID}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public List<HoaDonChiTiet> GetHDCTByID(@PathVariable(value = "hoadonID") int  hoadonID) {
+			return repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadonID);
+		}
 	// LAY 1 Hoa Don Chi Tiet
 	@RequestMapping(value = "/HoaDonChiTiet/{hoadon_ID}&{monan_ID}", method = RequestMethod.GET)
 	public HoaDonChiTiet FindHoaDonChiTietByID(@PathVariable("hoadon_ID") Integer hoadon_ID,
@@ -524,11 +530,11 @@ public class WebController {
 	}
 
 	// Them Chi Tiet Hoa Don
-	@RequestMapping(value = "/InsertHoaDonChiTiet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@RequestMapping(value = "/InsertHoaDonChiTiet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public boolean InserHoaDon(HoaDonChiTiet hdct) {
+	public HoaDonChiTiet InserHoaDon(@RequestBody HoaDonChiTiet hdct) {
 		return repositoryHDCT.InSertHDCT(hdct);
-
+        
 	}
 
 	// Update chi tiet hao don

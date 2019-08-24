@@ -27,7 +27,7 @@
                         <div class="card" style="width: 10.2rem;">
                           <img class="card-img-top p-4" src="assets\img\icons\dinner-table.png" alt="Card image cap" width="120px" height="150px">
                           <div class="card-footer borde">
-                            <p class="card-text" style="text-align: center;">Bàn {{x.ban_NO}}</p>
+                            <p class="card-text" style="text-align: center;"> {{x.ban_NO}}</p>
                           </div>
                         </div>
                       </div>
@@ -73,17 +73,17 @@
                           <th scope="col">Thành Tiền</th>
                         </tr>
                       </thead>
-                      <tbody ng-repeat="y in array">
+                      <tbody >
 
-                            <tr ng-if="y.IdBan==tableIndex" ng-repeat="z in y.value">
+                            <tr ng-repeat="y in details">
                               <td >{{$index+1}}</td>
-                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px" ng-click="deleteFood($index)"></i></td>
-                              <td >{{z.foodName}}</td>
+                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px" ng-click=""></i></td>
+                              <td >{{y.monan_NAME}}</td>
                               <td>
-                                <input type="number" name="" value="1" style="width:4em">
+                                <input ng-model="y.hoadonchitiet_SOLUONG" ng-change="changeAmount(y)" type="number" " style="width:4em">
                               </td>
-                              <td>{{z.foodPrice}}</td>
-                              <td>50.000</td>
+                              <td>{{y.hoadonchitiet_PRICE}}</td>
+                              <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}.000</td>
                             </tr>
                            </tbody> </table> </div> </div> <div class="card-footer">
                           <div  class="float-right">
