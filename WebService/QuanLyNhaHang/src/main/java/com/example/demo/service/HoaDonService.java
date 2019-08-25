@@ -76,6 +76,17 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 			}
 		}
 		
+		//UPDATE Status HoaDon
+				public default boolean UpdateStatusHoaDon(HoaDon o) {
+					HoaDon temp=this.getOne(o.getHOADON_ID());
+					if(temp!=null) {
+						temp.setHOADON_STATUS(o.getHOADON_STATUS());
+						this.save(temp);
+						return true;
+					}else {
+						return false;
+					}
+				}
 		//DELETE HoaDon
 		public default boolean 	DeleteHoaDon(long id) {
 			HoaDon temp=this.getOne(id);

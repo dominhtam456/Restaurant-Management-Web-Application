@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.concurrent.Future;
+
 
 import javax.validation.Valid;
 
@@ -26,8 +26,6 @@ import com.example.demo.service.LoaiMonAnService;
 import com.example.demo.service.LoaiNguyenLieuService;
 import com.example.demo.service.MonAnService;
 import com.example.demo.service.NguyenLieuService;
-
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
@@ -487,6 +485,18 @@ public class WebController {
 		}
 
 	}
+	
+	// CAP NHAT HoaDon Status
+		@RequestMapping(value = "/UpdateStatusHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+		public boolean UpdateStatusHoaDon(@Valid HoaDon hdForm) {
+			try {
+				return repositoryHoaDon.UpdateStatusHoaDon(hdForm);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+
+		}
 
 	// XOA HoaDon
 	@RequestMapping(value = "/DeleteHoaDon/{id}", method = RequestMethod.POST)

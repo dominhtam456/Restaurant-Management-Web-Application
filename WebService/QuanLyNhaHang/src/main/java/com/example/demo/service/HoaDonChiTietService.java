@@ -12,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.scheduling.annotation.Async;
 
 import com.example.demo.model.Ban;
-import com.example.demo.model.HoaDon;
 import com.example.demo.model.HoaDonChiTiet;
 import com.example.demo.model.HoaDonChiTietID;
 
@@ -92,14 +91,6 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 	@Query("SELECT h FROM Hoadonchitiet h WHERE h.HOADON_HOADON_ID = ?hoadonID")
 	public  List<HoaDonChiTiet> GetHoaDonChiTietToHoaDonID(@Param("hoadonID") Integer hoadonID);
 */
-		String default CreateHoaDonNo() {
-			int maxID=0;
-			for (HoaDon o : this.findAll()) {
-				if(o.getHOADON_ID()>maxID) {
-					maxID=o.get
-				}
-			}
-			return list;
-		}
+		
 	
 }
