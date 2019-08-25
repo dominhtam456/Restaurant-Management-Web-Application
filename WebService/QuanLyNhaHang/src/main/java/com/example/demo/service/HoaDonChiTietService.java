@@ -91,6 +91,5 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 	@Query("SELECT h FROM Hoadonchitiet h WHERE h.HOADON_HOADON_ID = ?hoadonID")
 	public  List<HoaDonChiTiet> GetHoaDonChiTietToHoaDonID(@Param("hoadonID") Integer hoadonID);
 */
-		
 	
 }

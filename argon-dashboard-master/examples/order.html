@@ -77,13 +77,13 @@
 
                             <tr ng-repeat="y in details">
                               <td >{{$index+1}}</td>
-                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px" ng-click=""></i></td>
+                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px" ng-click="delete(y)"></i></td>
                               <td >{{y.monan_NAME}}</td>
                               <td>
                                 <input ng-model="y.hoadonchitiet_SOLUONG" ng-change="changeAmount(y)" type="number" " style="width:4em">
                               </td>
                               <td>{{y.hoadonchitiet_PRICE}}</td>
-                              <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}.000</td>
+                              <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}</td>
                             </tr>
                            </tbody> </table> </div> </div> <div class="card-footer">
                           <div  class="float-right">
@@ -104,7 +104,7 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <div><span>Bàn 1</span></div>
+                                    <div><span>Bàn {{tableIndex}}</span></div>
                                     <div class="container">
                                       <hr>
                                       <div class="row">
@@ -122,14 +122,15 @@
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                <tr>
-                                                  <td>1</td>
-                                                  <td>Thịt cầy</td>
+                                                <tr ng-repeat="y in details">
+                                                  <td >{{$index+1}}</td>
+
+                                                  <td >{{y.monan_NAME}}</td>
                                                   <td>
-                                                    <input type="number" name="" value="" style="width:4em">
+                                                    <input disabled ng-model="y.hoadonchitiet_SOLUONG" ng-change="changeAmount(y)" type="number" " style="width:4em">
                                                   </td>
-                                                  <td>30.000</td>
-                                                  <td>50.000</td>
+                                                  <td>{{y.hoadonchitiet_PRICE}}</td>
+                                                  <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}</td>
                                                 </tr>
                                               </tbody>
                                             </table>
@@ -140,7 +141,7 @@
                                             <tbody>
                                               <tr>
                                                 <td>Tổng Tiền Hàng</td>
-                                                <td>30,000</td>
+                                                <td>{{total}}</td>
                                               </tr>
                                               <tr>
                                                 <td>Giảm Giá</td>
@@ -148,15 +149,15 @@
                                               </tr>
                                               <tr>
                                                 <td><b>Khách Cần Trả</b></td>
-                                                <td><b style="color: #F5365C;">30.000</b></td>
+                                                <td><b style="color: #F5365C;">{{total}}</b></td>
                                               </tr>
                                               <tr>
                                                 <td>Khách Thanh Toán</td>
-                                                <td><input type="text" value="" /></td>
+                                                <td><input ng-model="excesscash" type="number" value="0" /></td>
                                               </tr>
                                               <tr>
                                                 <td>Tiền Thừa Trả Khách </td>
-                                                <td>000000</td>
+                                                <td>{{excesscash - total }}</td>
                                               </tr>
                                             </tbody>
                                           </table>
@@ -165,7 +166,7 @@
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                    <button type="button" class="btn btn-success">Thanh Toán</button>
+                                    <button type="button" class="btn btn-success" ng-click="payBill()">Thanh Toán</button>
                                   </div>
                                 </div>
                               </div>

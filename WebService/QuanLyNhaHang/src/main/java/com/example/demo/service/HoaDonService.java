@@ -41,33 +41,35 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 			}
 			return list;
 		}
+		
 		//CREATE HOA DON NO
-		public  default String CreateHoaDonNo() {
-			Integer maxID=0;
-			for (HoaDon o : this.findAll()) {
-				if(o.getHOADON_ID()>maxID) {
-					maxID=Integer.parseInt(o.getHOADON_ID().toString());
+				public  default String CreateHoaDonNo() {
+					Integer maxID=0;
+					for (HoaDon o : this.findAll()) {
+						if(o.getHOADON_ID()>maxID) {
+							maxID=Integer.parseInt(o.getHOADON_ID().toString());
+						}
+					}
+					return "HD00"+(maxID+1);
 				}
-			}
-			return "HD00"+(maxID+1);
-		}
-		//INSERT HoaDon
-		@SuppressWarnings("unused")
-		public default HoaDon InsertHoaDon(HoaDon o) {
-			o.setHOADON_NO(CreateHoaDonNo());
-			//mac dinh khahc hanng le=1
-			o.setKHACHHANG_KHACHHANG_ID(1);
-			if(o!=null) {
-			   return save(o);
-				
-			}else {
-				return null;
-			}
-		}
+				//INSERT HoaDon
+				@SuppressWarnings("unused")
+				public default HoaDon InsertHoaDon(HoaDon o) {
+					o.setHOADON_NO(CreateHoaDonNo());
+					//mac dinh khahc hanng le=1
+					o.setKHACHHANG_KHACHHANG_ID(1);
+					if(o!=null) {
+					   return save(o);
+						
+					}else {
+						return null;
+					}
+				}
 		
 		//UPDATE HoaDon
 		public default boolean UpdateHoaDon(HoaDon o) {
 			HoaDon temp=this.getOne(o.getHOADON_ID());
+			temp.setHOADON_STATUS(o.getHOADON_STATUS());
 			if(temp!=null) {
 				this.save(temp);
 				return true;
@@ -76,17 +78,6 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 			}
 		}
 		
-		//UPDATE Status HoaDon
-				public default boolean UpdateStatusHoaDon(HoaDon o) {
-					HoaDon temp=this.getOne(o.getHOADON_ID());
-					if(temp!=null) {
-						temp.setHOADON_STATUS(o.getHOADON_STATUS());
-						this.save(temp);
-						return true;
-					}else {
-						return false;
-					}
-				}
 		//DELETE HoaDon
 		public default boolean 	DeleteHoaDon(long id) {
 			HoaDon temp=this.getOne(id);
@@ -97,6 +88,5 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 				return false;
 			}
 		}
-		
 		
 }

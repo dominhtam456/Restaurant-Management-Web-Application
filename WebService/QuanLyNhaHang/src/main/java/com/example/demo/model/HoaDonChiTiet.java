@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,6 +20,7 @@ public class HoaDonChiTiet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
+	@Id
     private HoaDonChiTietID hoadonchitietID;
 
 	@Column(name = "HOADONCHITIET_PRICE")

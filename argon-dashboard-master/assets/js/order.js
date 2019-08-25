@@ -23,27 +23,6 @@
     }, function myError(response) {
       $scope.foods = response.statusText;
     });
-    /*
-    [
-    {
-        "IdBan" : "",
-        "value" : [
-          {
-            "toan" : "Môn Toán",
-            "anh" : "Môn Anh"
-          },
-          {
-            "toan" : "Môn Toán",
-            "anh" : "Môn Anh"
-          }
-        ]
-    }
-    */
-
-
-
-    //$scope.array.push($scope.data);
-    //$scope.array[0].value[0].toan
 
     $scope.tableIndex = "";
     $scope.getTable = function(table) {
@@ -64,9 +43,10 @@
           method: "GET",
           url: "http://localhost:8080/api/GetHDCTByID/" + id
         }).then(function mySuccess(response) {
+          $scope.total=0;
           $scope.details = response.data;
-
           angular.forEach($scope.details, function(k) {
+            $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
             $http({
               method: "GET",
               url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
@@ -150,7 +130,9 @@
                           url: "http://localhost:8080/api/GetHDCTByID/" +$scope.idhd
                         }).then(function mySuccess(response) {
                           $scope.details = response.data;
+                          $scope.total=0;
                           angular.forEach($scope.details, function(k) {
+                            $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
                             $http({
                               method: "GET",
                               url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
@@ -160,6 +142,7 @@
                               $scope.foods = response.statusText;
                             });
                           });
+
                         }, function myError(response) {
                           $scope.details = response.statusText;
                         });
@@ -193,7 +176,9 @@
                           url: "http://localhost:8080/api/GetHDCTByID/" + id
                         }).then(function mySuccess(response) {
                           $scope.details = response.data;
+                          $scope.total=0;
                           angular.forEach($scope.details, function(k) {
+                            $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
                             $http({
                               method: "GET",
                               url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
@@ -234,8 +219,10 @@
             method: "GET",
             url: "http://localhost:8080/api/GetHDCTByID/" + response.data.hoadonchitietID.hoadon_HOADON_ID
           }).then(function mySuccess(response) {
+            $scope.total=0;
             $scope.details = response.data;
             angular.forEach($scope.details, function(k) {
+              $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
               $http({
                 method: "GET",
                 url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
@@ -249,6 +236,55 @@
             $scope.details = response.statusText;
           });
         });
+    }
+
+
+    $scope.payBill=function(){
+      var id="";
+      $http({
+        method: "GET",
+        url: "http://localhost:8080/api/GetHoaDonToStatus/false"
+      }).then(function mySuccess(response) {
+        $scope.hdidctt = response.data;
+        angular.forEach($scope.hdidctt, function(k) {
+          if (k.ban_BAN_ID == $scope.tableIndex) {
+            id = k.hoadon_ID;
+          }
+        });
+        if(id != null && id != ""){
+          $http({
+            method: "GET",
+            url: "http://localhost:8080/api/HoaDon/" + id
+          }).then(function mySuccess(data) {
+            var data = {
+              "hoadon_ID": id,
+              "hoadon_STATUS": true
+            };
+            console.log(JSON.stringify(data));
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8080/api/UpdateHoaDon',
+                data: JSON.stringify(data),
+                headers: {
+                  "Content-Type": "application/json; charset=UTF-8"
+                },
+              })
+              .then(function mySuccess(response) {
+                alert("Thanh toán thành công");
+                $window.location.reload();
+              });
+          });
+
+        }
+      });
+    }
+
+    $scope.delete= function(food){
+      $http({
+        method: "GET",
+        url: "http://localhost:8080/api/DeleteHoaDonChiTiet/" + food.hoadonchitietID.hoadon_HOADON_ID + "&" + food.hoadonchitietID.monan_MONAN_ID
+      }).then(function mySuccess(response) {
+      });
     }
 
 
