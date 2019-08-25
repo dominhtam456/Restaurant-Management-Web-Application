@@ -41,11 +41,20 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 			}
 			return list;
 		}
-		
+		//CREATE HOA DON NO
+		public  default String CreateHoaDonNo() {
+			Integer maxID=0;
+			for (HoaDon o : this.findAll()) {
+				if(o.getHOADON_ID()>maxID) {
+					maxID=Integer.parseInt(o.getHOADON_ID().toString());
+				}
+			}
+			return "HD00"+(maxID+1);
+		}
 		//INSERT HoaDon
 		@SuppressWarnings("unused")
 		public default HoaDon InsertHoaDon(HoaDon o) {
-			o.setHOADON_NO("HD00"+String.valueOf(this.count()+1));
+			o.setHOADON_NO(CreateHoaDonNo());
 			//mac dinh khahc hanng le=1
 			o.setKHACHHANG_KHACHHANG_ID(1);
 			if(o!=null) {
@@ -77,5 +86,6 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 				return false;
 			}
 		}
+		
 		
 }
