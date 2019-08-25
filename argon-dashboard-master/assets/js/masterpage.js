@@ -20,6 +20,10 @@ app.config(function($routeProvider) {
     templateUrl : "/examples/order.html",
     controller : "TablesCtrl"
   })
+  .when("/food-details", {
+    templateUrl : "/examples/food-details.html",
+    controller : ""//nho them controller
+  })
   .when("/login", {
     templateUrl : "/examples/login.html",
     controller : "Login.IndexController",
