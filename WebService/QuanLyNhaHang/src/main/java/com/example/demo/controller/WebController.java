@@ -235,9 +235,11 @@ public class WebController {
 	}
 
 	// THEM LOAI MON AN
-	@RequestMapping(value = "/InsertLoaiMonAn", method = RequestMethod.POST)
+	@RequestMapping(value = "/InsertLoaiMonAn", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_ATOM_XML_VALUE,
+			MediaType.APPLICATION_JSON_VALUE }, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
-	public LoaiMonAn insertLoaiMonAn(@Valid @RequestBody LoaiMonAn loaimonanForm) {
+	public LoaiMonAn insertLoaiMonAn(@Valid LoaiMonAn loaimonanForm) {
 		// @Valid: kiem tra xem co ton tai object trong body
 		LoaiMonAn lma = repositoryLoaiMonAn.save(loaimonanForm);
 		return lma;
