@@ -22,11 +22,11 @@
                   <div class="card-deck border">
                     <a ng-repeat="x in tables" ng-click="getTable(x)">
                       <!--repeat here -->
-                      <div class="card-block mb-2 mt-2">
+                      <div class="card-block mb-2 mt-2" >
 
-                        <div class="card" style="width: 10.2rem;">
+                        <div class="card" style="width: 10.2rem;" >
                           <img class="card-img-top p-4" src="assets\img\icons\dinner-table.png" alt="Card image cap" width="120px" height="150px">
-                          <div class="card-footer borde">
+                          <div class="card-footer borde" ng-style="x.tableColor">
                             <p class="card-text" style="text-align: center;"> {{x.ban_NO}}</p>
                           </div>
                         </div>
@@ -77,7 +77,7 @@
 
                             <tr ng-repeat="y in details">
                               <td >{{$index+1}}</td>
-                              <td><i class="fas fa-times " style="color: #F5365C; font-size: 20px" ng-click="delete(y)"></i></td>
+                              <td><i class="fas fa-times" style="color: #F5365C; font-size: 20px" ng-click="delete(y)"></i></td>
                               <td >{{y.monan_NAME}}</td>
                               <td>
                                 <input ng-model="y.hoadonchitiet_SOLUONG" ng-change="changeAmount(y)" type="number" " style="width:4em">

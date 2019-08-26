@@ -3,13 +3,36 @@
   module.controller('TablesCtrl', function($scope, $http, $window, $filter) {
     //$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     //Get tables
-
+    $scope.date= new Date();
+    alert($scope.date);
     $scope.array = [];
     $http({
       method: "GET",
       url: "http://localhost:8080/api/GetAllBan"
     }).then(function mySuccess(response) {
       $scope.tables = response.data;
+        $http({
+          method: "GET",
+          url: "http://localhost:8080/api/GetHoaDonToStatus/false"
+        }).then(function mySuccess(response) {
+          $scope.data= response.data;
+          angular.forEach($scope.tables, function(e) {
+            var d=0;
+            angular.forEach($scope.data, function(k) {
+              if(e.ban_ID == k.ban_BAN_ID){
+                d=1;
+                e.tableColor= {
+                  "background-color" : "red"
+                }
+              }
+            });
+            if(d==0){
+              e.tableColor= {
+                "background-color" : "white"
+              }
+            }
+          });
+        });
     }, function myError(response) {
       $scope.tables = response.statusText;
     });
@@ -89,7 +112,7 @@
           if (d == 0) {
             var data = {
               "hoadon_STATUS": false,
-              "hoadon_DATE": "2019-04-04",
+              "hoadon_DATE": $scope.date,
               "ban_BAN_ID": $scope.tableIndex,
               "hoadon_TAX": null,
               "nhanvien_NHANVIEN_ID": 1,
@@ -146,6 +169,36 @@
                         }, function myError(response) {
                           $scope.details = response.statusText;
                         });
+                      });
+                      $http({
+                        method: "GET",
+                        url: "http://localhost:8080/api/GetAllBan"
+                      }).then(function mySuccess(response) {
+                        $scope.tables = response.data;
+                          $http({
+                            method: "GET",
+                            url: "http://localhost:8080/api/GetHoaDonToStatus/false"
+                          }).then(function mySuccess(response) {
+                            $scope.data= response.data;
+                            angular.forEach($scope.tables, function(e) {
+                              var d=0;
+                              angular.forEach($scope.data, function(k) {
+                                if(e.ban_ID == k.ban_BAN_ID){
+                                  d=1;
+                                  e.tableColor= {
+                                    "background-color" : "red"
+                                  }
+                                }
+                              });
+                              if(d==0){
+                                e.tableColor= {
+                                  "background-color" : "white"
+                                }
+                              }
+                            });
+                          });
+                      }, function myError(response) {
+                        $scope.tables = response.statusText;
                       });
               }, function myError(response) {
                 $scope.tablesArray = response.statusText;
@@ -284,21 +337,100 @@
         method: "GET",
         url: "http://localhost:8080/api/DeleteHoaDonChiTiet/" + food.hoadonchitietID.hoadon_HOADON_ID + "&" + food.hoadonchitietID.monan_MONAN_ID
       }).then(function mySuccess(response) {
+        $http({
+          method: "GET",
+          url: "http://localhost:8080/api/GetHDCTByID/" + food.hoadonchitietID.hoadon_HOADON_ID
+        }).then(function mySuccess(response) {
+          $scope.total=0;
+          $scope.details = response.data;
+          angular.forEach($scope.details, function(k) {
+            $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
+            $http({
+              method: "GET",
+              url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
+            }).then(function mySuccess(response) {
+              k.monan_NAME = response.data.monan_NAME;
+            }, function myError(response) {
+              $scope.foods = response.statusText;
+            });
+          });
+        }, function myError(response) {
+          $scope.details = response.statusText;
+        });
       });
+      $http({
+        method: "GET",
+        url: "http://localhost:8080/api/GetAllHoaDon/"
+      }).then(function mySuccess(response) {
+        var d=0;
+        $scope.data=response.data;
+        angular.forEach($scope.data, function(k) {
+          $http({
+            method: "GET",
+            url: "http://localhost:8080/api/GetHDCTByID/" + k.hoadon_ID
+          }).then(function mySuccess(response) {
+            if(response.data=="" || response.data==null || response.data==[]){
+              $http({
+                method: "POST",
+                url: "http://localhost:8080/api/DeleteHoaDon/" + k.hoadon_ID
+              }).then(function mySuccess(response) {
+                $http({
+                  method: "GET",
+                  url: "http://localhost:8080/api/GetAllBan"
+                }).then(function mySuccess(response) {
+                  $scope.tables = response.data;
+                    $http({
+                      method: "GET",
+                      url: "http://localhost:8080/api/GetHoaDonToStatus/false"
+                    }).then(function mySuccess(response) {
+                      $scope.data= response.data;
+                      angular.forEach($scope.tables, function(e) {
+                        var d=0;
+                        angular.forEach($scope.data, function(k) {
+                          if(e.ban_ID == k.ban_BAN_ID){
+                            d=1;
+                            e.tableColor= {
+                              "background-color" : "red"
+                            }
+                          }
+                        });
+                        if(d==0){
+                          e.tableColor= {
+                            "background-color" : "white"
+                          }
+                        }
+                      });
+                    });
+                }, function myError(response) {
+                  $scope.tables = response.statusText;
+                });
+              });
+            }
+          });
+        });
+      });
+
     }
+
+
+
+    // $scope.changeColor= function(table){
+    //   $http({
+    //     method: "GET",
+    //     url: "http://localhost:8080/api/GetHoaDonToStatus/false"
+    //   }).then(function mySuccess(response) {
+    //     $scope.data= response.data;
+    //     angular.forEach($scope.data, function(k) {
+    //       if(table.ban_ID==k.ban_BAN_ID){
+    //         return "{'background-color':'red'}";
+    //       }
+    //     });
+    //   });
+    // }
+
 
 
 
     });
   });
-  // $scope.deleteFood = function(x) {
-  //   angular.forEach($scope.array, function(k) {
-  //     if (k.IdBan == $scope.tableIndex) {
-  //       k.value.splice(x, 1);
-  //     }
-  //   });
-  //
-  //
-  // };
-
 }(angular.module("myApp")));
