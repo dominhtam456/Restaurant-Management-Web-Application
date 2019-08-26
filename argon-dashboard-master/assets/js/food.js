@@ -124,6 +124,18 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
         }
       }
 
+      //add food type
+
+      $scope.AddTypeFood= function(){
+          var data=$.param({
+            lOAIMONAN_NAME: $scope.loaiMonAn
+          });
+
+          $http.post("http://localhost:8080/api/InsertLoaiMonAn/",data)
+            .then(function mySuccess(data) {
+              $window.location.reload()
+          });
+      }
 });
 
 
