@@ -16,7 +16,7 @@
         function Login(username, password, callback) {
             $http.post('http://localhost:8080/token/generate-token', { username: username, password: password })
                 .then(function (response) {
-
+                  
                     // login successful if there's a token in the response
                     if (response.data.result.token) {
                         // store username and token in local storage to keep user logged in between page refreshes
