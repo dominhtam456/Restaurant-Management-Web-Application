@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `quanlynhahang` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `quanlynhahang`;
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlynhahang
@@ -91,7 +89,7 @@ CREATE TABLE `hoadon` (
   CONSTRAINT `fk_HOADON_BAN1` FOREIGN KEY (`BAN_BAN_ID`) REFERENCES `ban` (`BAN_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_HOADON_KHACHHANG1` FOREIGN KEY (`KHACHHANG_KHACHHANG_ID`) REFERENCES `khachhang` (`KHACHHANG_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_HOADON_NHANVIEN1` FOREIGN KEY (`NHANVIEN_NHANVIEN_ID`) REFERENCES `nhanvien` (`NHANVIEN_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +98,7 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
-INSERT INTO `hoadon` VALUES (3,'HD001','2019-04-04',_binary '',NULL,1,1,1),(10,'HD002',NULL,NULL,NULL,1,1,1),(11,'HD003',NULL,NULL,NULL,1,1,1),(12,'HD004',NULL,_binary '\0',NULL,1,1,1);
+INSERT INTO `hoadon` VALUES (13,'HD001','2019-04-04',_binary '',NULL,1,1,1),(14,'HD002','2019-04-04',_binary '',NULL,1,2,1),(18,'HD0018','2019-08-26',_binary '',NULL,1,3,1),(19,'HD0019','2019-08-26',_binary '',NULL,1,1,1);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,6 +127,7 @@ CREATE TABLE `hoadonchitiet` (
 
 LOCK TABLES `hoadonchitiet` WRITE;
 /*!40000 ALTER TABLE `hoadonchitiet` DISABLE KEYS */;
+INSERT INTO `hoadonchitiet` VALUES (13,1,'50000',2),(13,2,'50000',1),(13,3,'35000',2),(14,7,'30000',1),(14,8,'40000',1),(14,9,'35000',1),(18,1,'50000',1),(18,2,'50000',1),(18,3,'35000',1),(19,1,'50000',1),(19,13,'17000',1),(19,14,'5000',1);
 /*!40000 ALTER TABLE `hoadonchitiet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +239,7 @@ CREATE TABLE `monan` (
 
 LOCK TABLES `monan` WRITE;
 /*!40000 ALTER TABLE `monan` DISABLE KEYS */;
-INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50.000',NULL,NULL,'Bò_lúc_lắc_với_khoai_tây_chiên.jpg',1,NULL),(2,'1dhcnm','Đùi heo chiên nước mắm','50.000',NULL,NULL,'Đùi_heo_chiên_nước_mắm.jpg',1,NULL),(3,'2ccdc','Cơm chiên dương châu','35.000',NULL,NULL,'Cơm_chiên_dương_châu.jpg',2,NULL),(4,'2cchs','Cơm chiên hải sản','40.000',NULL,NULL,'Cơm_chiên_hải_sản.jpg',2,NULL),(5,'3rdxt','Rau dền xào tỏi','25.000',NULL,NULL,'Rau_dền_xào_tỏi.JPG',3,NULL),(6,'3rcvxt','Rau chân vịt xào trứng','20.000',NULL,NULL,'Rau_chân_vịt_xào_trứng.webp',3,NULL),(7,'4thq','Thịt heo quay','30.000',NULL,NULL,'Thịt_heo_quay.jpg',4,NULL),(8,'4ctkd','Cà tím kho đậu','40.000',NULL,NULL,'Cà_tím_kho_đậu.jpg',4,NULL),(9,'5bnxq','Món nướng bò rau xiên que','35.000',NULL,NULL,'Món_nướng_bò_rau_xiên_que.jpg',5,NULL),(10,'5ctlns','Cá thác lác nướng sả','35.000',NULL,NULL,'Cá_thác_lác_nướng_sả.jpg',5,NULL),(11,'6rc','Rau câu','15.000',NULL,NULL,'Rau_câu.jpg',6,NULL),(12,'6tctc','Trái cây thập cẩm','18.000',NULL,NULL,'Trái_cây_thập_cẩm.jfif',6,NULL),(13,'7cpsd','Cà phê sữa đá','17.000',NULL,NULL,'Coffee_sữa_đá.jpg',7,NULL),(14,'7ns','Nước suối','5.000',NULL,NULL,'Nước_suối.png',7,NULL);
+INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50000',NULL,NULL,'Bò_lúc_lắc_với_khoai_tây_chiên.jpg',1,NULL),(2,'1dhcnm','Đùi heo chiên nước mắm','50000',NULL,NULL,'Đùi_heo_chiên_nước_mắm.jpg',1,NULL),(3,'2ccdc','Cơm chiên dương châu','35000',NULL,NULL,'Cơm_chiên_dương_châu.jpg',2,NULL),(4,'2cchs','Cơm chiên hải sản','40000',NULL,NULL,'Cơm_chiên_hải_sản.jpg',2,NULL),(5,'3rdxt','Rau dền xào tỏi','25000',NULL,NULL,'Rau_dền_xào_tỏi.JPG',3,NULL),(6,'3rcvxt','Rau chân vịt xào trứng','20000',NULL,NULL,'Rau_chân_vịt_xào_trứng.webp',3,NULL),(7,'4thq','Thịt heo quay','30000',NULL,NULL,'Thịt_heo_quay.jpg',4,NULL),(8,'4ctkd','Cà tím kho đậu','40000',NULL,NULL,'Cà_tím_kho_đậu.jpg',4,NULL),(9,'5bnxq','Món nướng bò rau xiên que','35000',NULL,NULL,'Món_nướng_bò_rau_xiên_que.jpg',5,NULL),(10,'5ctlns','Cá thác lác nướng sả','35.000',NULL,NULL,'Cá_thác_lác_nướng_sả.jpg',5,NULL),(11,'6rc','Rau câu','15000',NULL,NULL,'Rau_câu.jpg',6,NULL),(12,'6tctc','Trái cây thập cẩm','18000',NULL,NULL,'Trái_cây_thập_cẩm.jfif',6,NULL),(13,'7cpsd','Cà phê sữa đá','17000',NULL,NULL,'Coffee_sữa_đá.jpg',7,NULL),(14,'7ns','Nước suối','5000',NULL,NULL,'Nước_suối.png',7,NULL);
 /*!40000 ALTER TABLE `monan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,4 +345,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-21 12:29:54
+-- Dump completed on 2019-08-26 22:29:20
