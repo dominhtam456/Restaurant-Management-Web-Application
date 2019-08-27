@@ -22,7 +22,7 @@
               if(e.ban_ID == k.ban_BAN_ID){
                 d=1;
                 e.tableColor= {
-                  "background-color" : "red"
+                  "background-color" : "#FFF1A8"
                 }
               }
             });
@@ -186,7 +186,7 @@
                                 if(e.ban_ID == k.ban_BAN_ID){
                                   d=1;
                                   e.tableColor= {
-                                    "background-color" : "red"
+                                    "background-color" : "#FFF1A8"
                                   }
                                 }
                               });
