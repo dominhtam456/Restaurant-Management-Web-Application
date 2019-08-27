@@ -4,7 +4,6 @@
     //$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     //Get tables
     $scope.date= new Date();
-    alert($scope.date);
     $scope.array = [];
     $http({
       method: "GET",
@@ -49,6 +48,7 @@
 
     $scope.tableIndex = "";
     $scope.getTable = function(table) {
+      $scope.total=0;
       var id = "";
       $scope.tableIndex = table.ban_ID;
       $http({
@@ -66,7 +66,7 @@
           method: "GET",
           url: "http://localhost:8080/api/GetHDCTByID/" + id
         }).then(function mySuccess(response) {
-          $scope.total=0;
+
           $scope.details = response.data;
           angular.forEach($scope.details, function(k) {
             $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
@@ -205,6 +205,20 @@
               });
           }
           else{
+            $http({
+              method: "GET",
+              url: "http://localhost:8080/api/GetHDCTByID/" + id
+            }).then(function mySuccess(response) {
+              $scope.data=response.data;
+              var k=0;
+              var sl=0;
+              angular.forEach($scope.data, function(e) {
+                if(food.monan_ID==e.hoadonchitietID.monan_MONAN_ID){
+                    k=1;
+                    sl=e.hoadonchitiet_SOLUONG;
+                }
+              })
+              if(k==0){
                     $scope.foodDetail = {
                       "hoadonchitietID": {
                         "hoadon_HOADON_ID": id,
@@ -245,6 +259,57 @@
                           $scope.details = response.statusText;
                         });
                       });
+                    }
+                    else{
+                      $scope.foodDetail = {
+                        "hoadonchitietID": {
+                          "hoadon_HOADON_ID": id,
+                          "monan_MONAN_ID": food.monan_ID
+                        },
+                        "hoadonchitiet_PRICE": food.monan_PRICE,
+                        "hoadonchitiet_SOLUONG": sl +1
+                      };
+
+                      console.log(JSON.stringify($scope.foodDetail));
+                      $http({
+                          method: 'POST',
+                          url: 'http://localhost:8080/api/InsertHoaDonChiTiet',
+                          data: JSON.stringify($scope.foodDetail),
+                          headers: {
+                            "Content-Type": "application/json; charset=UTF-8"
+                          },
+                        })
+                        .then(function successCallback(response) {
+                          $http({
+                            method: "GET",
+                            url: "http://localhost:8080/api/GetHDCTByID/" + id
+                          }).then(function mySuccess(response) {
+                            $scope.details = response.data;
+                            $scope.total=0;
+                            angular.forEach($scope.details, function(k) {
+                              $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
+                              $http({
+                                method: "GET",
+                                url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
+                              }).then(function mySuccess(response) {
+                                k.monan_NAME = response.data.monan_NAME;
+                              }, function myError(response) {
+                                $scope.foods = response.statusText;
+                              });
+                            });
+                          }, function myError(response) {
+                            $scope.details = response.statusText;
+                          });
+                        });
+                    }
+
+
+
+
+
+
+                    });
+
           }
         });
       };
