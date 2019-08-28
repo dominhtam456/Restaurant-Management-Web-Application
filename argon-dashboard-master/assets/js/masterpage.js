@@ -25,7 +25,11 @@ app.config(function($routeProvider) {
     controller : "Login.IndexController",
     controllerAs: "vm"
   })
-
+  .when("/statistical", {
+    templateUrl : "/examples/login.html",
+    controller : "Login.IndexController",
+    controllerAs: "vm"
+  })
 });
 
 app.run(function($rootScope, $http, $location, $localStorage) {
