@@ -6,6 +6,11 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.service.MonAnService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -28,7 +33,13 @@ public class HoaDonChiTiet implements Serializable {
 
 	@Column(name = "HOADONCHITIET_SOLUONG")
 	private Integer HOADONCHITIET_SOLUONG;
-
+    
+	@Transient
+	private String thanhTien;
+	
+	@Transient
+	private String tenMonAn;
+	
 	//HAM TAO
 	public HoaDonChiTiet(HoaDonChiTietID hoadonchitietID, String hOADONCHITIET_PRICE,
 			int hOADONCHITIET_SOLUONG) {
@@ -69,7 +80,20 @@ public class HoaDonChiTiet implements Serializable {
 		this.hoadonchitietID = hoadonchitietID;
 	}
 
-	
-	
+
+	//GET TIEN*SOLUONG
+	public String getThanhTien() {
+		return String.valueOf(Integer.valueOf(this.HOADONCHITIET_PRICE)*this.HOADONCHITIET_SOLUONG);
+	}
+
+	public String getTenMonAn() {
+		return tenMonAn;
+	}
+
+	public void setTenMonAn(String tenMonAn) {
+		this.tenMonAn = tenMonAn;
+	}
+
+
 	
 }

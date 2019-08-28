@@ -1,11 +1,16 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -552,12 +558,58 @@ public class WebController {
 			@PathVariable("monan_ID") Integer monan_ID) {
 		return repositoryHDCT.DeLeTeCTHD(new HoaDonChiTietID(hoadon_ID, monan_ID));
 	}
-	/*
-    //Get Hoa Don Chi Tiet Theo ID Hoa Don
-	@RequestMapping(path = "/GetHDCTHoaDonID//{hoadon_ID}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Future<Optional<List<HoaDonChiTiet>>> GetHDCTHoaDonID(@PathVariable("hoadon_ID") Integer hoadon_ID) {
-		// This returns a JSON or XML with the users
-		return repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadon_ID);
+	//------------------------THONG KE-----------------------------//
+	
+	//KIEM TRA MON AN CHUA TON TAI
+	   public static HoaDonChiTiet KiemTraTonTai(List<HoaDonChiTiet>list,HoaDonChiTiet hdct) {
+		if(list==null) {
+			return null;
+		}else {
+			for (HoaDonChiTiet hoaDonChiTiet : list) {
+				if(hoaDonChiTiet.getHoadonchitietID().getMONAN_MONAN_ID()==hdct.getHoadonchitietID().getMONAN_MONAN_ID()) {
+					return hoaDonChiTiet;
+				}
+			}
+			return null;
+		}
 	}
-	*/
+	   //HAM THONG KE MON AN THEO NGAY
+		public  List<HoaDonChiTiet> ThongKeMonAnTheoNgay(Date fromDate, Date toDate) {
+			List<HoaDonChiTiet> list=new ArrayList<>();
+			List<HoaDonChiTiet>dsAllHDCT=repositoryHDCT.findAll();
+			String fromdate=String.valueOf(fromDate);
+			String todate=String.valueOf(toDate);
+			for (HoaDonChiTiet hoaDonChiTiet : dsAllHDCT) {
+				String date=String.valueOf(repositoryHoaDon.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getHOADON_HOADON_ID())).getHOADON_DATE());
+				HoaDonChiTiet kq=KiemTraTonTai(list,hoaDonChiTiet);
+				  
+				if(date.compareTo(fromdate)>=0&&date.compareTo(todate)<=0) {
+					if(kq==null) {
+						hoaDonChiTiet.setTenMonAn(repositoryMonAn.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getMONAN_MONAN_ID())).getMONAN_NAME());
+						list.add(hoaDonChiTiet);
+					}
+					if(kq!=null) {
+						kq.setHOADONCHITIET_SOLUONG(kq.getHOADONCHITIET_SOLUONG()+hoaDonChiTiet.getHOADONCHITIET_SOLUONG());
+						
+					}  
+					
+				}
+								
+				
+			}
+			return list;
+		}
+
+	//REQUEST THONG KE MON AN Theo Ngay 
+		@RequestMapping(path = "/ThongKeMonAn", 
+				method = RequestMethod.GET
+				)
+		@ResponseBody
+		public List<HoaDonChiTiet> ThongKeMonAn(@RequestParam(value="fromDate")  Date fromDate,@RequestParam(value="toDate")  Date toDate)  {
+			// This returns a JSON or XML with the users
+			
+			return this.ThongKeMonAnTheoNgay(fromDate,toDate);
+			
+		}
+	
 }

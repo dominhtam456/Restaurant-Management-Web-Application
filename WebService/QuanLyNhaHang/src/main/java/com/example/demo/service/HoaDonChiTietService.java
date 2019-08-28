@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -91,5 +92,9 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 	@Query("SELECT h FROM Hoadonchitiet h WHERE h.HOADON_HOADON_ID = ?hoadonID")
 	public  List<HoaDonChiTiet> GetHoaDonChiTietToHoaDonID(@Param("hoadonID") Integer hoadonID);
 */
+
+		//GET MON AN NAME
+		
 	
+		
 }
