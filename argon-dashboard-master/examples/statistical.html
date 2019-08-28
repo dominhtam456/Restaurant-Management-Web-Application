@@ -1,12 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    //
-</body>
-</html>
+    <div class="row">
+      <div class="col">
+        <form>
+          <div class="row">
+            <div class="col-11">
+              <div class="form-group row">
+                <label for="inputNum" class="col-form-label form-control-sm text-white">Ngày Bắt Đầu</label>
+                <div class="col-sm-2">
+                  <input ng-model="inputStartDate" type="date" class="form-control form-control-sm " id="inputNum" placeholder="0">
+                </div>
+                <label for="inputNum" class="col-form-label form-control-sm text-white">Ngày Kết Thúc</label>
+                <div class="col-sm-2">
+                  <input ng-model="inputEndDate" type="date" class="form-control form-control-sm " id="inputNum" placeholder="0">
+                </div>
+
+                <div class="form-check text-white col-2">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="topFoods">Món ăn bán chạy
+                  </label>
+                </div>
+                <div class="form-check text-white col-2">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="listBill">Liệt kê hóa đơn
+                  </label>
+                </div>
+                <div class="form-check text-white col-1">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="totalSale">Tổng tiền
+                  </label>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="col-1">
+              <button type="button" ng-click="View()" class="btn btn-primary">Hiển thị</button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="table-responsive" >
+            <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio=='topFoods'">
+              <thead class="thead-light">
+                <th scope="col">STT</th>
+                <th scope="col">Tên Món Ăn</th>
+                <th scope="col">Số Lượng Bán</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Bò bít tết</td>
+                  <td>156.2</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+          <div>
+            <div class="row">
+              <div class="table-responsive" >
+                <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio=='listBill'">
+                  <thead class="thead-light">
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã Hóa Đơn</th>
+                    <th scope="col">Ngày Hóa Đơn</th>
+                    <th scope="col">Thành Tiền</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>HD0001</td>
+                      <td>2019/08/27</td>
+                      <td>1000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="row">
+
+              <div class="table-responsive" ng-if="radio=='totalSale'">
+                <br>
+                <br>
+                <br>
+                <p align=center>Tổng Tiền: 100000 đ</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="row">
+              <div class="table-responsive" >
+                <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio==null">
+                  <thead class="thead-light">
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã Hóa Đơn</th>
+                    <th scope="col">Ngày Hóa Đơn</th>
+                    <th scope="col">Thành Tiền</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>HD0001</td>
+                      <td>2019/08/27</td>
+                      <td>1000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>

@@ -26,9 +26,7 @@ app.config(function($routeProvider) {
     controllerAs: "vm"
   })
   .when("/statistical", {
-    templateUrl : "/examples/login.html",
-    controller : "Login.IndexController",
-    controllerAs: "vm"
+    templateUrl : "/examples/statistical.html",
   })
 });
 
