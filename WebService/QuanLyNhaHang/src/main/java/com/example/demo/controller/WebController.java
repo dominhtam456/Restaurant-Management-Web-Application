@@ -2,15 +2,14 @@ package com.example.demo.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 
-import org.hibernate.annotations.Parameter;
+import org.apache.logging.log4j.util.PropertySource.Comparator;
+import org.hibernate.boot.model.relational.Database;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +31,8 @@ import com.example.demo.service.LoaiMonAnService;
 import com.example.demo.service.LoaiNguyenLieuService;
 import com.example.demo.service.MonAnService;
 import com.example.demo.service.NguyenLieuService;
-
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
-
+import com.example.demo.service.ThongKeService;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
 import com.example.demo.model.HoaDonChiTiet;
@@ -560,6 +558,12 @@ public class WebController {
 	}
 	//------------------------THONG KE-----------------------------//
 	
+	public class CustomComparator implements java.util.Comparator<HoaDonChiTiet> {
+	    @Override
+	    public int compare(HoaDonChiTiet o1, HoaDonChiTiet o2) {
+	        return o2.getHOADONCHITIET_SOLUONG().compareTo(o1.getHOADONCHITIET_SOLUONG());
+	    }
+	}
 	//KIEM TRA MON AN CHUA TON TAI
 	   public static HoaDonChiTiet KiemTraTonTai(List<HoaDonChiTiet>list,HoaDonChiTiet hdct) {
 		if(list==null) {
@@ -597,6 +601,7 @@ public class WebController {
 								
 				
 			}
+			Collections.sort(list, new CustomComparator());
 			return list;
 		}
 
@@ -612,4 +617,14 @@ public class WebController {
 			
 		}
 	
+		@Autowired
+		ThongKeService thongKeService;
+				@RequestMapping(path = "/ThongKe",method = RequestMethod.GET
+						)
+				@ResponseBody
+				public List<HoaDonChiTiet> ThongKe()  {
+					// This returns a JSON or XML with the users
+					return thongKeService.TK();
+					
+				}
 }
