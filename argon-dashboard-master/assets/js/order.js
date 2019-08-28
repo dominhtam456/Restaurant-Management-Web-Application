@@ -1,6 +1,10 @@
 (function(module) {
 
   module.controller('TablesCtrl', function($scope, $http, $window, $filter) {
+    $scope.excesscash=0;
+    $scope.hdno="";
+    $scope.day="";
+    $scope.total=0;
     //$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     //Get tables
     $scope.date= new Date();
@@ -50,15 +54,19 @@
     $scope.getTable = function(table) {
       $scope.total=0;
       var id = "";
+     
       $scope.tableIndex = table.ban_ID;
       $http({
         method: "GET",
         url: "http://localhost:8080/api/GetHoaDonToStatus/false"
       }).then(function mySuccess(response) {
         $scope.hdidctt = response.data;
+        
         angular.forEach($scope.hdidctt, function(k) {
           if (k.ban_BAN_ID == $scope.tableIndex) {
             id = k.hoadon_ID;
+            $scope.hdno=k.hoadon_NO;
+            $scope.day=k.hoadon_DATE;
           }
         });
         if(id != null && id != ""){
@@ -341,6 +349,7 @@
             $scope.details = response.data;
             angular.forEach($scope.details, function(k) {
               $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
+             
               $http({
                 method: "GET",
                 url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
@@ -367,6 +376,8 @@
         angular.forEach($scope.hdidctt, function(k) {
           if (k.ban_BAN_ID == $scope.tableIndex) {
             id = k.hoadon_ID;
+            $scope.hdno=k.hoadon_NO;
+            $scope.day=k.hoadon_DATE;
           }
         });
         if(id != null && id != ""){
