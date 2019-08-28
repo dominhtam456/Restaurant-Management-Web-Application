@@ -89,14 +89,14 @@
                             <input ng-model="y.hoadonchitiet_SOLUONG" ng-change="changeAmount(y)"
                               type="number" " style=" width:4em">
                           </td>
-                          <td>{{y.hoadonchitiet_PRICE}}</td>
-                          <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}</td>
+                          <td>{{y.hoadonchitiet_PRICE | number}}</td>
+                          <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG | number}}</td>
                         </tr>
                       </tbody>
                     </table>
 
                   </div>
-                  <p><h3 class="text-danger float-md-right ">Tổng tiền: {{total}} đ</h4></p>
+                  <p><h3 class="text-danger float-md-right ">Tổng tiền: {{total | number}} đ</h4></p>
                 </div>
                 <div class="card-footer">
                   <div class="float-right">
@@ -144,7 +144,7 @@
                                             <input disabled ng-model="y.hoadonchitiet_SOLUONG"
                                               ng-change="changeAmount(y)" type="number" " style=" width:4em">
                                           </td>
-                                          <td>{{y.hoadonchitiet_PRICE}}</td>
+                                          <td>{{y.hoadonchitiet_PRICE | number}}</td>
                                           <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}</td>
                                         </tr>
                                       </tbody>
@@ -157,7 +157,7 @@
                                     <tbody>
                                       <tr>
                                         <td>Tổng Tiền Hàng</td>
-                                        <td>{{total}}</td>
+                                        <td>{{total | number}}</td>
                                       </tr>
                                       <tr>
                                         <td>Giảm Giá</td>
@@ -165,7 +165,7 @@
                                       </tr>
                                       <tr>
                                         <td><b>Khách Cần Trả</b></td>
-                                        <td><b style="color: #F5365C;">{{total}}</b></td>
+                                        <td><b style="color: #F5365C;">{{total | number}}</b></td>
                                       </tr>
                                       <tr>
                                         <td>Khách Thanh Toán</td>
@@ -173,7 +173,7 @@
                                       </tr>
                                       <tr>
                                         <td>Tiền Thừa Trả Khách </td>
-                                        <td>{{excesscash - total }}</td>
+                                        <td>{{excesscash - total | number}}</td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -215,11 +215,11 @@
     <div class="row">
       <div class="col-sm-6">
         <div style="line-height: 10px;">
-          <p>Tổng Tiền Hàng: {{total}} đ</p>
+          <p>Tổng Tiền Hàng: {{total| number}} đ</p>
           <p>Giảm Giá: 0 đ</p>
-          <p style="font-size: 20px"><b>Khách Cần Trả: {{total}} đ</b></p>
-          <p>Khách Thanh Toán:{{excesscash}} đ</p>
-          <p>Tiền thừa trả khách: {{excesscash - total}} đ</p>
+          <p style="font-size: 20px"><b>Khách Cần Trả: {{total| number}} đ</b></p>
+          <p>Khách Thanh Toán:{{excesscash| number}} đ</p>
+          <p>Tiền thừa trả khách: {{excesscash - total| number}} đ</p>
           <p>Thuế: 0%</p>
           <hr>
           <p>Thu Ngân: Nguyen Van A</p>
@@ -247,7 +247,7 @@
         <br>
       </thead>
       <tbody>
-       
+
         <tr ng-repeat="y in details" style="line-height: 1em">
           <br>
           <br>
@@ -257,8 +257,8 @@
           <td>
             {{y.hoadonchitiet_SOLUONG}}
           </td>
-          <td>{{y.hoadonchitiet_PRICE}}</td>
-          <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG}}</td>
+          <td>{{y.hoadonchitiet_PRICE| number}}</td>
+          <td>{{y.hoadonchitiet_PRICE*y.hoadonchitiet_SOLUONG| number}}</td>
         </tr>
       </tbody>
     </table>
