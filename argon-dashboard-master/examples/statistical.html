@@ -1,44 +1,53 @@
-    <div class="row">
-      <div class="col">
+<div class="row">
+  <div class="col">
+    <div class="card shadow card-with-satistical">
+      <div class="card-header">
+          <h1 class="mb-0">Báo Cáo Thống Kê</h1>
+      </div>
+      <div class="card-body">
         <form>
           <div class="row">
-            <div class="col-11">
+            <div class="col-12">
               <div class="form-group row">
-                <label for="inputNum" class="col-form-label form-control-sm text-white">Ngày Bắt Đầu</label>
+                <label for="inputNum" class="col-form-label form-control-sm">Ngày Bắt Đầu</label>
                 <div class="col-sm-2">
-                  <input ng-model="inputStartDate" type="date" class="form-control form-control-sm " id="inputNum" placeholder="0">
+                  <input ng-model="inputStartDate" type="date" class="form-control form-control-sm " id="inputNum"
+                    placeholder="0">
                 </div>
-                <label for="inputNum" class="col-form-label form-control-sm text-white">Ngày Kết Thúc</label>
+                <label for="inputNum" class="col-form-label form-control-sm">Ngày Kết Thúc</label>
                 <div class="col-sm-2">
-                  <input ng-model="inputEndDate" type="date" class="form-control form-control-sm " id="inputNum" placeholder="0">
+                  <input ng-model="inputEndDate" type="date" class="form-control form-control-sm " id="inputNum"
+                    placeholder="0">
                 </div>
 
-                <div class="form-check text-white col-2">
+                <div class="form-check col-2">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="topFoods">Món ăn bán chạy
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="topFoods"
+                      checked="checked">Món
+                    ăn
+                    bán chạy
                   </label>
                 </div>
-                <div class="form-check text-white col-2">
+                <div class="form-check  col-2">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="listBill">Liệt kê hóa đơn
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="listBill">Liệt
+                    kê
+                    hóa đơn
                   </label>
                 </div>
-                <div class="form-check text-white col-1">
+                <div class="form-check  col-1 p-1">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="totalSale">Tổng tiền
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="totalSale">Tổng
+                    tiền
                   </label>
-
                 </div>
-
               </div>
             </div>
-            <div class="col-1">
-              <button type="button" ng-click="View()" class="btn btn-primary">Hiển thị</button>
-            </div>
+            <button type="button" ng-click="View()" class=" btn btn-primary mb-3">Hiển thị</button>
           </div>
         </form>
         <div class="row">
-          <div class="table-responsive" >
+          <div class="table-responsive">
             <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio=='topFoods'">
               <thead class="thead-light">
                 <th scope="col">STT</th>
@@ -46,70 +55,104 @@
                 <th scope="col">Số Lượng Bán</th>
               </thead>
               <tbody>
-                <tr>
+                <tr data-toggle="collapse" data-target="#accordion" class="clickable">
                   <td>1</td>
                   <td>Bò bít tết</td>
                   <td>156.2</td>
                 </tr>
+                <tr >
+                    <td colspan="8" id="accordion" class="collapse">
+                      <div class="container">
+                        <div class="row">
+                          <div class="card-body border">
+                            <!--  -->
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
               </tbody>
             </table>
           </div>
         </div>
-
-          <div>
-            <div class="row">
-              <div class="table-responsive" >
-                <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio=='listBill'">
-                  <thead class="thead-light">
-                    <th scope="col">STT</th>
-                    <th scope="col">Mã Hóa Đơn</th>
-                    <th scope="col">Ngày Hóa Đơn</th>
-                    <th scope="col">Thành Tiền</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>HD0001</td>
-                      <td>2019/08/27</td>
-                      <td>1000</td>
+        <div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio=='listBill'">
+                <thead class="thead-light">
+                  <th scope="col">STT</th>
+                  <th scope="col">Mã Hóa Đơn</th>
+                  <th scope="col">Ngày Hóa Đơn</th>
+                  <th scope="col">Thành Tiền</th>
+                </thead>
+                <tbody>
+                  <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+                    <td>1</td>
+                    <td>HD0001</td>
+                    <td>2019/08/27</td>
+                    <td>1000</td>
+                  </tr>
+                  <tr >
+                      <td colspan="8" id="accordion" class="collapse">
+                        <div class="container">
+                          <div class="row">
+                            <div class="card-body border">
+                              <!--  -->
+                            </div>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <div>
-            <div class="row">
-
-              <div class="table-responsive" ng-if="radio=='totalSale'">
-                <br>
-                <br>
-                <br>
-                <p align=center>Tổng Tiền: 100000 đ</p>
-              </div>
+        </div>
+        <div>
+          <div class="row">
+            <div class="table-responsive" ng-if="radio=='totalSale'">
+              <br>
+              <br>
+              <br>
+              <p align=center>Tổng Tiền: 100000 đ</p>
             </div>
           </div>
+        </div>
 
-          <div>
-            <div class="row">
-              <div class="table-responsive" >
-                <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio==null">
-                  <thead class="thead-light">
-                    <th scope="col">STT</th>
-                    <th scope="col">Mã Hóa Đơn</th>
-                    <th scope="col">Ngày Hóa Đơn</th>
-                    <th scope="col">Thành Tiền</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>HD0001</td>
-                      <td>2019/08/27</td>
-                      <td>1000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        <div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush accordion" id="accordionRow" ng-if="radio==null">
+                <thead class="thead-light">
+                  <th scope="col">STT</th>
+                  <th scope="col">Mã Hóa Đơn</th>
+                  <th scope="col">Ngày Hóa Đơn</th>
+                  <th scope="col">Thành Tiền</th>
+                </thead>
+                <tbody>
+                  <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+                    <td>1</td>
+                    <td>HD0001</td>
+                    <td>2019/08/27</td>
+                    <td>1000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="8" id="accordion" class="collapse">
+                      <div class="container">
+                        <div class="row">
+                          <div class="card-body border">
+                            <!--  -->
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
