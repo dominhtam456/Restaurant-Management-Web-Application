@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -43,6 +44,11 @@ public class HoaDon implements Serializable {
 
 	@JoinColumn(name = "NHANVIEN_NHANVIEN_ID")
 	private Integer NHANVIEN_NHANVIEN_ID;
+	
+	@javax.persistence.Transient
+	private Integer tongTien=0;
+	
+	
 	/*
 	 * @Transient private String TENLOAI_MONAN;
 	 */
@@ -129,6 +135,14 @@ public class HoaDon implements Serializable {
 
 	public void setNHANVIEN_NHANVIEN_ID(Integer nHANVIEN_NHANVIEN_ID) {
 		NHANVIEN_NHANVIEN_ID = nHANVIEN_NHANVIEN_ID;
+	}
+
+	public Integer getTongTien() {
+		return tongTien;
+	}
+
+	public void setTongTien(Integer tongTien) {
+		this.tongTien = tongTien;
 	}
 
 	

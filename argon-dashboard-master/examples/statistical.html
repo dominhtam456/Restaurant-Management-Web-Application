@@ -55,10 +55,10 @@
                 <th scope="col">Số Lượng Bán</th>
               </thead>
               <tbody>
-                <tr >
-                  <td>1</td>
-                  <td>Bò bít tết</td>
-                  <td>156.2</td>
+                <tr ng-repeat="x in listTopFoods">
+                  <td>{{$index+1}}</td>
+                  <td>{{x.tenMonAn}}</td>
+                  <td>{{x.hoadonchitiet_SOLUONG}}</td>
                 </tr>
               </tbody>
             </table>
@@ -75,11 +75,11 @@
                   <th scope="col">Thành Tiền</th>
                 </thead>
                 <tbody>
-                  <tr data-toggle="collapse" data-target="#accordion" class="clickable">
-                    <td>1</td>
-                    <td>HD0001</td>
-                    <td>2019/08/27</td>
-                    <td>1000</td>
+                  <tr data-toggle="collapse" data-target="#accordion" class="clickable" ng-repeat="x in listBillByDate">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.hoadon_NO}}</td>
+                    <td>{{x.hoadon_DATE}}</td>
+                    <td>{{x.tongTien}}</td>
                   </tr>
                   <tr >
                       <td colspan="8" id="accordion" class="collapse">
@@ -122,7 +122,7 @@
               <br>
               <br>
               <br>
-              <p align=center>Tổng Tiền: 100000 đ</p>
+              <p align=center>Tổng Tiền: {{total}} đ</p>
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@
                   <th scope="col">Thành Tiền</th>
                 </thead>
                 <tbody>
-                  <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+                  <tr data-toggle="collapse" data-target="#accordion" class="clickable" >
                     <td>1</td>
                     <td>HD0001</td>
                     <td>2019/08/27</td>

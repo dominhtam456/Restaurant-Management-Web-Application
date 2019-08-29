@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.logging.log4j.util.PropertySource.Comparator;
-import org.hibernate.boot.model.relational.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,8 +29,7 @@ import com.example.demo.service.LoaiMonAnService;
 import com.example.demo.service.LoaiNguyenLieuService;
 import com.example.demo.service.MonAnService;
 import com.example.demo.service.NguyenLieuService;
-import com.example.demo.service.ThongKeService;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
 import com.example.demo.model.HoaDonChiTiet;
@@ -389,7 +386,6 @@ public class WebController {
 		// This returns a JSON or XML with the users
 		return repositoryBan.GetAllBans();
 	}
-	
 
 	// LAY 1 BAN
 	@RequestMapping(value = "/Ban/{id}", method = RequestMethod.GET)
@@ -473,11 +469,11 @@ public class WebController {
 	}
 
 	// THEM HoaDon
-	
+
 	@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public HoaDon InserHoaDon(@Valid @RequestBody HoaDon hd) {
-		
+
 		return repositoryHoaDon.InsertHoaDon(hd);
 
 	}
@@ -524,10 +520,11 @@ public class WebController {
 	}
 
 	// LAY CTHD THEO ID_HOADON
-		@RequestMapping(path = "/GetHDCTByID/{hoadonID}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		public List<HoaDonChiTiet> GetHDCTByID(@PathVariable(value = "hoadonID") int  hoadonID) {
-			return repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadonID);
-		}
+	@RequestMapping(path = "/GetHDCTByID/{hoadonID}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<HoaDonChiTiet> GetHDCTByID(@PathVariable(value = "hoadonID") int hoadonID) {
+		return repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadonID);
+	}
+
 	// LAY 1 Hoa Don Chi Tiet
 	@RequestMapping(value = "/HoaDonChiTiet/{hoadon_ID}&{monan_ID}", method = RequestMethod.GET)
 	public HoaDonChiTiet FindHoaDonChiTietByID(@PathVariable("hoadon_ID") Integer hoadon_ID,
@@ -540,7 +537,7 @@ public class WebController {
 	@ResponseBody
 	public HoaDonChiTiet InserHoaDon(@RequestBody HoaDonChiTiet hdct) {
 		return repositoryHDCT.InSertHDCT(hdct);
-        
+
 	}
 
 	// Update chi tiet hao don
@@ -556,75 +553,146 @@ public class WebController {
 			@PathVariable("monan_ID") Integer monan_ID) {
 		return repositoryHDCT.DeLeTeCTHD(new HoaDonChiTietID(hoadon_ID, monan_ID));
 	}
-	//------------------------THONG KE-----------------------------//
-	
+	// ------------------------THONG KE-----------------------------//
+
 	public class CustomComparator implements java.util.Comparator<HoaDonChiTiet> {
-	    @Override
-	    public int compare(HoaDonChiTiet o1, HoaDonChiTiet o2) {
-	        return o2.getHOADONCHITIET_SOLUONG().compareTo(o1.getHOADONCHITIET_SOLUONG());
-	    }
+		@Override
+		public int compare(HoaDonChiTiet o1, HoaDonChiTiet o2) {
+			return o2.getHOADONCHITIET_SOLUONG().compareTo(o1.getHOADONCHITIET_SOLUONG());
+		}
 	}
-	//KIEM TRA MON AN CHUA TON TAI
-	   public static HoaDonChiTiet KiemTraTonTai(List<HoaDonChiTiet>list,HoaDonChiTiet hdct) {
-		if(list==null) {
+
+	public class CustomComparatorSortHoaDonDate implements java.util.Comparator<HoaDon> {
+		@Override
+		public int compare(HoaDon o1, HoaDon o2) {
+			return o1.getHOADON_DATE().compareTo(o2.getHOADON_DATE());
+		}
+	}
+
+	// KIEM TRA MON AN CHUA TON TAI
+	public static HoaDonChiTiet KiemTraTonTai(List<HoaDonChiTiet> list, HoaDonChiTiet hdct) {
+		if (list == null) {
 			return null;
-		}else {
+		} else {
 			for (HoaDonChiTiet hoaDonChiTiet : list) {
-				if(hoaDonChiTiet.getHoadonchitietID().getMONAN_MONAN_ID()==hdct.getHoadonchitietID().getMONAN_MONAN_ID()) {
+				if (hoaDonChiTiet.getHoadonchitietID().getMONAN_MONAN_ID() == hdct.getHoadonchitietID()
+						.getMONAN_MONAN_ID()) {
 					return hoaDonChiTiet;
 				}
 			}
 			return null;
 		}
 	}
-	   //HAM THONG KE MON AN THEO NGAY
-		public  List<HoaDonChiTiet> ThongKeMonAnTheoNgay(Date fromDate, Date toDate) {
-			List<HoaDonChiTiet> list=new ArrayList<>();
-			List<HoaDonChiTiet>dsAllHDCT=repositoryHDCT.findAll();
-			String fromdate=String.valueOf(fromDate);
-			String todate=String.valueOf(toDate);
-			for (HoaDonChiTiet hoaDonChiTiet : dsAllHDCT) {
-				String date=String.valueOf(repositoryHoaDon.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getHOADON_HOADON_ID())).getHOADON_DATE());
-				HoaDonChiTiet kq=KiemTraTonTai(list,hoaDonChiTiet);
-				  
-				if(date.compareTo(fromdate)>=0&&date.compareTo(todate)<=0) {
-					if(kq==null) {
-						hoaDonChiTiet.setTenMonAn(repositoryMonAn.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getMONAN_MONAN_ID())).getMONAN_NAME());
-						list.add(hoaDonChiTiet);
-					}
-					if(kq!=null) {
-						kq.setHOADONCHITIET_SOLUONG(kq.getHOADONCHITIET_SOLUONG()+hoaDonChiTiet.getHOADONCHITIET_SOLUONG());
-						
-					}  
-					
+
+	// HAM THONG KE MON AN THEO NGAY
+	public List<HoaDonChiTiet> ThongKeMonAnTheoNgay(Date fromDate, Date toDate) {
+		List<HoaDonChiTiet> list = new ArrayList<>();
+		List<HoaDonChiTiet> dsAllHDCT = repositoryHDCT.findAll();
+		String fromdate = String.valueOf(fromDate);
+		String todate = String.valueOf(toDate);
+		for (HoaDonChiTiet hoaDonChiTiet : dsAllHDCT) {
+			String date = String.valueOf(repositoryHoaDon
+					.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getHOADON_HOADON_ID())).getHOADON_DATE());
+			HoaDonChiTiet kq = KiemTraTonTai(list, hoaDonChiTiet);
+
+			if (date.compareTo(fromdate) >= 0 && date.compareTo(todate) <= 0) {
+				if (kq == null) {
+					hoaDonChiTiet.setTenMonAn(
+							repositoryMonAn.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getMONAN_MONAN_ID()))
+									.getMONAN_NAME());
+					list.add(hoaDonChiTiet);
 				}
-								
-				
+				if (kq != null) {
+					kq.setHOADONCHITIET_SOLUONG(
+							kq.getHOADONCHITIET_SOLUONG() + hoaDonChiTiet.getHOADONCHITIET_SOLUONG());
+
+				}
+
 			}
-			Collections.sort(list, new CustomComparator());
-			return list;
+
+		}
+		Collections.sort(list, new CustomComparator());
+		return list;
+	}
+
+	// HAM THONG KE TONG TIEN
+	public String ThongKeTongTienTheoNgay(Date fromDate, Date toDate) {
+		int tongTien = 0;
+		String fromdate = String.valueOf(fromDate);
+		String todate = String.valueOf(toDate);
+		for (HoaDonChiTiet hoaDonChiTiet : repositoryHDCT.findAll()) {
+			String date = String.valueOf(repositoryHoaDon
+					.getOne(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getHOADON_HOADON_ID())).getHOADON_DATE());
+
+			if (date.compareTo(fromdate) >= 0 && date.compareTo(todate) <= 0) {
+				tongTien += Integer.valueOf(hoaDonChiTiet.getThanhTien());
+
+			}
+
 		}
 
-	//REQUEST THONG KE MON AN Theo Ngay 
-		@RequestMapping(path = "/ThongKeMonAn", 
-				method = RequestMethod.GET
-				)
-		@ResponseBody
-		public List<HoaDonChiTiet> ThongKeMonAn(@RequestParam(value="fromDate")  Date fromDate,@RequestParam(value="toDate")  Date toDate)  {
-			// This returns a JSON or XML with the users
+		return String.valueOf(tongTien);
+	}
+
+	// HAM THONG KE HOA DON
+	public List<HoaDon> ThongKeHoaDonTheoNgay(Date fromDate, Date toDate) {
+		List<HoaDon> dsAllHDCT = repositoryHoaDon.findAll();
+		List<HoaDon> list=new ArrayList<>();
+		String fromdate = String.valueOf(fromDate);
+		String todate = String.valueOf(toDate);
+		for (HoaDon hoaDon : dsAllHDCT) {
+			String date = String.valueOf(hoaDon.getHOADON_DATE());
+			if ((date.compareTo(fromdate) >= 0 && date.compareTo(todate) <=0) && hoaDon.getHOADON_STATUS() == true) {			
+				for (HoaDonChiTiet hoaDonChiTiet : repositoryHDCT.findAll()) {
+					if(hoaDon.getHOADON_ID().equals(Long.valueOf(hoaDonChiTiet.getHoadonchitietID().getHOADON_HOADON_ID()))) {
+						hoaDon.setTongTien(hoaDon.getTongTien()+Integer.valueOf(hoaDonChiTiet.getThanhTien()));
+					}
+                   
+				}
+				
+				list.add(hoaDon);
+			}
 			
-			return this.ThongKeMonAnTheoNgay(fromDate,toDate);
 			
 		}
+		Collections.sort(list,new CustomComparatorSortHoaDonDate());
+		return list;
+	}
 	
-		@Autowired
-		ThongKeService thongKeService;
-				@RequestMapping(path = "/ThongKe",method = RequestMethod.GET
-						)
-				@ResponseBody
-				public List<HoaDonChiTiet> ThongKe()  {
-					// This returns a JSON or XML with the users
-					return thongKeService.TK();
-					
-				}
+	
+
+	
+
+	// REQUEST THONG KE MON AN Theo Ngay
+	@RequestMapping(path = "/ThongKeMonAn", method = RequestMethod.GET)
+	@ResponseBody
+	public List<HoaDonChiTiet> ThongKeMonAn(@RequestParam(value = "fromDate") Date fromDate,
+			@RequestParam(value = "toDate") Date toDate) {
+		// This returns a JSON or XML with the users
+
+		return this.ThongKeMonAnTheoNgay(fromDate, toDate);
+
+	}
+
+	// REQUEST THONG ke Tong Tien Theo Ngay
+	@RequestMapping(path = "/ThongKeTongTien", method = RequestMethod.GET)
+	@ResponseBody
+	public String ThongKeTongTien(@RequestParam(value = "fromDate") Date fromDate,
+			@RequestParam(value = "toDate") Date toDate) {
+		// This returns a JSON or XML with the users
+
+		return this.ThongKeTongTienTheoNgay(fromDate, toDate);
+
+	}
+	// REQUEST THONG ke Hoa Don Theo Ngay
+		@RequestMapping(path = "/ThongKeHoaDon", method = RequestMethod.GET)
+		@ResponseBody
+		public List<HoaDon> ThongKeHoaDon(@RequestParam(value = "fromDate") Date fromDate,
+				@RequestParam(value = "toDate") Date toDate) {
+			// This returns a JSON or XML with the users
+
+			return this.ThongKeHoaDonTheoNgay(fromDate, toDate);
+
+		}
+
 }

@@ -27,6 +27,7 @@ app.config(function($routeProvider) {
   })
   .when("/statistical", {
     templateUrl : "/examples/statistical.html",
+    controller : "StatisticalCtrl"
   })
 });
 

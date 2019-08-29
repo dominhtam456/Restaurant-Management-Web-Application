@@ -149,7 +149,7 @@
       if(key!="" && key!= null){
       $http({
         method : "GET",
-        url : "http://localhost:8080/api//SearchResources/" + key
+        url : "http://localhost:8080/api/SearchResources/" + key
       }).then(function mySuccess(response) {
           $scope.searched = response.data;
         },function myError(response) {
