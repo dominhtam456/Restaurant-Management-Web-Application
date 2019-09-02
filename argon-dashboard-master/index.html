@@ -46,6 +46,7 @@
   <link href="./assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <script src="./assets/js/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/style.css"/>
   <link rel="stylesheet" href="  https://printjs-4de6.kxcdn.com/print.min.css  ">
@@ -55,17 +56,17 @@
 
   </head>
 
-<body class="" ng-app="myApp" >
+<body  ng-app="myApp" >
   <div ng-include="'dashboard.html'"></div>
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white nav-custom" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./index.html">
-        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+      <a class="navbar-brand pt-0" href="#!">
+        
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -146,95 +147,62 @@
           </div>
         </form>
         <!-- Navigation -->
-        <ul class="navbar-nav">
-          <li class="nav-item  class=" active" ">
-          <a class=" nav-link active " href="" > <i class="ni ni-tv-2 text-primary"></i> Dashboard
+        <ul class="navbar-nav nav-sidebar-custom ">
+          
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#!">
+                <i class="fas fa-vector-square text-danger " ></i> Đặt bàn
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#!order">
-                <i class="fas fa-vector-square text-danger"></i> Đặt bàn
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#!foods">
+            <a class="nav-link text-white" href="#!foods">
                 <i class="fab fa-elementor text-success"></i> Thực Đơn
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link " href="./examples/profile.html">
-              <i class="ni ni-single-02 text-yellow"></i> User profile
-            </a>
-          </li> -->
           <li class="nav-item">
-            <a class="nav-link " href="#!tables">
+            <a class="nav-link text-white" href="#!resources">
               <i class="ni ni-bullet-list-67 text-red"></i> Nguyên Liệu
             </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link " href="">
+              <a class="nav-link text-white" href="">
                   <i class="fab fa-pagelines text-success"></i>Thành Phần Món Ăn
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link " href="#!statistical">
-                  <i class="fas fa-table text-blue"></i>Thống Kê
+              <a class="nav-link text-white" href="#!statistical">
+                  <i class="fas fa-table text-red"></i>Thống Kê
               </a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#!login">
-              <i class="ni ni-key-25 text-info"></i> Login
-            </a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="./examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
-            </a>
-          </li> -->
+          
         </ul>
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
-        <h6 class="navbar-heading text-muted">Documentation</h6>
+        <h6 class="navbar-heading text-secondary" ng-controller="index">&copy; {{SomeYearFunction}} PWD team</h6>
         <!-- Navigation -->
-        <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-              <i class="ni ni-spaceship"></i> Getting started
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-              <i class="ni ni-palette"></i> Foundation
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-              <i class="ni ni-ui-04"></i> Components
-            </a>
-          </li>
-        </ul>
+        
       </div>
     </div>
   </nav>
   <div class="main-content">
     <!-- Navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark bg-white sha" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
+        <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
         <!-- Form -->
 
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link pr-0" href="#" target _self role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="./assets/img/theme/team-4-800x800.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Danh :))</span>
+                  <span class="mb-0 text-sm  font-weight-bold text-dark">Jessica Danh :))</span>
                 </div>
               </div>
             </a>
@@ -270,7 +238,7 @@
     </nav>
     <!-- End Navbar -->
     <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="header  pb-6 pt-5 pt-md-8">
       <div class="container-fluid">
         <div class="header-body">
           <!-- Card stats -->
@@ -317,6 +285,7 @@
   <script src="assets\js\statistical.js"></script>
   <script src="/assets/js/custom.js"></script>
   <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+  <script src="assets/js/index.js"></script>
 
   <script>document.write('<base href="' + document.location + '" />');</script>
 </body>

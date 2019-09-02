@@ -4,3 +4,9 @@ $(".custom-file-input").on("change", function() {
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
 
+  $(document).ready(function () {
+    $(click1).click(function (e) { 
+      $('.nav-custom').hide();
+      
+    });
+});

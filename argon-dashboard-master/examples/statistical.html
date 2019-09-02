@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col">
     <div class="card shadow card-with-satistical">
-      <div class="card-header">
-          <h1 class="mb-0">Báo Cáo Thống Kê</h1>
+      <div class="card-header bg-primary">
+        <h1 class="mb-0">Báo Cáo Thống Kê</h1>
       </div>
       <div class="card-body">
         <form>
@@ -43,7 +43,7 @@
                 </div>
               </div>
             </div>
-            <button type="button" ng-click="View()" class=" btn btn-primary mb-3">Hiển thị</button>
+            <button type="button" ng-click="View()" class=" btn btn-danger mb-3">Hiển thị</button>
           </div>
         </form>
         <div class="row">
@@ -81,36 +81,36 @@
                     <td>{{x.hoadon_DATE}}</td>
                     <td>{{x.tongTien}}</td>
                   </tr>
-                  <tr >
-                      <td colspan="8" id="{{x.hoadon_NO}}" class="collapse" data-parent="#accordionRow">
-                        <div class="container">
-                          <div class="row">
-                            <div class="card-body border">
-                              <div class="table-responsive">
-                                <table>
-                                  <thead class="thead-light">
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Mã Món Ăn</th>
-                                    <th scope="col">TênMón Ăn</th>
-                                    <th scope="col">Đơn Giá</th>
-                                    <th scope="col">Số Lượng</th>
-                                  </thead>
-                                  <tbody>
-                                    <tr ng-repeat="y in billDetails">
-                                      <td>{{$index+1}}</td>
-                                      <td>{{y.hoadonchitietID.monan_MONAN_ID}}</td>
-                                      <td>{{y.monan_NAME}}</td>
-                                      <td>{{y.hoadonchitiet_PRICE}}</td>
-                                      <td>{{y.hoadonchitiet_SOLUONG}}</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
+                  <tr>
+                    <td colspan="8" id="{{x.hoadon_NO}}" class="collapse" data-parent="#accordionRow">
+                      <div class="container">
+                        <div class="row">
+                          <div class="card-body border">
+                            <div class="table-responsive">
+                              <table>
+                                <thead class="thead-light">
+                                  <th scope="col">STT</th>
+                                  <th scope="col">Mã Món Ăn</th>
+                                  <th scope="col">TênMón Ăn</th>
+                                  <th scope="col">Đơn Giá</th>
+                                  <th scope="col">Số Lượng</th>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="y in billDetails">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{y.hoadonchitietID.monan_MONAN_ID}}</td>
+                                    <td>{{y.monan_NAME}}</td>
+                                    <td>{{y.hoadonchitiet_PRICE}}</td>
+                                    <td>{{y.hoadonchitiet_SOLUONG}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                         </div>
-                      </td>
-                    </tr>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -144,36 +144,36 @@
                     <td>{{x.hoadon_DATE}}</td>
                     <td>{{x.tongTien}}</td>
                   </tr>
-                  <tr >
-                      <td colspan="8" id="{{x.hoadon_NO}}" class="collapse" data-parent="#accordionRow">
-                        <div class="container">
-                          <div class="row">
-                            <div class="card-body border">
-                              <div class="table-responsive">
-                                <table>
-                                  <thead class="thead-light">
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Mã Món Ăn</th>
-                                    <th scope="col">TênMón Ăn</th>
-                                    <th scope="col">Đơn Giá</th>
-                                    <th scope="col">Số Lượng</th>
-                                  </thead>
-                                  <tbody>
-                                    <tr ng-repeat="y in billDetails">
-                                      <td>{{$index+1}}</td>
-                                      <td>{{y.hoadonchitietID.monan_MONAN_ID}}</td>
-                                      <td>{{y.monan_NAME}}</td>
-                                      <td>{{y.hoadonchitiet_PRICE}}</td>
-                                      <td>{{y.hoadonchitiet_SOLUONG}}</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
+                  <tr>
+                    <td colspan="8" id="{{x.hoadon_NO}}" class="collapse" data-parent="#accordionRow">
+                      <div class="container">
+                        <div class="row">
+                          <div class="card-body border">
+                            <div class="table-responsive">
+                              <table>
+                                <thead class="thead-light">
+                                  <th scope="col">STT</th>
+                                  <th scope="col">Mã Món Ăn</th>
+                                  <th scope="col">TênMón Ăn</th>
+                                  <th scope="col">Đơn Giá</th>
+                                  <th scope="col">Số Lượng</th>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="y in billDetails">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{y.hoadonchitietID.monan_MONAN_ID}}</td>
+                                    <td>{{y.monan_NAME}}</td>
+                                    <td>{{y.hoadonchitiet_PRICE}}</td>
+                                    <td>{{y.hoadonchitiet_SOLUONG}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                         </div>
-                      </td>
-                    </tr>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>

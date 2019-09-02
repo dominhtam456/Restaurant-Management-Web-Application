@@ -2,23 +2,17 @@ var app = angular.module("myApp", ["ngRoute",'angularUtils.directives.dirPaginat
 app.config(function($routeProvider) {
   $routeProvider
   .when("/", {
-    templateUrl : "/examples/dashboard.html"
-  })
-  .when("/icons", {
-    templateUrl : "/examples/dashboard.html"
+    templateUrl : "/examples/order.html",
+    controller : "TablesCtrl"
   })
   .when("/foods", {
     templateUrl : "/examples/foods.html",
     controller : "FoodsCtrl",
     controllerAs: "vm"
   })
-  .when("/tables", {
-    templateUrl : "/examples/tables.html",
+  .when("/resources", {
+    templateUrl : "/examples/resources.html",
     controller : "ResourcesCtrl"
-  })
-  .when("/order", {
-    templateUrl : "/examples/order.html",
-    controller : "TablesCtrl"
   })
   .when("/login", {
     templateUrl : "/examples/login.html",

@@ -1,27 +1,27 @@
 <div class="row">
   <div class="col">
     <div class="card shadow">
-      <div class="card-header">
+      <div class="card-header bg-primary">
         <h1>Đặt Bàn</h1>
       </div>
       <div class="card-body">
         <div>
-          <div class="row">
-            <div class="col-sm-6 border">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <div class="row ">
+            <div class="col-sm-6 border rounded bg-secondary">
+              <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#ban" target="_self" role="tab"
-                    aria-controls="home" aria-selected="true">BÀN</a>
+                  <a class="nav-link active" id="table-tab" data-toggle="tab" href="#ban" target="_self" role="tab"
+                    aria-controls="table" aria-selected="true">BÀN</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#menu" target="_self" role="tab"
-                    aria-controls="profile" aria-selected="false">THỰC ĐƠN</a>
+                  <a class="nav-link" id="menu-tab" data-toggle="tab" href="#menu" target="_self" role="tab"
+                    aria-controls="menu" aria-selected="false">THỰC ĐƠN</a>
                 </li>
 
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="ban" role="tabpanel" aria-labelledby="home-tab">
-                  <div class="card-deck border">
+                  <div class="card-deck bg-white border">
                     <a ng-repeat="x in tables" ng-click="getTable(x)" id="a">
                       <!--repeat here -->
                       <div class="card-block mb-2 mt-2">
@@ -29,7 +29,7 @@
                         <div class="card" style="width: 10.2rem;">
                           <img class="card-img-top p-4" src="assets\img\icons\dinner-table.png" alt="Card image cap"
                             width="120px" height="150px">
-                          <div class="card-footer borde" ng-style="x.tableColor">
+                          <div class="card-footer border" ng-style="x.tableColor">
                             <p class="card-text" style="text-align: center; font-weight: bold"> {{x.ban_NO}}</p>
                           </div>
                         </div>
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="tab-pane fade show " id="menu" role="tabpanel" aria-labelledby="home-tab">
-                  <div class="card-deck border">
+                  <div class="card-deck bg-white border">
                     <a ng-repeat="x in foods" ng-click="addFood(x)">
                       <!--repeat here -->
                       <div class="card-block mb-2 mt-2">
@@ -56,12 +56,10 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-              <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
             </div>
             <div class="col-sm-6">
               <div class="card border">
-                <div class="card-header">
+                <div class="card-header bg-secondary">
                   <h1>Bàn {{tableIndex}}</h1>
                 </div>
                 <div class="card-body" style="height:40em; overflow-y: scroll;">
@@ -101,7 +99,7 @@
                 <div class="card-footer">
                   <div class="float-right">
                     <!-- Button trigger modal -->
-                    <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#btnPayment">
+                    <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#btnPayment">
                       Thanh Toán
                     </button>
                     <!-- Modal -->
@@ -109,18 +107,16 @@
                       aria-labelledby="btnPaymentTitle" aria-hidden="true">
                       <div class="modal-dialog modal-xl " role="document ">
                         <div class="modal-content">
-                          <div class="modal-header">
+                          <div class="modal-header bg-primary">
                             <h5 class="modal-title" id="btnPayment">
-                              <h1>Thanh Toán</h1>
+                              <h1>Thanh Toán Bàn {{tableIndex}}</h1>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                            <div><span>Bàn {{tableIndex}}</span></div>
                             <div class="container">
-                              <hr>
                               <div class="row">
                                 <div class="col-md-6">
 
@@ -182,7 +178,7 @@
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-success" onclick="printJS('form-bill', 'html')" ng-click="payBill()">Thanh Toán</button>
+                            <button type="button" class="btn btn-danger" onclick="printJS('form-bill', 'html')" ng-click="payBill()">Thanh Toán</button>
                           </div>
                         </div>
                       </div>
