@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.demo.service.MonAnService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 

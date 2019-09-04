@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,15 +29,18 @@ import com.example.demo.service.HoaDonChiTietService;
 import com.example.demo.service.HoaDonService;
 import com.example.demo.service.LoaiMonAnService;
 import com.example.demo.service.LoaiNguyenLieuService;
+import com.example.demo.service.MonAnChiTietService;
 import com.example.demo.service.MonAnService;
 import com.example.demo.service.NguyenLieuService;
-
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDon;
 import com.example.demo.model.HoaDonChiTiet;
 import com.example.demo.model.HoaDonChiTietID;
 import com.example.demo.model.LoaiMonAn;
 import com.example.demo.model.MonAn;
+import com.example.demo.model.MonAnChiTiet;
+import com.example.demo.model.MonAnChiTietID;
 
 @RestController
 @RequestMapping("/api")
@@ -44,12 +49,20 @@ public class WebController {
 
 	@Autowired
 	LoaiNguyenLieuService repositoryLoaiNguyenLieu;
+	
 	@Autowired
 	NguyenLieuService repositoryNguyenLieu;
+	
 	@Autowired
 	MonAnService repositoryMonAn;
+	
 	@Autowired
 	LoaiMonAnService repositoryLoaiMonAn;
+	
+	@Autowired
+	MonAnChiTietService repositoryMonAnChiTiet;
+	
+	
 
 	/////////////////////////////// LOAI NGUYEN LIEU /////////////////////////
 
@@ -370,11 +383,44 @@ public class WebController {
 			}
 			return repositoryMonAn.TimMonAnTheoTen(key);
 		} catch (Exception e) {
-			// TODO: handle exception
 			return null;
 		}
 	}
+	
+	/////////////////////////////// MON AN CHI TIET///////////////////////////
+	
+	// GET ALL MON AN CHI TIET
+		@RequestMapping(path = "/GetAllMonAnChiTiet", produces = MediaType.APPLICATION_JSON_VALUE)
+		public List<MonAnChiTiet> GetAllMonAnChiTiet() {
+			
+			return repositoryMonAnChiTiet.GetAllMonAnChiTiets(); 
+		}
+	
+	// GET 1 MON AN CHI TIET
+	@RequestMapping(path = "/GetMonAnChiTiet/{monanID}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<MonAnChiTiet> GetMonAnChiTiet(@PathVariable(value = "monanID") int monanID) {
+		return repositoryMonAnChiTiet.GetMonAnChiTietByMonAnID(monanID);
+	}
+	
+	
+	// INSERT MON AN CHI TIET
+	@RequestMapping(value = "/InsertMonAnChiTiet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public MonAnChiTiet InserMACT(@Valid @RequestBody MonAnChiTiet mact) {
 
+		return repositoryMonAnChiTiet.InSertMACT(mact);
+
+	}
+	
+	
+	// DELETE MON AN CHI TIET
+	@RequestMapping(value = "/DeleteMonAnChiTiet/{monanID}&{nguyenlieuID}", method = RequestMethod.GET)
+	public boolean DeleteMACT(@PathVariable("monanID") Long monanID,
+			@PathVariable("nguyenlieuID") Long nguyenlieuID) {
+		return repositoryMonAnChiTiet.DeleteMACT(new MonAnChiTietID(monanID, nguyenlieuID));
+	}
+	
+	
 	/////////////////////// QUAN LY BAN //////////////////////////////////
 
 	@Autowired

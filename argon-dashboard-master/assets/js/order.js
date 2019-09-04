@@ -54,14 +54,14 @@
     $scope.getTable = function(table) {
       $scope.total=0;
       var id = "";
-     
+
       $scope.tableIndex = table.ban_ID;
       $http({
         method: "GET",
         url: "http://localhost:8080/api/GetHoaDonToStatus/false"
       }).then(function mySuccess(response) {
         $scope.hdidctt = response.data;
-        
+
         angular.forEach($scope.hdidctt, function(k) {
           if (k.ban_BAN_ID == $scope.tableIndex) {
             id = k.hoadon_ID;
@@ -115,6 +115,8 @@
             if (k.ban_BAN_ID == $scope.tableIndex) {
               d = 1;
               id=k.hoadon_ID;
+              $scope.hdno=k.hoadon_NO;
+              $scope.day=k.hoadon_DATE;
             }
           });
           if (d == 0) {
@@ -193,6 +195,8 @@
                               angular.forEach($scope.data, function(k) {
                                 if(e.ban_ID == k.ban_BAN_ID){
                                   d=1;
+                                  $scope.hdno=k.hoadon_NO;
+                                  $scope.day=k.hoadon_DATE;
                                   e.tableColor= {
                                     "background-color" : "#FFF1A8"
                                   }
@@ -349,7 +353,7 @@
             $scope.details = response.data;
             angular.forEach($scope.details, function(k) {
               $scope.total = $scope.total + (k.hoadonchitiet_PRICE * k.hoadonchitiet_SOLUONG);
-             
+
               $http({
                 method: "GET",
                 url: "http://localhost:8080/api/MonAn/" + k.hoadonchitietID.monan_MONAN_ID
@@ -465,6 +469,8 @@
                         angular.forEach($scope.data, function(k) {
                           if(e.ban_ID == k.ban_BAN_ID){
                             d=1;
+                            $scope.hdno=k.hoadon_NO;
+                            $scope.day=k.hoadon_DATE;
                             e.tableColor= {
                               "background-color" : "red"
                             }

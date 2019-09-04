@@ -288,14 +288,16 @@
                                       {{foodDetails.monan_NO}}
                                     </td>
                                   </tr>
+
                                   <tr>
                                     <td>
-                                      Loại ón ăn:
+                                      Loại món ăn:
                                     </td>
                                     <td>
                                       {{foodDetails.tenloai_LOAIMONAN}}
                                     </td>
                                   </tr>
+
                                   <tr>
                                     <td>
                                       Giá Bán:
@@ -304,13 +306,27 @@
                                       {{foodDetails.monan_PRICE}}
                                     </td>
                                   </tr>
+
                                 </table>
                               </div>
+
                               <div class="col-4">
                                 <table>
                                   <tr>
                                     <td>
-                                      Mô tả:
+                                      Đơn vị tính:
+                                    </td>
+                                    <td>
+                                      {{foodDetails.monan_UNIT}}
+                                    </td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>
+                                      Trạng thái:
+                                    </td>
+                                    <td>
+                                        {{foodDetails.monan_STATUS}}
                                     </td>
                                     <td>
                                       <div class="card">
@@ -318,14 +334,7 @@
                                       </div>
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <td>
-                                      Ghi Chú:
-                                    </td>
-                                    <td>
-                                      <!-- content -->
-                                    </td>
-                                  </tr>
+
                                 </table>
                               </div>
                             </div>
@@ -382,13 +391,38 @@
 
                                                 </div>
                                               </div>
+
                                               <div class="form-group row">
                                                 <label for="inputNum"
                                                   class="col-sm-4 col-form-label form-control-sm">Giá bán:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="foodDetails.monan_PRICE" type="text"
                                                     class="form-control form-control-sm " id="inputNum">
+                                                </div>
+                                              </div>
 
+                                              <div class="form-group row">
+                                                <label for="inputUnit"
+                                                  class="col-sm-4 col-form-label form-control-sm">Đơn vị tính:</label>
+                                                <div class="col-sm-7">
+                                                  <input ng-model="foodDetails.monan_UNIT" type="text"
+                                                    class="form-control form-control-sm " id="inputUnit">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group row">
+                                                <label for="inputType"
+                                                  class="col-sm-4 col-form-label form-control-sm">Trạng thái:</label>
+                                                <div class="col-sm-7">
+                                                  <select class="form-control-sm" id="inputType"
+                                                    ng-model="foodDetails.monan_STATUS">
+                                                    <option value="Còn">
+                                                      Còn
+                                                    </option>
+                                                    <option value="Không">
+                                                      Không
+                                                    </option>
+                                                  </select>
                                                 </div>
                                               </div>
 

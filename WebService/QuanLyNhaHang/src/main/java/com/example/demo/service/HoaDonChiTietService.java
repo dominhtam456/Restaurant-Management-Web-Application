@@ -2,21 +2,11 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.scheduling.annotation.Async;
 
-import com.example.demo.model.Ban;
 import com.example.demo.model.HoaDonChiTiet;
 import com.example.demo.model.HoaDonChiTietID;
-
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDonChiTietID> {
 
@@ -34,10 +24,7 @@ public interface HoaDonChiTietService extends JpaRepository<HoaDonChiTiet, HoaDo
 	
 	// Them chi tiet hoa don
 	public default HoaDonChiTiet InSertHDCT(HoaDonChiTiet o) {
-		/*
-		 * o.setHOADON_HOADON_ID(10); o.setMONAN_MONAN_ID(1);
-		 * o.setHOADONCHITIET_PRICE("100000"); o.setHOADONCHITIET_SOLUONG(3);
-		 */
+		
 		if (o != null) {
 			return save(o);
 			

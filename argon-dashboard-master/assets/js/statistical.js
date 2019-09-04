@@ -46,8 +46,10 @@
       $scope.sDate=$filter('date')($scope.sDate, 'yyyy-MM-dd');
       $scope.eDate=$filter('date')($scope.eDate, 'yyyy-MM-dd');
 
-
-
+      var sDate = new Date($scope.sDate);
+      var eDate = new Date($scope.eDate);
+      if(eDate > sDate)
+      {
         $http({
           method : "GET",
           url : "http://localhost:8080/api/ThongKeMonAn/?fromDate=" + $scope.sDate + "&toDate=" + $scope.eDate
@@ -55,9 +57,6 @@
           $scope.listTopFoods=response.data;
           console.log($scope.listTopFoods);
         });
-
-
-
 
         $http({
           method : "GET",
@@ -77,8 +76,6 @@
           });
         }
 
-
-
         $http({
           method : "GET",
           url : "http://localhost:8080/api/ThongKeTongTien/?fromDate=" + $scope.sDate + "&toDate=" + $scope.eDate
@@ -86,8 +83,10 @@
           $scope.total=response.data;
           console.log($scope.total);
         })
-      
-
+      }
+      else {
+        alert("Không được nhập ngày bắt đầu lớn hơn hoặc bằng ngày kết thúc !!!");
+      }
 
     }
 

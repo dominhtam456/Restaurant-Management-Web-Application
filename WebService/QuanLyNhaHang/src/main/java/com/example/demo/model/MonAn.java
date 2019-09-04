@@ -1,20 +1,24 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
+@Entity(name = "MonAn")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "monan")
 public class MonAn implements Serializable{
@@ -22,20 +26,8 @@ public class MonAn implements Serializable{
 		 private static final long serialVersionUID = 1L;
 		 @Id
 		 @GeneratedValue(strategy = GenerationType.IDENTITY)
-		 
-	/*
-	 * @OneToMany( targetEntity=Employee.class ) private List employeelist;
-	 */
-		 //  @ManyToOne(fetch=FetchType.LAZY)
-		 //LAZY: can deN goi den moi lay DU LIEU
-		 //EG: 
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name="LOAIMONAN_LOAIMONAN_ID") private LoaiMonAn loaimonan;
-	 */
 		
-		@Column(name = "MONAN_ID")
+		 @Column(name = "MONAN_ID")
 		 private long MONAN_ID;
 		 
 		 @Column(name="MONAN_NO")
@@ -56,17 +48,25 @@ public class MonAn implements Serializable{
 		 @Column(name="MONAN_IMG")
 		 private String MONAN_IMG;
 		 
-		 
 		 @Column(name = "LOAIMONAN_LOAIMONAN_ID")
 		 private int LOAIMONAN_LOAIMONAN_ID;
+		 
+		 @OneToMany(
+			        mappedBy = "monan",
+			        cascade = CascadeType.ALL,
+			        orphanRemoval = true
+			    )
+		 
+		 private List<MonAnChiTiet> nguyenlieus = new ArrayList<>();
+		 
 		 @Transient
 		 private String TENLOAI_MONAN;
+		  
 		 
-		//khoi tao
-		 protected MonAn() {
+		// Constructor
+		 public MonAn() {
 		 	 super();
 		 }
-	
 		 
 		 public MonAn(String mONAN_NAME, String mONAN_PRICE, String mONAN_UNIT,
 				 String mONAN_STATUS ,@Null int lOAIMONAN_LOAIMONAN_ID) {
@@ -78,12 +78,8 @@ public class MonAn implements Serializable{
 		 	LOAIMONAN_LOAIMONAN_ID = lOAIMONAN_LOAIMONAN_ID;
 		 	
 		 }
-		//GETER AND SETER 
-	/*
-	 * public LoaiMonAn getLoaimonan() { return loaimonan; } public void
-	 * setLoaimonan(LoaiMonAn loaimonan) { this.loaimonan = loaimonan; }
-	 */
-
+		 
+		//GETTER AND SETTER 
 		 public String getTENLOAI_LOAIMONAN() {
 		 	return TENLOAI_MONAN;
 		 }
@@ -155,5 +151,21 @@ public class MonAn implements Serializable{
 		public void setLOAIMONAN_LOAIMONAN_ID(int lOAIMONAN_LOAIMONAN_ID) {
 			LOAIMONAN_LOAIMONAN_ID = lOAIMONAN_LOAIMONAN_ID;
 		}
- 	 
+		
+		
+		 @Override
+		    public boolean equals(Object o) {
+		        if (this == o) return true;
+		 
+		        if (o == null || getClass() != o.getClass())
+		            return false;
+		 
+		        MonAn monan = (MonAn) o;
+		        return Objects.equals(MONAN_NAME, monan.MONAN_NAME);
+		    }
+		 
+		    @Override
+		    public int hashCode() {
+		        return Objects.hash(MONAN_NAME);
+		    }
 }

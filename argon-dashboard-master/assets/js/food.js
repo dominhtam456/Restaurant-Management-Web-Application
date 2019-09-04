@@ -38,6 +38,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
           $scope.foodDetails.loaimonan_LOAIMONAN_ID=  $scope.foodDetails.loaimonan_LOAIMONAN_ID.toString();
         });
     };
+
     $scope.addFood= function(){
           var data= $.param({
                       MONAN_NO: $scope.foodNo,
@@ -45,7 +46,8 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
                       MONAN_PRICE: $scope.inputPrice,
                       lOAIMONAN_LOAIMONAN_ID: $scope.TypeId,
                       MONAN_IMG: $scope.theFile.name,
-                      MONAN_UNIT: $scope.inputUnit
+                      MONAN_UNIT: $scope.inputUnit,
+                      MONAN_STATUS: 'Còn'
                   });
                   var d=0
                   angular.forEach($scope.foods, function(rs) {
@@ -78,7 +80,9 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
                       MONAN_PRICE: $scope.foodDetails.monan_PRICE,
                       lOAIMONAN_LOAIMONAN_ID: $scope.foodDetails.loaimonan_LOAIMONAN_ID,
                       MONAN_IMG: foodIMG,
-                      MONAN_ID: $scope.foodDetails.monan_ID
+                      MONAN_ID: $scope.foodDetails.monan_ID,
+                      MONAN_STATUS: $scope.foodDetails.monan_STATUS,
+                      MONAN_UNIT: $scope.foodDetails.monan_UNIT
 
                   });
 
@@ -86,6 +90,8 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
             .then(function mySuccess(data) {
               $window.location.reload()
             });
+
+          console.log();
 
         }
 

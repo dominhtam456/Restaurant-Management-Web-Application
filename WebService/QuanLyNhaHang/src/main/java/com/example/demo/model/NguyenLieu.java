@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,16 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
+@Entity(name = "NguyenLieu")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "nguyenlieu")
+@NaturalIdCache
+@Cache(
+    usage = CacheConcurrencyStrategy.READ_WRITE
+)
 public class NguyenLieu implements Serializable {
 
-		//-3009157732242241606L??
 		private static final long serialVersionUID = 1L;
 		 @Id
 		 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +36,7 @@ public class NguyenLieu implements Serializable {
 		 @Column(name="NGUYENLIEU_NO")
 		 private String NGUYENLIEU_NO;
 		 
+		
 		 @Column(name = "NGUYENLIEU_NAME")
 		 private String NGUYENLIEU_NAME;
 		
@@ -43,8 +51,8 @@ public class NguyenLieu implements Serializable {
 		 
 		 @Column(name = "LOAINGUYENLIEU_LOAINGUYENLIEU_ID")
 		 private int LOAINGUYENLIEU_LOAINGUYENLIEU_ID;
-		
-		
+		 
+		 
 		 private String TENLOAI_NGUYENLIEU;
 		 
 		
@@ -56,10 +64,10 @@ public class NguyenLieu implements Serializable {
 			TENLOAI_NGUYENLIEU = tENLOAI_NGUYENLIEU;
 		}
 		
-		protected NguyenLieu() {
-			 
-		 }
-		
+		public NguyenLieu() {
+			super();
+		}
+
 		public NguyenLieu(String nGUYENLIEU_NAME, String nGUYENLIEU_PRICE, Date nGUYENLIEU_DATE,
 				int lOAINGUYENLIEU_LOAINGUYENLIEU_ID) {
 			
@@ -124,5 +132,18 @@ public class NguyenLieu implements Serializable {
 		public void setNGUYENLIEU_NO(String nGUYENLIEU_NO) {
 			NGUYENLIEU_NO = nGUYENLIEU_NO;
 		}
+		
 
+		@Override
+		    public boolean equals(Object o) {
+		        if (this == o) return true;
+		        if (o == null || getClass() != o.getClass()) return false;
+		        NguyenLieu nguyenlieu = (NguyenLieu) o;
+		        return Objects.equals(NGUYENLIEU_NAME, nguyenlieu.NGUYENLIEU_NAME);
+		    }
+		 
+		    @Override
+		    public int hashCode() {
+		        return Objects.hash(NGUYENLIEU_NAME);
+		    }
 }

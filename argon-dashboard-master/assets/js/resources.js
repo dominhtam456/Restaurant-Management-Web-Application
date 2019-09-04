@@ -69,16 +69,17 @@
         else{
           nguyenlieuIMG=$scope.resourcesDetails.nguyenlieu_IMG;
         }
+
           var data= $.param({
                       NGUYENLIEU_NO: $scope.resourcesDetails.nguyenlieu_NO,
-                      NGUYENLIEU_NAME: $scope.resourcesDetails.nguyenlieu_NAME,
+                      nGUYENLIEU_NAME: $scope.resourcesDetails.nguyenlieu_NAME,
                       NGUYENLIEU_PRICE: $scope.resourcesDetails.nguyenlieu_PRICE,
                       NGUYENLIEU_ID: $scope.resourcesDetails.nguyenlieu_ID,
                       lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.resourcesDetails.loainguyenlieu_LOAINGUYENLIEU_ID,
                       NGUYENLIEU_DATE: $scope.resourcesDetails.nguyenlieu_DATE,
                       NGUYENLIEU_IMG: nguyenlieuIMG
                   });
-
+                  console.log(data);
           $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
             .then(function mySuccess(data) {
               $window.location.reload()
