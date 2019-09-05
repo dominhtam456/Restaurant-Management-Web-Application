@@ -4,7 +4,7 @@
       <div class="card-header border-0 bg-primary">
         <div>
           <div class="float-left">
-            <h1 class="mb-0 modal-title">Thực Đơn</h1>
+            <h1 class="mb-0 modal-title" style="color: white;">Thực Đơn</h1>
           </div>
           <div class="float-md-right d-inline-block">
             <form>
@@ -27,7 +27,7 @@
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content ">
                 <div class="modal-header bg-primary">
-                  <h2 class="modal-title" id="modalAddFoods">Thêm Món Ăn
+                  <h2 class="modal-title" id="modalAddFoods" style="color: white;">Thêm Món Ăn
                   </h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -141,7 +141,7 @@
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header bg-primary">
-                                <h5 class="modal-title" id="addTypeLabel">Thêm Loại Món Ăn</h5>
+                                <h5 class="modal-title text-white" id="addTypeLabel">Thêm Loại Món Ăn</h5>
                                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                                 <!-- <span aria-hidden="true">&times;</span> -->
                                 </button>
@@ -159,6 +159,7 @@
                                           <div class="col-sm-7">
                                             <input type="text" class="form-control form-control-sm" id="inputName"
                                               placeholder="eg. Món chiên" ng-model="loaiMonAn">
+                                            <p class="text-danger">{{alertLNL}}</p>
                                           </div>
                                           <div class="col-sm-1">
                                             <i class="fas fa-exclamation-circle"></i>
@@ -204,7 +205,7 @@
             <th scope="col"></th>
 
           </thead>
-          <tbody dir-paginate="x in searched|itemsPerPage:5">
+          <tbody dir-paginate="x in searched|itemsPerPage:10">
             <tr data-toggle="collapse" data-target="#a{{x.monan_ID}}" class="clickable" ng-click="getFoodIndex(x)"
               aria-expanded="true">
               <!--  dir-paginate-start="x in searched|itemsPerPage:5">-->
@@ -228,7 +229,7 @@
                 </span>
               </td>
               <td>
-                <span class="mr-2">{{x.monan_PRICE}}</span>
+                <span class="mr-2">{{x.monan_PRICE}}đ</span>
               </td>
               <td>
                 <div class="d-flex align-items-center">
@@ -303,7 +304,7 @@
                                       Giá Bán:
                                     </td>
                                     <td>
-                                      {{foodDetails.monan_PRICE}}
+                                      {{foodDetails.monan_PRICE}}đ
                                     </td>
                                   </tr>
 
@@ -328,12 +329,18 @@
                                     <td>
                                         {{foodDetails.monan_STATUS}}
                                     </td>
-                                    <td>
-                                      <div class="card">
-                                        <!-- content -->
-                                      </div>
+
+                                  </tr>
+                                  <tr>
+                                    <td style="vertical-align: top;">
+                                      Thành Phần:
+                                    </td>
+                                    <td >
+                                      <span ng-repeat="z in foodING">- {{z.nguyenlieu.nguyenlieu_NAME}}<br><br></span>
                                     </td>
                                   </tr>
+
+
 
                                 </table>
                               </div>
@@ -349,7 +356,7 @@
                                 <div class="modal-dialog modal-lg" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header bg-primary">
-                                      <h2 class="modal-title" id="modifyFoodsTitle">Cập Nhật Thông Tin Món Ăn
+                                      <h2 class="modal-title" id="modifyFoodsTitle" style="color: white;">Cập Nhật Thông Tin Món Ăn
                                       </h2>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>

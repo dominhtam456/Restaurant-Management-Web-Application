@@ -568,6 +568,11 @@ public class WebController {
 	// LAY CTHD THEO ID_HOADON
 	@RequestMapping(path = "/GetHDCTByID/{hoadonID}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<HoaDonChiTiet> GetHDCTByID(@PathVariable(value = "hoadonID") int hoadonID) {
+		for (HoaDonChiTiet item : repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadonID)) {
+			item.setTenMonAn(
+					repositoryMonAn.getOne(Long.valueOf(item.getHoadonchitietID().getMONAN_MONAN_ID()))
+							.getMONAN_NAME());
+		}
 		return repositoryHDCT.GetHoaDonChiTietToHoaDonID(hoadonID);
 	}
 

@@ -19,7 +19,6 @@
           url: "http://localhost:8080/api/GetHDCTByID/" + bill.hoadon_ID
         }).then(function mySuccess(response) {
           $scope.billDetails=response.data;
-          console.log($scope.billDetails);
         });
       }
       $http({
@@ -48,7 +47,7 @@
 
       var sDate = new Date($scope.sDate);
       var eDate = new Date($scope.eDate);
-      if(eDate > sDate)
+      if(eDate >= sDate)
       {
         $http({
           method : "GET",
@@ -72,7 +71,6 @@
             url: "http://localhost:8080/api/GetHDCTByID/" + bill.hoadon_ID
           }).then(function mySuccess(response) {
             $scope.billDetails=response.data;
-            console.log($scope.billDetails);
           });
         }
 
@@ -81,7 +79,6 @@
           url : "http://localhost:8080/api/ThongKeTongTien/?fromDate=" + $scope.sDate + "&toDate=" + $scope.eDate
         }).then(function mySuccess(response) {
           $scope.total=response.data;
-          console.log($scope.total);
         })
       }
       else {

@@ -4,7 +4,7 @@
       <div class="card-header border-0 bg-primary">
         <div>
           <div class="float-left">
-            <h1 class="mb-0 modal-title">Nguyên Liệu</h1>
+            <h1 class="mb-0 modal-title" style="color: white;">Nguyên Liệu</h1>
           </div>
           <div class="float-md-right d-inline-block">
             <form>
@@ -27,7 +27,7 @@
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content ">
                 <div class="modal-header bg-primary">
-                  <h2 class="modal-title" id="modalAddMaterials">Thêm Nguyên Liệu
+                  <h2 class="modal-title" id="modalAddMaterials" style="color: white;">Thêm Nguyên Liệu
                   </h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -164,7 +164,7 @@
               <th scope="col"></th>
             </tr>
           </thead>
-          <tbody dir-paginate="x in searched|itemsPerPage:5">
+          <tbody dir-paginate="x in searched|itemsPerPage:10">
 
             <tr data-toggle="collapse" data-target="#a{{x.nguyenlieu_ID}}" class="clickable table-striped"
               aria-expanded="true" ng-click="getResourcesIndex(x)">
@@ -256,6 +256,14 @@
                                       {{resourcesDetails.nguyenlieu_PRICE}}đ
                                     </td>
                                   </tr>
+                                  <tr>
+                                    <td>
+                                      <b>Hạn sử dụng:</b>
+                                    </td>
+                                    <td>
+                                      {{resourcesDetails.nguyenlieu_DATE | date:'MM/dd/yyyy'}}
+                                    </td>
+                                  </tr>
                                 </table>
                               </div>
                               <div class="col-4">
@@ -293,7 +301,7 @@
                                 <div class="modal-dialog modal-lg" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header bg-primary">
-                                      <h2 class="modal-title" id="modifyMaterialTitle">Cập Nhật Thông Tin Nguyên Liệu
+                                      <h2 class="modal-title" id="modifyMaterialTitle" style="color: white;">Cập Nhật Thông Tin Nguyên Liệu
                                       </h2>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -306,7 +314,7 @@
                                             <div class="col-6">
                                               <div class="form-group row">
                                                 <label for="input1" class="col-sm-4 col-form-label form-control-sm">Mã
-                                                  hàng hóa:</label>
+                                                  nguyên liệu:</label>
                                                 <div class="col-sm-7">
                                                   <input ng-model="resourcesDetails.nguyenlieu_NO" type="text"
                                                     class="form-control form-control-sm" id="input1"

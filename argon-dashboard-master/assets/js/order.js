@@ -1,7 +1,7 @@
 (function(module) {
 
   module.controller('TablesCtrl', function($scope, $http, $window, $filter) {
-    $scope.excesscash=0;
+    $scope.excesscash="";
     $scope.hdno="";
     $scope.day="";
     $scope.total=0;
@@ -25,7 +25,7 @@
               if(e.ban_ID == k.ban_BAN_ID){
                 d=1;
                 e.tableColor= {
-                  "background-color" : "#FFF1A8"
+                  "background-color" : "#2DCE89"
                 }
               }
             });
@@ -198,7 +198,7 @@
                                   $scope.hdno=k.hoadon_NO;
                                   $scope.day=k.hoadon_DATE;
                                   e.tableColor= {
-                                    "background-color" : "#FFF1A8"
+                                    "background-color" : "#2DCE89"
                                   }
                                 }
                               });
@@ -472,7 +472,7 @@
                             $scope.hdno=k.hoadon_NO;
                             $scope.day=k.hoadon_DATE;
                             e.tableColor= {
-                              "background-color" : "red"
+                              "background-color" : "#2DCE89"
                             }
                           }
                         });
@@ -494,21 +494,6 @@
 
     }
 
-
-
-    // $scope.changeColor= function(table){
-    //   $http({
-    //     method: "GET",
-    //     url: "http://localhost:8080/api/GetHoaDonToStatus/false"
-    //   }).then(function mySuccess(response) {
-    //     $scope.data= response.data;
-    //     angular.forEach($scope.data, function(k) {
-    //       if(table.ban_ID==k.ban_BAN_ID){
-    //         return "{'background-color':'red'}";
-    //       }
-    //     });
-    //   });
-    // }
 
 
 

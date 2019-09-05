@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: quanlynhahang
+-- Host: 127.0.0.1    Database: qlnh
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	5.7.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `ban`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ban` (
   `BAN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `BAN_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `BAN_STATUS` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `BAN_NO` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  `BAN_STATUS` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`BAN_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `chucvu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `chucvu` (
   `CHUCVU_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CHUCVU_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `CHUCVU_NAME` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `CHUCVU_DES` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`CHUCVU_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -74,10 +74,10 @@ DROP TABLE IF EXISTS `hoadon`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hoadon` (
   `HOADON_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `HOADON_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `HOADON_NO` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `HOADON_DATE` date DEFAULT NULL,
   `HOADON_STATUS` bit(1) DEFAULT NULL,
-  `HOADON_TAX` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `HOADON_TAX` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `KHACHHANG_KHACHHANG_ID` int(11) DEFAULT NULL,
   `BAN_BAN_ID` int(11) NOT NULL,
   `NHANVIEN_NHANVIEN_ID` int(11) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `hoadon` (
   CONSTRAINT `fk_HOADON_BAN1` FOREIGN KEY (`BAN_BAN_ID`) REFERENCES `ban` (`BAN_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_HOADON_KHACHHANG1` FOREIGN KEY (`KHACHHANG_KHACHHANG_ID`) REFERENCES `khachhang` (`KHACHHANG_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_HOADON_NHANVIEN1` FOREIGN KEY (`NHANVIEN_NHANVIEN_ID`) REFERENCES `nhanvien` (`NHANVIEN_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
-INSERT INTO `hoadon` VALUES (13,'HD001','2019-04-04',_binary '',NULL,1,1,1),(14,'HD002','2019-04-04',_binary '',NULL,1,2,1),(18,'HD0018','2019-08-26',_binary '',NULL,1,3,1),(19,'HD0019','2019-08-26',_binary '',NULL,1,1,1),(20,'HD0020','2019-09-04',_binary '',NULL,1,3,1),(21,'HD0021','2019-09-04',_binary '\0',NULL,1,3,1),(22,'HD0022','2019-09-04',_binary '',NULL,1,2,1),(23,'HD0023','2019-09-04',_binary '',NULL,1,5,1),(24,'HD0024','2019-09-04',_binary '',NULL,1,7,1),(25,'HD0025','2019-09-04',_binary '',NULL,1,2,1),(26,'HD0026','2019-09-04',_binary '',NULL,1,9,1),(27,'HD0027','2019-09-04',_binary '',NULL,1,7,1);
+INSERT INTO `hoadon` VALUES (13,'HD001','2019-04-04',_binary '',NULL,1,1,1),(14,'HD002','2019-04-04',_binary '',NULL,1,2,1),(18,'HD0018','2019-08-26',_binary '',NULL,1,3,1),(19,'HD0019','2019-08-26',_binary '',NULL,1,1,1),(20,'HD0020','2019-09-04',_binary '',NULL,1,3,1),(21,'HD0021','2019-09-04',_binary '',NULL,1,3,1),(22,'HD0022','2019-09-04',_binary '',NULL,1,2,1),(23,'HD0023','2019-09-04',_binary '',NULL,1,5,1),(24,'HD0024','2019-09-04',_binary '',NULL,1,7,1),(25,'HD0025','2019-09-04',_binary '',NULL,1,2,1),(26,'HD0026','2019-09-04',_binary '',NULL,1,9,1),(27,'HD0027','2019-09-04',_binary '',NULL,1,7,1),(28,'HD0028','2019-09-05',_binary '',NULL,1,3,1),(29,'HD0029','2019-09-05',_binary '',NULL,1,8,1),(31,'HD0030','2019-09-05',_binary '',NULL,1,3,1),(32,'HD0032','2019-09-05',_binary '',NULL,1,5,1),(33,'HD0033','2019-09-05',_binary '',NULL,1,1,1),(34,'HD0034','2019-09-05',_binary '',NULL,1,3,1),(35,'HD0035','2019-09-05',_binary '',NULL,1,5,1);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS `hoadonchitiet`;
 CREATE TABLE `hoadonchitiet` (
   `HOADON_HOADON_ID` int(11) NOT NULL,
   `MONAN_MONAN_ID` int(11) NOT NULL,
-  `HOADONCHITIET_PRICE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `HOADONCHITIET_PRICE` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `HOADONCHITIET_SOLUONG` int(11) DEFAULT NULL,
   PRIMARY KEY (`HOADON_HOADON_ID`,`MONAN_MONAN_ID`),
   KEY `fk_HOADONCHITIET_MONAN1_idx` (`MONAN_MONAN_ID`),
@@ -127,7 +127,7 @@ CREATE TABLE `hoadonchitiet` (
 
 LOCK TABLES `hoadonchitiet` WRITE;
 /*!40000 ALTER TABLE `hoadonchitiet` DISABLE KEYS */;
-INSERT INTO `hoadonchitiet` VALUES (13,1,'50000',2),(13,2,'50000',1),(13,3,'35000',2),(14,7,'30000',1),(14,8,'40000',1),(14,9,'35000',1),(18,1,'50000',1),(18,2,'50000',1),(18,3,'35000',1),(19,1,'50000',1),(19,13,'17000',1),(19,14,'5000',1),(20,1,'50000',3),(20,8,'40000',1),(21,2,'50000',1),(21,3,'35000',2),(21,4,'40000',3),(22,1,'50000',1),(23,1,'50000',2),(23,2,'50000',1),(23,3,'35000',2),(24,1,'50000',1),(24,2,'50000',1),(24,3,'35000',1),(24,7,'30000',1),(24,8,'40000',1),(25,1,'50000',1),(25,2,'50000',1),(25,3,'35000',1),(25,4,'40000',1),(25,8,'40000',1),(26,1,'50000',2),(26,2,'50000',2),(27,2,'50000',1),(27,3,'35000',1),(27,4,'40000',2);
+INSERT INTO `hoadonchitiet` VALUES (13,1,'50000',2),(13,2,'50000',1),(13,3,'35000',2),(14,7,'30000',1),(14,8,'40000',1),(14,9,'35000',1),(18,1,'50000',1),(18,2,'50000',1),(18,3,'35000',1),(19,1,'50000',1),(19,13,'17000',1),(19,14,'5000',1),(20,1,'50000',3),(20,8,'40000',1),(21,2,'50000',1),(21,3,'35000',2),(21,4,'40000',3),(22,1,'50000',1),(23,1,'50000',2),(23,2,'50000',1),(23,3,'35000',2),(24,1,'50000',1),(24,2,'50000',1),(24,3,'35000',1),(24,7,'30000',1),(24,8,'40000',1),(25,1,'50000',1),(25,2,'50000',1),(25,3,'35000',1),(25,4,'40000',1),(25,8,'40000',1),(26,1,'50000',2),(26,2,'50000',2),(27,2,'50000',1),(27,3,'35000',1),(27,4,'40000',2),(28,1,'50000',1),(29,4,'40000',32),(29,7,'30000',10),(29,8,'40000',1),(31,1,'50000',3),(31,2,'50000',2),(32,4,'40000',1),(32,7,'30000',1),(32,8,'40000',1),(32,12,'18000',1),(32,13,'17000',3),(33,1,'50000',1),(33,2,'50000',1),(33,3,'35000',1),(34,1,'50000',5),(34,2,'50000',1),(34,3,'35000',1),(34,4,'40000',1),(35,5,'25000',1),(35,6,'20000',1),(35,8,'40000',1);
 /*!40000 ALTER TABLE `hoadonchitiet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,12 +140,12 @@ DROP TABLE IF EXISTS `khachhang`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `khachhang` (
   `KHACHHANG_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `KHACHHANG_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `KHACHHANG_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `KHACHHANG_ADD` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `KHACHHANG_PHONE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `KHACHHANG_EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `KHACHHANG_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `KHACHHANG_NO` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `KHACHHANG_NAME` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `KHACHHANG_ADD` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `KHACHHANG_PHONE` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `KHACHHANG_EMAIL` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `KHACHHANG_IMG` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`KHACHHANG_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,10 +169,10 @@ DROP TABLE IF EXISTS `loaimonan`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loaimonan` (
   `LOAIMONAN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `LOAIMONAN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `LOAIMONAN_DES` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `LOAIMONAN_NAME` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `LOAIMONAN_DES` longtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`LOAIMONAN_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,8 +194,8 @@ DROP TABLE IF EXISTS `loainguyenlieu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loainguyenlieu` (
   `LOAINGUYENLIEU_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `LOAINGUYENLIEU_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `LOAINGUYENLIEU_UNIT` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `LOAINGUYENLIEU_NAME` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `LOAINGUYENLIEU_UNIT` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`LOAINGUYENLIEU_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -219,17 +219,17 @@ DROP TABLE IF EXISTS `monan`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `monan` (
   `MONAN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `MONAN_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `MONAN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `MONAN_PRICE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `MONAN_UNIT` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `MONAN_STATUS` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `MONAN_IMG` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `MONAN_NO` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `MONAN_NAME` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `MONAN_PRICE` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `MONAN_UNIT` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `MONAN_STATUS` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
+  `MONAN_IMG` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `LOAIMONAN_LOAIMONAN_ID` int(11) NOT NULL,
   PRIMARY KEY (`MONAN_ID`),
   KEY `fk_MONAN_LOAIMONAN1_idx` (`LOAIMONAN_LOAIMONAN_ID`),
   CONSTRAINT `fk_MONAN_LOAIMONAN1` FOREIGN KEY (`LOAIMONAN_LOAIMONAN_ID`) REFERENCES `loaimonan` (`LOAIMONAN_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `monan` (
 
 LOCK TABLES `monan` WRITE;
 /*!40000 ALTER TABLE `monan` DISABLE KEYS */;
-INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50000','Dĩa','Còn','Bò_lúc_lắc_với_khoai_tây_chiên.jpg',1),(2,'1dhcnm','Đùi heo chiên nước mắm','50000','Dĩa','Còn','Đùi_heo_chiên_nước_mắm.jpg',1),(3,'2ccdc','Cơm chiên dương châu','35000','Dĩa','Còn','Cơm_chiên_dương_châu.jpg',2),(4,'2cchs','Cơm chiên hải sản','40000','Dĩa','Còn','Cơm_chiên_hải_sản.jpg',2),(5,'3rdxt','Rau dền xào tỏi','25000','Dĩa','Không','Rau_dền_xào_tỏi.JPG',3),(6,'3rcvxt','Rau chân vịt xào trứng','20000','Dĩa','Còn','Rau_chân_vịt_xào_trứng.webp',3),(7,'4thq','Thịt heo quay','30000','Dĩa','Còn','Thịt_heo_quay.jpg',4),(8,'4ctkd','Cà tím kho đậu','40000','Dĩa','Còn','Cà_tím_kho_đậu.jpg',4),(9,'5bnxq','Món nướng bò rau xiên que','35000','Dĩa','Còn','Món_nướng_bò_rau_xiên_que.jpg',5),(10,'5ctlns','Cá thác lác nướng sả','35.000','Dĩa','Còn','Cá_thác_lác_nướng_sả.jpg',5),(11,'6rc','Rau câu','15000','Ly','Còn','Rau_câu.jpg',6),(12,'6tctc','Trái cây thập cẩm','18000','Dĩa','Còn','Trái_cây_thập_cẩm.jfif',6),(13,'7cpsd','Cà phê sữa đá','17000','Ly','Còn','Coffee_sữa_đá.jpg',7),(14,'7ns','Nước suối','5000','Chai','Còn','Nước_suối.png',7),(21,'MVT','Mì vịt tiềm','250000','Dĩa','Còn','Cơm_chiên_hải_sản.jpg',12);
+INSERT INTO `monan` VALUES (1,'1bllvktc','Bò lúc lắc với khoai tây chiên','50000','Dĩa','Còn','Bò_lúc_lắc_với_khoai_tây_chiên.jpg',1),(2,'1dhcnm','Đùi heo chiên nước mắm','50000','Dĩa','Còn','Đùi_heo_chiên_nước_mắm.jpg',1),(3,'2ccdc','Cơm chiên dương châu','35000','Dĩa','Còn','Cơm_chiên_dương_châu.jpg',2),(4,'2cchs','Cơm chiên hải sản','40000','Dĩa','Còn','Cơm_chiên_hải_sản.jpg',2),(5,'3rdxt','Rau dền xào tỏi','25000','Dĩa','Không','Rau_dền_xào_tỏi.JPG',3),(6,'3rcvxt','Rau chân vịt xào trứng','20000','Dĩa','Còn','Rau_chân_vịt_xào_trứng.webp',3),(7,'4thq','Thịt heo quay','30000','Dĩa','Còn','Thịt_heo_quay.jpg',4),(8,'4ctkd','Cà tím kho đậu','40000','Dĩa','Còn','Cà_tím_kho_đậu.jpg',4),(9,'5bnxq','Món nướng bò rau xiên que','35000','Dĩa','Còn','Món_nướng_bò_rau_xiên_que.jpg',5),(10,'5ctlns','Cá thác lác nướng sả','35.000','Dĩa','Còn','Cá_thác_lác_nướng_sả.jpg',5),(11,'6rc','Rau câu','15000','Ly','Còn','Rau_câu.jpg',6),(12,'6tctc','Trái cây thập cẩm','18000','Dĩa','Còn','Trái_cây_thập_cẩm.jfif',6),(13,'7cpsd','Cà phê sữa đá','17000','Ly','Còn','Coffee_sữa_đá.jpg',7),(14,'7ns','Nước suối','5000','Chai','Còn','Nước_suối.png',7),(24,'MVT','MVT','250000','Dia','Còn','Potato.jpg',12),(25,'MVT','Nuoc Suoi','5000','chai','Còn','Rau_câu.jpg',7);
 /*!40000 ALTER TABLE `monan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +268,7 @@ CREATE TABLE `monanchitiet` (
 
 LOCK TABLES `monanchitiet` WRITE;
 /*!40000 ALTER TABLE `monanchitiet` DISABLE KEYS */;
-INSERT INTO `monanchitiet` VALUES (1,1,2),(1,2,1),(1,3,1);
+INSERT INTO `monanchitiet` VALUES (1,1,2),(1,2,1),(1,3,1),(2,2,1),(2,3,0.2),(3,16,0.2);
 /*!40000 ALTER TABLE `monanchitiet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,19 +281,19 @@ DROP TABLE IF EXISTS `nguyenlieu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nguyenlieu` (
   `NGUYENLIEU_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NGUYENLIEU_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `NGUYENLIEU_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `NGUYENLIEU_PRICE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NGUYENLIEU_NO` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `NGUYENLIEU_NAME` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `NGUYENLIEU_PRICE` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `NGUYENLIEU_DATE` date DEFAULT NULL,
-  `NGUYENLIEU_IMG` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NGUYENLIEU_IMG` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `LOAINGUYENLIEU_LOAINGUYENLIEU_ID` int(11) DEFAULT NULL,
-  `tenloai_nguyenlieu` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tenloai_nguyenlieu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`NGUYENLIEU_ID`),
   UNIQUE KEY `NGUYENLIEU_NO_UNIQUE` (`NGUYENLIEU_NO`),
   UNIQUE KEY `UK_md2a2uwajnlju03kcjrn474hx` (`NGUYENLIEU_NAME`),
   KEY `fk_NGUYENLIEU_LOAINGUYENLIEU1_idx` (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`),
   CONSTRAINT `fk_NGUYENLIEU_LOAINGUYENLIEU1` FOREIGN KEY (`LOAINGUYENLIEU_LOAINGUYENLIEU_ID`) REFERENCES `loainguyenlieu` (`LOAINGUYENLIEU_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +302,7 @@ CREATE TABLE `nguyenlieu` (
 
 LOCK TABLES `nguyenlieu` WRITE;
 /*!40000 ALTER TABLE `nguyenlieu` DISABLE KEYS */;
-INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-10-10','Beef.jpg',1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-10-10','Pork.jpg',1,NULL),(3,'2rd','Rau dền','10.000','2019-10-10','Rau_den.png',2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-10-10','Rau_chan_vit.jpg',2,NULL),(6,'2kt','Khoai tây','22.000','2019-10-10','Potato.jpg',2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2019-10-10','milk.jpg',3,NULL),(8,'4ct','Cá thu','250.000','2019-10-10','Mackerel.jpg',4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-10-10','Cá_thác_lác.jpg',4,NULL),(15,'5tv','Trứng vịt','30000','2019-10-10','Duck\'s_egg.jpg',5,NULL),(16,'5tg','Trứng gà tươi','30000','2019-10-10','Eggs.jpg',5,NULL),(18,'5tc','Trứng cút','28.500','2019-10-10','Trứng_cút.jpg',5,NULL),(25,'5tn','Trứng ngỗng','30000','2019-12-17','Pork.jpg',5,NULL),(26,'5tdd','Trứng đà điễu','32000','2019-12-17','Mackerel.jpg',5,NULL),(27,'NL01','A','1000','2019-08-08','Beef.jpg',2,NULL),(28,'rx','Rau xanh sạch','250000','2019-10-05','Rau_den.png',2,NULL);
+INSERT INTO `nguyenlieu` VALUES (1,'1tb','Thịt bò','280.000','2019-10-10','Beef.jpg',1,NULL),(2,'1thd','Thịt heo đùi','80.000','2019-10-10','Pork.jpg',1,NULL),(3,'2rd','Rau dền','10.000','2019-10-10','Rau_den.png',2,NULL),(4,'2rcv','Rau chân vịt','9.000','2019-10-10','Rau_chan_vit.jpg',2,NULL),(6,'2kt','Khoai tây','22.000','2019-10-10','Potato.jpg',2,NULL),(7,'3stvm','Sữa Tươi Vinamilk 100% Có Đường - Hộp 900ml','34.000','2019-10-10','milk.jpg',3,NULL),(8,'4ct','Cá thu','250.000','2019-10-10','Mackerel.jpg',4,NULL),(9,'4ctl','Cá thác lác','220.000','2019-10-10','Cá_thác_lác.jpg',4,NULL),(15,'5tv','Trứng vịt','30000','2019-10-10','Duck\'s_egg.jpg',5,NULL),(16,'5tg','Trứng gà tươi','30000','2019-10-10','Eggs.jpg',5,NULL),(18,'5tc','Trứng cút','28.500','2019-10-10','Trứng_cút.jpg',5,NULL),(25,'5tn','Trứng ngỗng','30000','2019-12-17','Pork.jpg',5,NULL),(26,'5tdd','Trứng đà điễu','32000','2019-12-17','Mackerel.jpg',5,NULL),(28,'rx','Rau xanh sạch','250000','2019-10-05','Rau_den.png',2,NULL);
 /*!40000 ALTER TABLE `nguyenlieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,13 +315,13 @@ DROP TABLE IF EXISTS `nhanvien`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nhanvien` (
   `NHANVIEN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NHANVIEN_NO` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NHANVIEN_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `NHANVIEN_PHONE` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NHANVIEN_EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `NHANVIEN_PASSWORD` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_NO` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_NAME` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `NHANVIEN_PHONE` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_EMAIL` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_PASSWORD` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `NHANVIEN_LOAI` smallint(3) DEFAULT NULL,
-  `NHANVIEN_IMG` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NHANVIEN_IMG` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CHUCVU_CHUCVU_ID` int(11) NOT NULL,
   PRIMARY KEY (`NHANVIEN_ID`),
   KEY `fk_NHANVIEN_CHUCVU_idx` (`CHUCVU_CHUCVU_ID`),
@@ -348,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-04 13:03:51
+-- Dump completed on 2019-09-05 16:37:21

@@ -36,6 +36,12 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
       }).then(function mySuccess(response) {
           $scope.foodDetails = response.data;
           $scope.foodDetails.loaimonan_LOAIMONAN_ID=  $scope.foodDetails.loaimonan_LOAIMONAN_ID.toString();
+          $http({
+            method : "GET",
+            url : "http://localhost:8080/api/GetMonAnChiTiet/" + food.monan_ID
+          }).then(function mySuccess(response) {
+            $scope.foodING=response.data;
+          });
         });
     };
 
@@ -139,7 +145,8 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
 
           $http.post("http://localhost:8080/api/InsertLoaiMonAn/",data)
             .then(function mySuccess(data) {
-              $window.location.reload()
+              $scope.loaiMonAn="";
+              $scope.alertLNL="Bạn đã thêm loại nguyên liệu thành công!"
           });
       }
 });
