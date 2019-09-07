@@ -2,14 +2,7 @@
 
 module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
 
-  $scope.setFile = function(element) {
-        $scope.$apply(function($scope) {
-            $scope.theFile = element.files[0];
-        });
-    };
-  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-  //Get foods
+  // Get foods
   $http({
     method : "GET",
     url : "http://localhost:8080/api/GetAllMonAn"
@@ -20,7 +13,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
       $scope.searched = response.statusText;
   });
 
-  //Get foods type
+  // Get foods type
   $http({
     method : "GET",
     url : "http://localhost:8080/api/GetAllLoaiMonAn"
@@ -45,6 +38,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
         });
     };
 
+    // Add food
     $scope.addFood= function(){
           var data= $.param({
                       MONAN_NO: $scope.foodNo,
@@ -72,6 +66,36 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
           }
     }
 
+    // add food type
+    $scope.AddTypeFood= function(){
+        var data=$.param({
+          lOAIMONAN_NAME: $scope.loaiMonAn
+        });
+
+        $http.post("http://localhost:8080/api/InsertLoaiMonAn/",data)
+          .then(function mySuccess(data) {
+            $scope.loaiMonAn="";
+            $scope.alertLNL="Bạn đã thêm loại nguyên liệu thành công!";
+
+            $http({
+              method : "GET",
+              url : "http://localhost:8080/api/GetAllLoaiMonAn"
+            }).then(function mySuccess(response) {
+                $scope.foodsType = response.data;
+
+              });
+        });
+    }
+
+    // Add food IMG
+    $scope.setFile = function(element) {
+          $scope.$apply(function($scope) {
+              $scope.theFile = element.files[0];
+          });
+      };
+    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+    // Update food
     $scope.updateFood= function(){
       var foodIMG="";
         if(angular.isDefined($scope.theFile)){
@@ -101,7 +125,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
 
         }
 
-
+        // Delete Food
         $scope.deleteFood= function(food){
           var data= $.param({
                       MONAN_ID: food.monan_ID
@@ -113,6 +137,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
             });
         }
 
+        // Search Foods When Use Button
         $scope.findFoods= function(key){
           if(key!="" && key!= null){
           $http({
@@ -136,20 +161,6 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
         }
       }
 
-      //add food type
-
-      $scope.AddTypeFood= function(){
-          var data=$.param({
-            lOAIMONAN_NAME: $scope.loaiMonAn
-          });
-
-          $http.post("http://localhost:8080/api/InsertLoaiMonAn/",data)
-            .then(function mySuccess(data) {
-              $scope.loaiMonAn="";
-              $scope.alertLNL="Bạn đã thêm loại nguyên liệu thành công!"
-          });
-      }
 });
-
 
 }(angular.module("myApp")));

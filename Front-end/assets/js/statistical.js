@@ -21,6 +21,7 @@
           $scope.billDetails=response.data;
         });
       }
+
       $http({
         method : "GET",
         url : "http://localhost:8080/api/ThongKeMonAn/?fromDate=" + $scope.date + "&toDate=" + $scope.date

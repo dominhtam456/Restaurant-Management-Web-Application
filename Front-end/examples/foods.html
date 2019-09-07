@@ -11,10 +11,6 @@
               <div class="input-group md-form form-sm form-2 pl-0">
                 <input class="form-control " ng-model="searchInput" type="text" placeholder="Search"
                   aria-label="Search">
-                <div class="input-group-append">
-                  <span class="input-group-text bg-success" ng-click="findFoods(searchInput)" id="basic-text1"><i
-                      class="fas fa-search text-white" aria-hidden="true"></i></span>
-                </div>
               </div>
             </form>
           </div>
@@ -56,7 +52,6 @@
                                     <span style="font-size:10px;color:red;"
                                       ng-if="formAddMaterial.foodNo.$invalid && formAddMaterial.foodNo.$touched">Không
                                       được để trống mã món ăn</span>
-                                    <!-- <span class="valid-feedback" ng-show="formAddMaterial.resourcesNo.$touched && formAddMaterial.resourcesNo.$invalid"> Không bỏ rỗng trường này</span> -->
                                   </div>
                                 </div>
 
@@ -142,9 +137,6 @@
                             <div class="modal-content">
                               <div class="modal-header bg-primary">
                                 <h5 class="modal-title text-white" id="addTypeLabel">Thêm Loại Món Ăn</h5>
-                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-                                <!-- <span aria-hidden="true">&times;</span> -->
-                                </button>
                               </div>
                               <div class="modal-body">
                                 <form ng-submit="AddTypeFood()" class="mt-2">
@@ -205,10 +197,9 @@
             <th scope="col"></th>
 
           </thead>
-          <tbody dir-paginate="x in searched|itemsPerPage:10">
+          <tbody dir-paginate="x in searched | itemsPerPage:10 | filter: searchInput">
             <tr data-toggle="collapse" data-target="#a{{x.monan_ID}}" class="clickable" ng-click="getFoodIndex(x)"
               aria-expanded="true">
-              <!--  dir-paginate-start="x in searched|itemsPerPage:5">-->
               <th>
                 <span>{{$index+1}}</span>
               </th>
@@ -339,9 +330,6 @@
                                       <span ng-repeat="z in foodING">- {{z.nguyenlieu.nguyenlieu_NAME}}<br><br></span>
                                     </td>
                                   </tr>
-
-
-
                                 </table>
                               </div>
                             </div>
@@ -523,6 +511,4 @@
       </div>
     </div>
   </div>
-</div>
-<!-- Dark table -->
 </div>

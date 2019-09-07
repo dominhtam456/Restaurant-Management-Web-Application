@@ -22,10 +22,7 @@
 
                 <div class="form-check col-2">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="topFoods"
-                      checked="checked">Món
-                    ăn
-                    bán chạy
+                    <input type="radio" class="form-check-input" name="optradio" ng-model="radio" value="topFoods">Món ăn bán chạy
                   </label>
                 </div>
                 <div class="form-check  col-2">
@@ -90,7 +87,6 @@
                               <table>
                                 <thead class="thead-light">
                                   <th scope="col">STT</th>
-                                  <th scope="col">Mã Món Ăn</th>
                                   <th scope="col">TênMón Ăn</th>
                                   <th scope="col">Đơn Giá</th>
                                   <th scope="col">Số Lượng</th>
@@ -98,7 +94,6 @@
                                 <tbody>
                                   <tr ng-repeat="y in billDetails">
                                     <td>{{$index+1}}</td>
-                                    <td>{{y.hoadonchitietID.monan_MONAN_ID}}</td>
                                     <td>{{y.tenMonAn}}</td>
                                     <td>{{y.hoadonchitiet_PRICE}}</td>
                                     <td>{{y.hoadonchitiet_SOLUONG}}</td>
@@ -153,7 +148,6 @@
                               <table>
                                 <thead class="thead-light">
                                   <th scope="col">STT</th>
-                                  <th scope="col">Mã Món Ăn</th>
                                   <th scope="col">TênMón Ăn</th>
                                   <th scope="col">Đơn Giá</th>
                                   <th scope="col">Số Lượng</th>
@@ -161,8 +155,7 @@
                                 <tbody>
                                   <tr ng-repeat="y in billDetails">
                                     <td>{{$index+1}}</td>
-                                    <td>{{y.hoadonchitietID.monan_MONAN_ID}}</td>
-                                    <td>{{y.monan_NAME}}</td>
+                                    <td>{{y.tenMonAn}}</td>
                                     <td>{{y.hoadonchitiet_PRICE}}</td>
                                     <td>{{y.hoadonchitiet_SOLUONG}}</td>
                                   </tr>
