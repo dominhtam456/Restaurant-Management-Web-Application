@@ -132,7 +132,7 @@ module.controller('FoodsCtrl', function($scope, $http, $window ,$filter) {
                   });
           $http.post("http://localhost:8080/api/MonAn/" + food.monan_ID,data)
             .then(function mySuccess(response){
-              alert("Bạn đã xóa nguyên liệu thành công");
+              alert("Bạn đã xóa món ăn thành công");
               $window.location.reload()
             });
         }
